@@ -5,12 +5,14 @@ import Newsletter from "../components/Newsletter";
 import Footer from "../components/Footer";
 import { Add, Remove } from "@mui/icons-material";
 import React, { useState } from "react";
+import { mobile } from "../responsive";
 
 const Container = styled.div``;
 
 const Wrapper = styled.div`
   padding: 50px;
   display: flex;
+  ${mobile({ flexDirection: "column", padding: "10px" })}
 `;
 
 const ImageContainer = styled.div`
@@ -21,6 +23,7 @@ const Image = styled.img`
   width: 100%;
   height: 90vh;
   object-fit: cover;
+  ${mobile({ height: "30vh" })}
 `;
 
 const InfoContainer = styled.div`
@@ -31,6 +34,7 @@ const InfoContainer = styled.div`
 
 const Title = styled.h1`
   font-weight: 250;
+  ${mobile({ fontSize: "1.25em" })}
 `;
 
 const Desc = styled.p`
@@ -56,10 +60,11 @@ const FilterContainer = styled.div`
   margin: 30px 0px;
   display: flex;
   justify-content: space-between;
+  ${mobile({ width: "100%" })}
 `;
 
 const FilterTitle = styled.span`
-  font-size: 20px;
+  font-size: 1.25em;
   font-weight: 200;
 `;
 
@@ -84,6 +89,7 @@ const AddContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  ${mobile({ width: "97%" })}
 `;
 
 const AmountContainer = styled.div`
@@ -96,7 +102,7 @@ const StyledButton = styled.button`
   padding: 9px;
   border: 1.5px solid skyblue;
   border-radius: 10px;
-  font-size: 10px;
+  font-size: 0.64em;
   font-weight: 150;
   cursor: pointer;
   &:hover {

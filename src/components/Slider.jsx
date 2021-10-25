@@ -12,6 +12,7 @@ const Container = styled.div`
   margin: auto;
   position: relative;
   overflow: hidden;
+  ${mobile({ display: "none" })}
 `;
 
 const Arrow = styled.div`
@@ -64,18 +65,18 @@ const InfoContainer = styled.div`
 `;
 
 const Title = styled.h1`
-  font-size: 50px;
+  font-size: 3em;
 `;
 
 const Desc = styled.p`
   margin: 30px 0px;
-  font-size: 15px;
+  font-size: 0.9em;
   font-weight: 300;
 `;
 
 const Button = styled.button`
   padding: 10px;
-  font-size: 20px;
+  font-size: 1.25em;
   background-color: transparent;
   cursor: pointer;
 `;

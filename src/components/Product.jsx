@@ -1,11 +1,11 @@
 import React from "react";
-
 import {
   FavoriteBorderOutlined,
   SearchOutlined,
   ShoppingCartOutlined,
 } from "@mui/icons-material";
 import styled from "styled-components";
+import { mobile } from "../responsive";
 
 const Info = styled.div`
   width: 100%;
@@ -30,8 +30,9 @@ const Container = styled.div`
   height: 350px;
   display: flex;
   align-items: center;
+  justify-content: center;
+  background-color: #f5fbfd;
   position: relative;
-
   &:hover ${Info} {
     opacity: 1;
   }
@@ -54,6 +55,7 @@ const Icon = styled.div`
   width: 40px;
   height: 40px;
   border-radius: 50%;
+  margin: 10px;
   display: flex;
   align-items: center;
   justify-content: center;

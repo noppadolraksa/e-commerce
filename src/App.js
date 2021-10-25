@@ -8,7 +8,7 @@ import Signin from "./pages/Signin";
 import Cart from "./pages/Cart";
 
 const App = () => {
-  return <Homepage />;
+  return <Register />;
 };
 
 export default App;

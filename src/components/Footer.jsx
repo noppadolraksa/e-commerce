@@ -7,9 +7,11 @@ import {
   Twitter,
 } from "@mui/icons-material";
 import styled from "styled-components";
+import { mobile } from "../responsive";
 
 const Container = styled.div`
   display: flex;
+  ${mobile({ flexDirection: "column" })}
 `;
 
 const Left = styled.div`
@@ -42,10 +44,12 @@ const SocialIcon = styled.div`
   background-color: #${(props) => props.color};
   margin-right: 30px;
   cursor: pointer;
+  ${mobile({ flexDirection: "column" })}
 `;
 
 const Center = styled.div`
   flex: 1;
+  ${mobile({ display: "none" })}
 `;
 
 const Title = styled.h3`
@@ -68,6 +72,7 @@ const ListItem = styled.li`
 const Right = styled.div`
   flex: 1;
   margin-right: 20px;
+  ${mobile({ margin: "0px 20px" })}
 `;
 
 const ContactItem = styled.div`

@@ -7,7 +7,7 @@ import { mobile } from "../responsive";
 const Container = styled.div`
   height: 70px;
   background-color: white;
-  ${mobile({ height: "80%" })}
+  ${mobile({ height: "90px" })}
 `;
 
 const Wrapper = styled.div`
@@ -16,6 +16,7 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
+  ${mobile({ padding: "10px 0px", width: "100vw" })}
 `;
 
 const Left = styled.div`
@@ -23,7 +24,8 @@ const Left = styled.div`
 `;
 
 const Center = styled.div`
-  flex: 3;
+  flex: 1;
+  ${mobile({ margin: "0px 20px" })}
 `;
 
 const Right = styled.div`
@@ -31,29 +33,31 @@ const Right = styled.div`
   justify-content: flex-end;
   align-items: center;
   flex: 1;
+  ${mobile({ margin: "10px 20px" })}
 `;
 
 const Input = styled.input`
   flex: 7;
-  height: 30px;
+
   border: none;
   margin-right: 10px;
   padding-left: 20px;
+  ${mobile({ margin: "0px", padding: "0px 10px" })}
 `;
 
 const Logo = styled.p`
   font-weight: bold;
   margin: 0px 20px;
-  font-size: 30px;
-  ${mobile({ vh: "80vh" })}
+  font-size: 2em;
+  ${mobile({ fontSize: "1.2em" })}
 `;
 
 const SearchContainer = styled.div`
   border: 0.5px solid lightgray;
   display: flex;
-
   justify-content: flex-end;
 `;
+
 const SearchBackground = styled.div`
   height: 40px;
   width: 100%;
@@ -64,11 +68,11 @@ const SearchBackground = styled.div`
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  ${mobile({ flex: "3" })}
+  ${mobile({ padding: "0px 10px", margin: "0px" })}
 `;
 
 const MenuItems = styled.div`
-  font-size: 14px;
+  font-size: 0.85em;
   cursor: pointer;
   margin-left: 25px;
 `;
@@ -87,7 +91,7 @@ const Navbar = () => {
               <Search
                 style={{
                   color: "white",
-                  fontSize: "20px",
+                  fontSize: "1.2em",
                   textAlign: "center",
                 }}
               />

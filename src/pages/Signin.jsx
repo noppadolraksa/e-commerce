@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { mobile } from "../responsive";
 
 const Container = styled.div`
   height: 100vh;
@@ -26,16 +27,17 @@ const Wrapper = styled.div`
   -webkit-box-shadow: 0px 0px 7px 1px rgba(54, 54, 54, 0.31);
   -moz-box-shadow: 0px 0px 7px 1px rgba(54, 54, 54, 0.31);
   position: retative;
+  ${mobile({ width: "75%", height: "40%" })}
 `;
 
 const Logo = styled.h1`
-  font-size: 15px;
+  font-size: 1em;
   font-weight: 150;
   position: absolute;
 `;
 
 const Title = styled.h1`
-  font-size: 30px;
+  font-size: 2em;
   font-weight: 800;
   margin: 30px 10px 10px 10px;
 `;
@@ -53,7 +55,7 @@ const Input = styled.input`
 `;
 
 const SubText = styled.p`
-  font-size: 14px;
+  font-size: 1em;
   font-weight: 300;
   margin-bottom: 0px;
 `;
@@ -66,8 +68,9 @@ const Button = styled.button`
   color: white;
   cursor: pointer;
   width: 20%;
-  margin-top: 0px;
-  margin-left: 290px;
+  display: flex;
+  align-self: flex-end;
+  ${mobile({ padding: "10px", fontSize: "0.7em" })}
 `;
 
 const Signin = () => {

@@ -94,12 +94,12 @@ const ProductAmountContainer = styled.div`
 `;
 
 const ProductPrice = styled.div`
-  font-size: 30px;
+  font-size: 1.9em;
   font-weight: 300;
 `;
 
 const ProductAmount = styled.div`
-  font-size: 24px;
+  font-size: 1.5em;
   margin: 5px;
 `;
 
@@ -120,7 +120,7 @@ const SummaryItem = styled.div`
   display: flex;
   justify-content: space-between;
   font-weight: ${(props) => props.type === "total" && "500"};
-  font-size: ${(props) => props.type === "total" && "24px"};
+  font-size: ${(props) => props.type === "total" && "1.5em"};
 `;
 
 const SummaryItemText = styled.span``;

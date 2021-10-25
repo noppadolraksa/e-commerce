@@ -14,7 +14,7 @@ const Ul = styled.ul``;
 
 const Title = styled.h1`
   text-align: center;
-  font-size: 30px;
+  font-size: 2em;
   margin-bottom: 40px;
 `;
 const SubTitle = styled.h4`
@@ -22,7 +22,7 @@ const SubTitle = styled.h4`
 `;
 
 const Desc = styled.p`
-  font-size: 14px;
+  font-size: 0.9em;
   margin-bottom: 30px;
   text-indent: 40px;
   line-height: 25px; //Change The Spacing Between Lines

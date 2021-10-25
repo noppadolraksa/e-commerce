@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { mobile } from "../responsive";
 
 const Container = styled.div`
   height: 100vh;
@@ -13,6 +14,7 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  ${mobile({ alignItems: "start" })}
 `;
 
 const Wrapper = styled.div`
@@ -24,16 +26,17 @@ const Wrapper = styled.div`
   box-shadow: 0px 0px 7px 1px rgba(54, 54, 54, 0.31);
   -webkit-box-shadow: 0px 0px 7px 1px rgba(54, 54, 54, 0.31);
   -moz-box-shadow: 0px 0px 7px 1px rgba(54, 54, 54, 0.31);
+  ${mobile({ width: "75vw", marginTop: "50px", height: "50vh" })}
 `;
 
 const Logo = styled.h1`
-  font-size: 15px;
+  font-size: 0.95em;
   font-weight: 150;
   margin: 0px;
 `;
 
 const Title = styled.h1`
-  font-size: 24px;
+  font-size: 1.5em;
   font-weight: 500;
   margin: 10px 10px 10px;
 `;
@@ -49,7 +52,7 @@ const AgreementContainer = styled.div`
 `;
 
 const Agreement = styled.div`
-  font-size: 14px;
+  font-size: 0.9em;
   font-weight: 200;
 `;
 
@@ -66,7 +69,6 @@ const Button = styled.button`
   background-color: #318383;
   color: white;
   cursor: pointer;
-  margin-left: 400px;
 `;
 
 const Input = styled.input`
