@@ -24,7 +24,7 @@ const Left = styled.div`
 `;
 
 const Center = styled.div`
-  flex: 1;
+  flex: 3;
   ${mobile({ margin: "0px 20px" })}
 `;
 
@@ -37,8 +37,6 @@ const Right = styled.div`
 `;
 
 const Input = styled.input`
-  flex: 7;
-
   border: none;
   margin-right: 10px;
   padding-left: 20px;
@@ -55,15 +53,14 @@ const Logo = styled.p`
 const SearchContainer = styled.div`
   border: 0.5px solid lightgray;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
 `;
 
 const SearchBackground = styled.div`
   height: 40px;
-  width: 100%;
+  width: 40px;
   background-color: #008080c7;
   z-index: 2;
-  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;

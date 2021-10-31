@@ -19,7 +19,7 @@ const Container = styled.div`
 
 const Wrapper = styled.div`
   width: 30%;
-  height: 50%;
+  height: 305px;
   padding: 20px;
   background-color: white;
   background: #fdfdfd;
@@ -27,7 +27,7 @@ const Wrapper = styled.div`
   -webkit-box-shadow: 0px 0px 7px 1px rgba(54, 54, 54, 0.31);
   -moz-box-shadow: 0px 0px 7px 1px rgba(54, 54, 54, 0.31);
   position: retative;
-  ${mobile({ width: "75%", height: "40%" })}
+  ${mobile({ width: "75%" })}
 `;
 
 const Logo = styled.h1`

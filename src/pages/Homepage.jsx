@@ -15,7 +15,7 @@ const FixNavBar = styled.div`
   width: 100%;
 `;
 
-const Homepage = () => {
+const Homepage = (cat, filters, sort) => {
   return (
     <div style={{ marginTop: 100 }}>
       <FixNavBar>
@@ -24,7 +24,7 @@ const Homepage = () => {
       </FixNavBar>
       <Slider />
       <Categories />
-      <Products />
+      <Products cat={cat} filters={filters} sort={sort} />
       <Newsletter />
       <Footer />
     </div>

@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { useLocation } from "react-router";
 import styled from "styled-components";
 import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
@@ -39,6 +40,19 @@ const Title = styled.h1`
 `;
 
 const ProductList = () => {
+  const location = useLocation();
+  const cat = location.pathname.split("/")[2];
+  const [filters, setFilters] = useState({});
+  const [sort, setSort] = useState("Newest Arrival");
+
+  const handleFilter = (e) => {
+    const value = e.target.value;
+    setFilters({
+      ...filters,
+      [e.target.name]: value,
+    });
+  };
+
   return (
     <Container>
       <Announcement />
@@ -47,38 +61,35 @@ const ProductList = () => {
       <FilterContainer>
         <Filter>
           <FilterText>Filter Products</FilterText>
-          <Select>
-            <Option disabled selected>
-              Color
-            </Option>
-            <Option>White</Option>
-            <Option>Black</Option>
-            <Option>Red</Option>
-            <Option>Blue</Option>
-            <Option>Yellow</Option>
-            <Option>Green</Option>
+          <Select name="score" onChange={handleFilter}>
+            <Option disabled>Score</Option>
+            <Option>4.0 higher</Option>
+            <Option>3.0 higher</Option>
+            <Option>2.0 higher</Option>
+            <Option>1.0 higher</Option>
+            <Option>lower than 1.0</Option>
           </Select>
-          <Select>
-            <Option disabled selected>
-              Size
-            </Option>
-            <Option>XS</Option>
-            <Option>S</Option>
-            <Option>M</Option>
-            <Option>L</Option>
-            <Option>XL</Option>
+          <Select name="promotion" onChange={handleFilter}>
+            <Option disabled>promotion</Option>
+            <Option>free shipment</Option>
+            <Option>exclusive price</Option>
+            <Option>only9.9$</Option>
+            <Option>10%cashback</Option>
+            <Option>9.9$free shipping</Option>
           </Select>
         </Filter>
         <Filter>
           <FilterText>Sort Products</FilterText>
-          <Select>
-            <Option selected>Newest Arrival</Option>
-            <Option>Price:low to high</Option>
-            <Option>Price:high to low</Option>
+          <Select onChange={(e) => setSort(e.target.value)}>
+            <Option value="newest">Newest Arrival</Option>
+            <Option value="lowToHigh">Price:low to high</Option>
+            <Option value="highToLow">Price:high to low</Option>
+            <Option value="highestLike">Highest Likes</Option>
+            <Option value="highestSold">Highest sold</Option>
           </Select>
         </Filter>
       </FilterContainer>
-      <Products />
+      <Products cat={cat} filters={filters} sort={sort} />
       <Newsletter />
       <Footer />
     </Container>
