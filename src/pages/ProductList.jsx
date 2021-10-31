@@ -48,7 +48,6 @@ const ProductList = () => {
   const handleFilter = (e) => {
     const value = e.target.value;
     setFilters({
-      ...filters,
       [e.target.name]: value,
     });
   };
@@ -61,13 +60,10 @@ const ProductList = () => {
       <FilterContainer>
         <Filter>
           <FilterText>Filter Products</FilterText>
-          <Select name="score" onChange={handleFilter}>
-            <Option disabled>Score</Option>
-            <Option>4.0 higher</Option>
-            <Option>3.0 higher</Option>
-            <Option>2.0 higher</Option>
-            <Option>1.0 higher</Option>
-            <Option>lower than 1.0</Option>
+          <Select name="condition" onChange={handleFilter}>
+            <Option disabled>condition</Option>
+            <Option>new</Option>
+            <Option>used</Option>
           </Select>
           <Select name="promotion" onChange={handleFilter}>
             <Option disabled>promotion</Option>
@@ -84,7 +80,7 @@ const ProductList = () => {
             <Option value="newest">Newest Arrival</Option>
             <Option value="lowToHigh">Price:low to high</Option>
             <Option value="highToLow">Price:high to low</Option>
-            <Option value="highestLike">Highest Likes</Option>
+            <Option value="highestScore">Highest Scores</Option>
             <Option value="highestSold">Highest sold</Option>
           </Select>
         </Filter>

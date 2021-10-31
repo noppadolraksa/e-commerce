@@ -44,24 +44,30 @@ const Products = ({ cat, filters, sort }) => {
       setFilteredProducts((prev) =>
         [...prev].sort((a, b) => a.createdAt - b.createdAt)
       );
-    } else if (sort === "asc") {
+    } else if (sort === "lowToHigh") {
       setFilteredProducts((prev) =>
         [...prev].sort((a, b) => a.price - b.price)
       );
-    } else {
+    } else if (sort === "highToLow") {
       setFilteredProducts((prev) =>
         [...prev].sort((a, b) => b.price - a.price)
       );
+    } else if (sort === "highestScore") {
+      setFilteredProducts((prev) =>
+        [...prev].sort((a, b) => b.score - a.score)
+      );
+    } else {
+      setFilteredProducts((prev) => [...prev].sort((a, b) => b.sold - a.sold));
     }
   }, [sort]);
 
   return (
     <Container>
       {cat
-        ? filteredProducts.map((item) => <Product item={item} key={item.id} />)
+        ? filteredProducts.map((item) => <Product item={item} key={item._id} />)
         : products
             .slice(0, 8)
-            .map((item) => <Product item={item} key={item.id} />)}
+            .map((item) => <Product item={item} key={item._id} />)}
     </Container>
   );
 };
