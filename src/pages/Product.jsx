@@ -10,6 +10,8 @@ import { mobile } from "../responsive";
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { publicRequest } from "../requestMethods";
+import { addProduct } from "../redux/cartRedux";
+import { useDispatch } from "react-redux";
 
 const Container = styled.div``;
 
@@ -136,6 +138,8 @@ const Product = () => {
   const [amount, setAmount] = useState(1);
   //setProduct to use data
   const [product, setProduct] = useState({});
+  //to let react know where is acion(wrap action)
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const getProduct = async () => {
@@ -166,6 +170,11 @@ const Product = () => {
     } else {
       setAmount(+e.target.value);
     }
+  };
+
+  //update cart
+  const handleCart = (e) => {
+    dispatch(addProduct({ product, amount }));
   };
 
   return (
@@ -224,7 +233,7 @@ const Product = () => {
                 onClick={() => handleClick("increment")}
               />
             </AmountContainer>
-            <StyledButton>ADD TO CART</StyledButton>
+            <StyledButton onClick={handleCart}>ADD TO CART</StyledButton>
           </AddContainer>
         </InfoContainer>
       </Wrapper>
