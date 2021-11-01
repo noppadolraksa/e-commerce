@@ -22,7 +22,6 @@ const Info = styled.div`
   z-index: 3;
   opacity: 0;
   transition: all 0.5s ease;
-  cursor: pointer;
 `;
 
 const Container = styled.div`
@@ -67,6 +66,7 @@ const Image = styled.img`
   width: 190px;
   height: 190px;
   margin: 20px 20px 10px 20px;
+  border: 1px solid #ddd;
 `;
 
 const Icon = styled.div`

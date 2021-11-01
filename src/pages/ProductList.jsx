@@ -35,8 +35,14 @@ const Select = styled.select`
 `;
 const Option = styled.option``;
 
-const Title = styled.h1`
-  margin: 20px;
+const Title = styled.p`
+  margin: 20px 20px 0px 20px;
+  font-weight: 500;
+  padding: 10px;
+  font-size: 20px;
+  border: 0.25px solid black;
+  background-color: #fafafa;
+  width: 150px;
 `;
 
 const ProductList = () => {
@@ -56,7 +62,7 @@ const ProductList = () => {
     <Container>
       <Announcement />
       <Navbar />
-      <Title>Dress</Title>
+      <Title>{`Category : ${cat}`}</Title>
       <FilterContainer>
         <Filter>
           <FilterText>Filter Products</FilterText>
@@ -80,7 +86,7 @@ const ProductList = () => {
             <Option value="newest">Newest Arrival</Option>
             <Option value="lowToHigh">Price:low to high</Option>
             <Option value="highToLow">Price:high to low</Option>
-            <Option value="highestScore">Highest Scores</Option>
+            <Option value="highestLikes">Highest Likes</Option>
             <Option value="highestSold">Highest sold</Option>
           </Select>
         </Filter>

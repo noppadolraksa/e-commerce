@@ -4,8 +4,12 @@ import Announcement from "../components/Announcement";
 import Newsletter from "../components/Newsletter";
 import Footer from "../components/Footer";
 import { Add, Remove } from "@mui/icons-material";
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import { mobile } from "../responsive";
+
+import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
+import { publicRequest } from "../requestMethods";
 
 const Container = styled.div``;
 
@@ -13,17 +17,23 @@ const Wrapper = styled.div`
   padding: 50px;
   display: flex;
   ${mobile({ flexDirection: "column", padding: "10px" })}
+  box-shadow: 0px 0px 7px 1px rgba(54, 54, 54, 0.31);
+  -webkit-box-shadow: 0px 0px 7px 1px rgba(54, 54, 54, 0.31);
+  -moz-box-shadow: 0px 0px 7px 1px rgba(54, 54, 54, 0.31);
 `;
 
 const ImageContainer = styled.div`
   flex: 1;
+  display: flex;
+  justify-content: center;
 `;
 
 const Image = styled.img`
   width: 100%;
   height: 90vh;
   object-fit: cover;
-  ${mobile({ height: "30vh" })}
+  min-width: 480px;
+  ${mobile({ width: "350px", minWidth: "200px" })}
 `;
 
 const InfoContainer = styled.div`
@@ -35,6 +45,10 @@ const InfoContainer = styled.div`
 const Title = styled.h1`
   font-weight: 250;
   ${mobile({ fontSize: "1.25em" })}
+  line-height: 1.5rem;
+  height: 6rem;
+  overflow: hidden;
+  font-size: 20px;
 `;
 
 const Desc = styled.p`
@@ -66,15 +80,6 @@ const FilterContainer = styled.div`
 const FilterTitle = styled.span`
   font-size: 1.25em;
   font-weight: 200;
-`;
-
-const FilterColor = styled.div`
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: ${(props) => props.color};
-  cursor: pointer;
-  margin: 0px 3px;
 `;
 
 const FilterSize = styled.select`
@@ -126,7 +131,23 @@ const Underline = styled.span`
 `;
 
 const Product = () => {
+  const location = useLocation();
+  const _id = location.pathname.split("/")[2];
   const [amount, setAmount] = useState(1);
+  //setProduct to use data
+  const [product, setProduct] = useState({});
+
+  useEffect(() => {
+    const getProduct = async () => {
+      try {
+        const res = await publicRequest.get(`/product/find/${_id}`);
+        setProduct(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getProduct();
+  }, [_id]);
 
   const handleClick = (e) => {
     if (e === "increment") {
@@ -153,45 +174,42 @@ const Product = () => {
       <Navbar />
       <Wrapper>
         <ImageContainer>
-          <Image src="https://i.ibb.co/S6qMxwr/jean.jpg" />
+          <Image src={product.img} />
         </ImageContainer>
         <InfoContainer>
-          <Title>
-            Andongnywell Women's Stretchy Ripped Hole Skinny Jeans Butt Lifting
-            Distressed Denim Pants with Pockets Trousers
-          </Title>
-          <Brand>Generic</Brand>
+          <Title>{product.title}</Title>
+          <Brand>{product.brand}</Brand>
           <Price>
-            <Underline>$45.99</Underline>
-            <Br />
-            $38.99 ( 15% off)
+            <Underline>$ {product.priceBeforeDiscount}</Underline>
+            <Br />${product.price} ({" "}
+            {((product.priceBeforeDiscount / product.price - 1) * 100).toFixed(
+              0
+            )}
+            % off)
           </Price>
-          <Desc>
-            trousers for women cycling trousers women womens thermal trousers
-            kids waterproof trousers work trousers rain trousers women motorbike
-            trousers women mens lined trousers mens grey trousers boys elasti ed
-            school trousers workman trousers black trousers men work waterproof
-            trousers for men kickboxing trousers ski trousers men trousers mens
-            fleece trousers mens hiking trousers waterproof floor layers
-            trousers fleece lined waterproof trousers children lined work
-            trousers
-          </Desc>
+          <Desc>{product.desc}</Desc>
           <FilterContainer>
             <Filter>
-              <FilterTitle>Color</FilterTitle>
-              <FilterColor color="black" />
-              <FilterColor color="darkblue" />
-              <FilterColor color="gray" />
-            </Filter>
-            <Filter>
-              <FilterTitle>Size</FilterTitle>
-              <FilterSize>
-                <FilterSizeOption>XS</FilterSizeOption>
-                <FilterSizeOption>S</FilterSizeOption>
-                <FilterSizeOption>M</FilterSizeOption>
-                <FilterSizeOption>L</FilterSizeOption>
-                <FilterSizeOption>XL</FilterSizeOption>
-              </FilterSize>
+              {product.filters?.map((e, id) => (
+                <>
+                  <FilterTitle key={id}>{e.filterTitle}</FilterTitle>
+                  <FilterSize>
+                    {e.filterProducts?.map((item, itemId) => (
+                      <FilterSizeOption key={itemId}>{item}</FilterSizeOption>
+                    ))}
+                  </FilterSize>
+                </>
+              ))}
+              {/* {product.filters?.map((e, id) => (
+                <FilterTitle key={id}>{e.filterTitle}</FilterTitle>
+              ))}
+              {product.filters?.map((e) => (
+                <FilterSize>
+                  {e.filterProducts?.map((item, itemId) => (
+                    <FilterSizeOption key={itemId}>{item}</FilterSizeOption>
+                  ))}
+                </FilterSize>
+              ))} */}
             </Filter>
           </FilterContainer>
           <AddContainer>

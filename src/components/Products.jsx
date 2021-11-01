@@ -52,9 +52,9 @@ const Products = ({ cat, filters, sort }) => {
       setFilteredProducts((prev) =>
         [...prev].sort((a, b) => b.price - a.price)
       );
-    } else if (sort === "highestScore") {
+    } else if (sort === "highestLikes") {
       setFilteredProducts((prev) =>
-        [...prev].sort((a, b) => b.score - a.score)
+        [...prev].sort((a, b) => b.likes - a.likes)
       );
     } else {
       setFilteredProducts((prev) => [...prev].sort((a, b) => b.sold - a.sold));

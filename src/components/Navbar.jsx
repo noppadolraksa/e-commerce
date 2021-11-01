@@ -3,11 +3,15 @@ import React from "react";
 import styled from "styled-components";
 import { Search, ShoppingCartOutlined } from "@mui/icons-material";
 import { mobile } from "../responsive";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
-  height: 70px;
+  height: 100px;
   background-color: white;
   ${mobile({ height: "90px" })}
+  -webkit-box-shadow: 0 2px 2px -2px #000000;
+  -moz-box-shadow: 0 2px 2px -2px #000000;
+  box-shadow: 0 2px 2px -2px #000000;
 `;
 
 const Wrapper = styled.div`
@@ -45,8 +49,11 @@ const Input = styled.input`
 
 const Logo = styled.p`
   font-weight: bold;
+  color: #005555;
   margin: 0px 20px;
   font-size: 2em;
+  cursor: pointer;
+  border-bottom-style: none;
   ${mobile({ fontSize: "1.2em" })}
 `;
 
@@ -79,7 +86,9 @@ const Navbar = () => {
     <Container>
       <Wrapper>
         <Left>
-          <Logo>My-Shop</Logo>
+          <Link to={`/`}>
+            <Logo>My-Shop</Logo>
+          </Link>
         </Left>
         <Center>
           <SearchContainer>
