@@ -164,12 +164,9 @@ const Product = () => {
         const { filters } = res.data;
         const data = [];
         filters.forEach((e) => {
-          for (let i = 0; i < 1; i++) {
-            data.push([e.filterTitle, e.filterProducts[i]]);
-          }
+          data.push([e.filterTitle, e.filterProducts[0]]);
         });
         const obj = Object.fromEntries(data);
-
         setFilters(obj);
       } catch (err) {
         console.log(err);
@@ -177,7 +174,6 @@ const Product = () => {
     };
     getProduct();
   }, [_id]);
-
   const handleClick = (e) => {
     if (e === "increment") {
       setAmount(amount + 1);
