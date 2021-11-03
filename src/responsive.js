@@ -15,3 +15,11 @@ export const tablet = (props) => {
     }
   `;
 };
+
+export const notebook = (props) => {
+  return css`
+    @media only screen and (max-width: 960px) {
+      ${props}
+    }
+  `;
+};

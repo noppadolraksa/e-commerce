@@ -2,14 +2,17 @@ import { Badge } from "@mui/material";
 import React from "react";
 import styled from "styled-components";
 import { Search, ShoppingCartOutlined } from "@mui/icons-material";
-import { mobile } from "../responsive";
+import { mobile, notebook, tablet } from "../responsive";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const Container = styled.div`
   height: 100px;
   background-color: white;
-  ${mobile({ height: "90px" })}
+  ${mobile({ height: "90px", maxWidth: "100vw" })}
+  ${tablet({ maxWidth: "780px" })}
+  ${notebook({ maxWidth: "960px" })}
+  flex-wrap:wrap;
   -webkit-box-shadow: 0 2px 2px -2px #000000;
   -moz-box-shadow: 0 2px 2px -2px #000000;
   box-shadow: 0 2px 2px -2px #000000;
@@ -30,7 +33,7 @@ const Left = styled.div`
 
 const Center = styled.div`
   flex: 3;
-  ${mobile({ margin: "0px 20px" })}
+  ${mobile({ width: "60vw", flex: "none", marginRight: "5px" })}
 `;
 
 const Right = styled.div`
@@ -38,13 +41,13 @@ const Right = styled.div`
   justify-content: flex-end;
   align-items: center;
   flex: 1;
-  ${mobile({ margin: "10px 20px" })}
+  ${mobile({ margin: "10px 20px 10px 0px" })}
 `;
 
 const Input = styled.input`
   border: none;
-  margin-right: 10px;
   padding-left: 20px;
+  width: 100%;
   ${mobile({ margin: "0px", padding: "0px 10px" })}
 `;
 
@@ -93,6 +96,7 @@ const Navbar = () => {
             <Logo>My-Shop</Logo>
           </Link>
         </Left>
+
         <Center>
           <SearchContainer>
             <Input placeholder="Search" />
@@ -111,9 +115,11 @@ const Navbar = () => {
           <MenuItems>Signin</MenuItems>
           <MenuItems>Register</MenuItems>
           <MenuItems>
-            <Badge badgeContent={quantity} color="primary">
-              <ShoppingCartOutlined />
-            </Badge>
+            <Link to="/cart">
+              <Badge badgeContent={quantity} color="primary">
+                <ShoppingCartOutlined />
+              </Badge>
+            </Link>
           </MenuItems>
         </Right>
       </Wrapper>

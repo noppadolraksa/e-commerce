@@ -13,6 +13,7 @@ const Container = styled.div``;
 const FilterContainer = styled.div`
   display: flex;
   justify-content: space-between;
+  ${mobile({ width: "90vw" })}
 `;
 
 const Filter = styled.div`

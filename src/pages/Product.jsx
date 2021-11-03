@@ -5,7 +5,7 @@ import Newsletter from "../components/Newsletter";
 import Footer from "../components/Footer";
 import { Add, Remove } from "@mui/icons-material";
 import React, { Fragment, useState } from "react";
-import { mobile } from "../responsive";
+import { mobile, notebook, tablet } from "../responsive";
 
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
@@ -13,12 +13,17 @@ import { publicRequest } from "../requestMethods";
 import { addProduct } from "../redux/cartRedux";
 import { useDispatch } from "react-redux";
 
-const Container = styled.div``;
+const Container = styled.div`
+  ${mobile({ maxWidth: "350px" })}
+  ${tablet({ maxWidth: "780px" })}
+  ${notebook({ maxWidth: "960px" })}
+`;
 
 const Wrapper = styled.div`
   padding: 50px;
   display: flex;
   ${mobile({ flexDirection: "column", padding: "10px" })}
+
   box-shadow: 0px 0px 7px 1px rgba(54, 54, 54, 0.31);
   -webkit-box-shadow: 0px 0px 7px 1px rgba(54, 54, 54, 0.31);
   -moz-box-shadow: 0px 0px 7px 1px rgba(54, 54, 54, 0.31);
@@ -36,6 +41,7 @@ const Image = styled.img`
   object-fit: cover;
   min-width: 480px;
   ${mobile({ width: "350px", minWidth: "200px" })}
+  ${tablet({ width: "350px", minWidth: "200px" })}
 `;
 
 const InfoContainer = styled.div`
@@ -140,12 +146,31 @@ const Product = () => {
   const [product, setProduct] = useState({});
   //to let react know where is acion(wrap action)
   const dispatch = useDispatch();
+  const [filters, setFilters] = useState({});
+
+  const handleFilter = (e) => {
+    const value = e.target.value;
+    setFilters({
+      ...filters,
+      [e.target.name]: value,
+    });
+  };
 
   useEffect(() => {
     const getProduct = async () => {
       try {
         const res = await publicRequest.get(`/product/find/${_id}`);
         setProduct(res.data);
+        const { filters } = res.data;
+        const data = [];
+        filters.forEach((e) => {
+          for (let i = 0; i < 1; i++) {
+            data.push([e.filterTitle, e.filterProducts[i]]);
+          }
+        });
+        const obj = Object.fromEntries(data);
+
+        setFilters(obj);
       } catch (err) {
         console.log(err);
       }
@@ -174,7 +199,13 @@ const Product = () => {
 
   //update cart
   const handleCart = (e) => {
-    dispatch(addProduct({ product, amount }));
+    dispatch(
+      addProduct({
+        ...product,
+        quantity: amount,
+        filters,
+      })
+    );
   };
 
   return (
@@ -191,9 +222,11 @@ const Product = () => {
           <Price>
             <Underline>$ {product.priceBeforeDiscount}</Underline>
             <Br />${product.price} ({" "}
-            {((product.priceBeforeDiscount / product.price - 1) * 100).toFixed(
-              0
-            )}
+            {(
+              ((product.priceBeforeDiscount - product.price) /
+                product.priceBeforeDiscount) *
+              100
+            ).toFixed(0)}
             % off)
           </Price>
           <Desc>{product.desc}</Desc>
@@ -201,24 +234,18 @@ const Product = () => {
             <Filter>
               {product.filters?.map((e, id) => (
                 <>
-                  <FilterTitle key={id}>{e.filterTitle}</FilterTitle>
-                  <FilterSize>
-                    {e.filterProducts?.map((item, itemId) => (
-                      <FilterSizeOption key={itemId}>{item}</FilterSizeOption>
+                  <FilterTitle value={e?.filterTitle} key={id}>
+                    {e?.filterTitle}
+                  </FilterTitle>
+                  <FilterSize onChange={handleFilter} name={e?.filterTitle}>
+                    {e?.filterProducts?.map((item, itemId) => (
+                      <FilterSizeOption value={item} key={itemId}>
+                        {item}
+                      </FilterSizeOption>
                     ))}
                   </FilterSize>
                 </>
               ))}
-              {/* {product.filters?.map((e, id) => (
-                <FilterTitle key={id}>{e.filterTitle}</FilterTitle>
-              ))}
-              {product.filters?.map((e) => (
-                <FilterSize>
-                  {e.filterProducts?.map((item, itemId) => (
-                    <FilterSizeOption key={itemId}>{item}</FilterSizeOption>
-                  ))}
-                </FilterSize>
-              ))} */}
             </Filter>
           </FilterContainer>
           <AddContainer>

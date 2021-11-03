@@ -26,13 +26,13 @@ const Info = styled.div`
 
 const Container = styled.div`
   margin: 5px;
-  flex-basis: 220px;
+  width: 220px;
   height: 300px;
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
   background-color: white;
   position: relative;
+  ${mobile({ width: "42vw", height: "55vh" })}
   box-shadow: 0px 0px 7px 1px rgba(54, 54, 54, 0.31);
   -webkit-box-shadow: 0px 0px 7px 1px rgba(54, 54, 54, 0.31);
   -moz-box-shadow: 0px 0px 7px 1px rgba(54, 54, 54, 0.31);
@@ -63,8 +63,8 @@ const Likes = styled.div`
 
 const Image = styled.img`
   z-index: 2;
-  width: 190px;
-  height: 190px;
+  width: 80%;
+  height: 60%;
   margin: 20px 20px 10px 20px;
   border: 1px solid #ddd;
 `;
@@ -80,6 +80,14 @@ const Icon = styled.div`
   background-color: white;
   cursor: pointer;
   transition: all 0.5s ease; // all function keep 0.5sec
+  text-decoration: none;
+  &:focus,
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
+    text-decoration: none;
+  }
 
   &:hover {
     background-color: #e9f5f5;
@@ -92,9 +100,14 @@ const Product = ({ item }) => {
     <Container>
       <Image src={item.img} />
       <TextTitle>{item.title}</TextTitle>
+      {item.priceBeforeDiscount && (
+        <Text>
+          Price : <del>{item.priceBeforeDiscount}</del> {` ${item.price}`} $
+          <br />
+        </Text>
+      )}
+      <Text>Total Sold : {item.sold}</Text>
       <Text>
-        Price : <del>{item.priceBeforeDiscount}</del> {` ${item.price}`} $<br />
-        Total Sold : {item.sold}
         <Likes>
           {item.likes}
           <Favorite style={{ color: "#e44d4dcc", height: "17px" }} />
@@ -106,7 +119,7 @@ const Product = ({ item }) => {
         </Icon>
         <Icon>
           <Link to={`/product/${item._id}`}>
-            <SearchOutlined />
+            <SearchOutlined style={{ color: "none", textDecoration: "none" }} />
           </Link>
         </Icon>
         <Icon>

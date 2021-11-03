@@ -2,11 +2,13 @@ import Product from "./Product";
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { mobile } from "../responsive";
 
 const Container = styled.div`
   padding: 20px;
   display: flex;
   flex-wrap: wrap;
+  ${mobile({ width: "90vw" })}
 `;
 
 const Products = ({ cat, filters, sort }) => {

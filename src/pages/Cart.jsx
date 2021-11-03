@@ -3,7 +3,9 @@ import React from "react";
 import styled from "styled-components";
 import Announcement from "../components/Announcement";
 import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
+
+import { useSelector } from "react-redux";
+import { mobile, tablet, notebook } from "../responsive";
 
 const Container = styled.div``;
 
@@ -16,26 +18,27 @@ const Title = styled.h1`
   text-align: center;
 `;
 
-const Top = styled.div`
+const Footer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 20px;
 `;
 
-const TopButton = styled.button`
+const FooterButton = styled.button`
   padding: 10px;
   font-weight: 600;
   cursor: pointer;
-  border: ${(props) => props.type === "filled" && "none"};
-  background-color: ${(props) =>
-    props.type === "filled" ? "black" : "transparent"};
-  color: ${(props) => props.type === "filled" && "white"};
+  border: none;
+  background-color: black;
+  color: white;
 `;
 
-const TopTexts = styled.div``;
+const FooterTexts = styled.div`
+  ${mobile({ display: "none" })}
+`;
 
-const TopText = styled.span`
+const FooterText = styled.span`
   text-decoration: underline;
   cursor: pointer;
   margin: 0px 10px;
@@ -45,6 +48,7 @@ const Bottom = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
 `;
 
 const Info = styled.div`
@@ -54,25 +58,69 @@ const Info = styled.div`
 const Product = styled.div`
   display: flex;
   justify-content: space-between;
+  border: 1px solid #ddd;
+  ${mobile({ flexDirection: "column" })}
 `;
+
 const ProductDetail = styled.div`
-  flex: 2;
   display: flex;
+  align-items: center;
+  margin: 10px;
+  flex: 8;
+  ${mobile({ flex: "1" })}
 `;
 
-const ProductName = styled.span``;
+const ProductName = styled.span`
+  flex: 2;
+  font-size: 11px;
+  height: 45px;
+  line-height: 16px;
+  overflow: hidden;
+  margin-right: 10px;
+  padding: 5px;
+  ${mobile({
+    display: "inline-block",
+    overflow: "hidden",
+    whiteSpace: "nowrap",
+    width: "65vw",
+    fontSize: "8px",
+    padding: "0px",
+  })}
+`;
 
-const ProductId = styled.span``;
+const ProductId = styled.span`
+  flex: 1;
+  font-size: 11px;
+  margin-right: 10px;
+  padding: 5px;
+  ${mobile({ fontSize: "8px" })}
+`;
 
-const ProductColor = styled.span``;
+const ProductPriceOneUnit = styled.span`
+  flex: 1;
+  font-size: 11px;
+  margin-right: 10px;
+  padding: 5px;
+  ${mobile({ fontSize: "8px" })}
+`;
 
-const ProductSize = styled.span``;
+const ProductSize = styled.span`
+  flex: 0.5;
+  font-size: 11px;
+  margin-right: 5px;
+  padding: 2px;
+  ${mobile({ fontSize: "8px" })}
+`;
 
 const Details = styled.div`
   padding: 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  flex-direction: row;
+  align-items: center;
+  flex: 8;
+  ${mobile({ flexDirection: "column", padding: "0px" })}
 `;
 
 const PriceDetail = styled.div`
@@ -84,7 +132,9 @@ const PriceDetail = styled.div`
 `;
 
 const Image = styled.img`
-  width: 200px;
+  width: 100px;
+  flex: 1;
+  ${mobile({ width: "50px" })}
 `;
 
 const ProductAmountContainer = styled.div`
@@ -94,12 +144,13 @@ const ProductAmountContainer = styled.div`
 `;
 
 const ProductPrice = styled.div`
-  font-size: 1.9em;
+  font-size: 1em;
   font-weight: 300;
+  ${mobile({ fontSize: "12px" })}
 `;
 
 const ProductAmount = styled.div`
-  font-size: 1.5em;
+  font-size: 1em;
   margin: 5px;
 `;
 
@@ -142,75 +193,55 @@ const Hr = styled.hr`
 `;
 
 const Cart = () => {
+  const cart = useSelector((state) => state.cart);
+
   return (
     <Container>
-      <Navbar />
       <Announcement />
+      <Navbar />
       <Wrapper>
         <Title>YOUR BAG</Title>
-        <Top>
-          <TopButton>CONTINUE SHOPPING</TopButton>
-          <TopTexts>
-            <TopText>Shopping Bag(2)</TopText>
-            <TopText>Your Wishlist (0)</TopText>
-          </TopTexts>
-          <TopButton type="filled">CHECKOUT NOW</TopButton>
-        </Top>
         <Bottom>
           <Info>
-            <Product>
-              <ProductDetail>
-                <Image src="https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1614188818-TD1MTHU_SHOE_ANGLE_GLOBAL_MENS_TREE_DASHERS_THUNDER_b01b1013-cd8d-48e7-bed9-52db26515dc4.png?crop=1xw:1.00xh;center,top&resize=480%3A%2A" />
-                <Details>
-                  <ProductName>
-                    <b>Product:</b> JESSIE THUNDER SHOES
-                  </ProductName>
-                  <ProductId>
-                    <b>ID:</b> 93813718293
-                  </ProductId>
-                  <ProductColor color="black" />
-                  <ProductSize>
-                    <b>Size:</b> 37.5
-                  </ProductSize>
-                </Details>
-              </ProductDetail>
-              <PriceDetail>
-                <ProductAmountContainer>
-                  <Add />
-                  <ProductAmount>2</ProductAmount>
-                  <Remove />
-                </ProductAmountContainer>
-                <ProductPrice>$ 30</ProductPrice>
-              </PriceDetail>
-            </Product>
+            {console.log(cart)}
+            {cart.products?.map((product) => (
+              <Product>
+                <ProductDetail>
+                  <Image src={product.img} />
+                  <Details>
+                    <ProductName>
+                      <b>Product:</b> {product.title}
+                    </ProductName>
+                    <ProductId>
+                      <b>Product ID:</b> {product._id}
+                      {console.log(product.filters)}
+                    </ProductId>
+                    <ProductPriceOneUnit>
+                      <b>Price :</b> {`$ ${product.price}`}
+                    </ProductPriceOneUnit>
+                    {Object.entries(product.filters).map(([key, value]) => (
+                      <ProductSize>
+                        <b>{`${key} :`}</b> {`${value}`}
+                      </ProductSize>
+                    ))}
+                  </Details>
+                </ProductDetail>
+                <PriceDetail>
+                  <ProductAmountContainer>
+                    <Add style={{ fontSize: "10px" }} />
+                    <ProductAmount>{product.quantity}</ProductAmount>
+                    <Remove style={{ fontSize: "10px" }} />
+                  </ProductAmountContainer>
+                  <ProductPrice>
+                    $ {product.quantity * product.price}
+                  </ProductPrice>
+                </PriceDetail>
+              </Product>
+            ))}
             <Hr />
-            <Product>
-              <ProductDetail>
-                <Image src="https://i.pinimg.com/originals/2d/af/f8/2daff8e0823e51dd752704a47d5b795c.png" />
-                <Details>
-                  <ProductName>
-                    <b>Product:</b> HAKURA T-SHIRT
-                  </ProductName>
-                  <ProductId>
-                    <b>ID:</b> 93813718293
-                  </ProductId>
-                  <ProductColor>Gray</ProductColor>
-                  <ProductSize>
-                    <b>Size:</b> M
-                  </ProductSize>
-                </Details>
-              </ProductDetail>
-              <PriceDetail>
-                <ProductAmountContainer>
-                  <Add />
-                  <ProductAmount>1</ProductAmount>
-                  <Remove />
-                </ProductAmountContainer>
-                <ProductPrice>$ 20</ProductPrice>
-              </PriceDetail>
-            </Product>
           </Info>
-          <Summary>
+
+          {/* <Summary>
             <SummaryTitle>ORDER SUMMARY</SummaryTitle>
             <SummaryItem>
               <SummaryItemText>Subtotal</SummaryItemText>
@@ -229,10 +260,16 @@ const Cart = () => {
               <SummaryItemPrice>$ 80</SummaryItemPrice>
             </SummaryItem>
             <Button>CHECKOUT NOW</Button>
-          </Summary>
+          </Summary> */}
         </Bottom>
       </Wrapper>
-      <Footer />
+      <Footer>
+        <FooterTexts>
+          <FooterText>Shopping Bag(2)</FooterText>
+          <FooterText>Your Wishlist (0)</FooterText>
+        </FooterTexts>
+        <FooterButton type="filled">CHECKOUT NOW</FooterButton>
+      </Footer>
     </Container>
   );
 };
