@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { mobile } from "../responsive";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../redux/apiCalls";
 
 const Container = styled.div`
   height: 100vh;
@@ -71,28 +73,56 @@ const Button = styled.button`
   display: flex;
   align-self: flex-end;
   ${mobile({ padding: "10px", fontSize: "0.7em" })}
+  &::disabled {
+    color: green;
+    cursor: not-not-allowed;
+  }
 `;
 
-const Signin = () => {
+const Error = styled.span`
+  color: red;
+`;
+
+const Login = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+  const { isFetching, error } = useSelector((state) => state.user);
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    login(dispatch, { username, password });
+  };
+
   return (
     <Container>
       <Wrapper>
         <Logo>My-Shop</Logo>
         <Title>Sign in</Title>
         <Form>
-          <Input placeholder="username" />
-          <Input placeholder="password" />
+          <Input
+            placeholder="username"
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <Input
+            placeholder="password"
+            onChange={(e) => setPassword(e.target.value)}
+            type="password"
+          />
           <SubText>
             No account? <a href="./Register">Create one!</a>
           </SubText>
           <SubText>
             Forgot password? <a href="./Register">Click here!</a>
           </SubText>
-          <Button>Submit</Button>
+          <Button onClick={handleClick} disabled={isFetching}>
+            Submit
+          </Button>
+          {error && <Error>Something went wrong...</Error>}
         </Form>
       </Wrapper>
     </Container>
   );
 };
 
-export default Signin;
+export default Login;

@@ -174,6 +174,7 @@ const Product = () => {
     };
     getProduct();
   }, [_id]);
+
   const handleClick = (e) => {
     if (e === "increment") {
       setAmount(amount + 1);

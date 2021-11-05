@@ -1,11 +1,15 @@
 import { Add, Remove } from "@mui/icons-material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Announcement from "../components/Announcement";
 import Navbar from "../components/Navbar";
-
+import StripeCheckout from "react-stripe-checkout";
 import { useSelector } from "react-redux";
 import { mobile, tablet, notebook } from "../responsive";
+import { userRequest } from "../requestMethods";
+import { useHistory } from "react-router";
+
+const KEY = process.env.REACT_APP_STRIPE;
 
 const Container = styled.div``;
 
@@ -194,6 +198,28 @@ const Hr = styled.hr`
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
+  const [stripeToken, setStripeToken] = useState(null);
+  const history = useHistory();
+
+  const onToken = (token) => {
+    setStripeToken(token);
+  };
+
+  useEffect(() => {
+    const makeRequest = async () => {
+      try {
+        const res = await userRequest.post("/checkout/payment", {
+          tokenId: stripeToken.id,
+          amount: 500,
+        });
+        history.push("/success", {
+          stripeData: res.data,
+          products: cart,
+        });
+      } catch {}
+    };
+    stripeToken && makeRequest();
+  }, [stripeToken, history, cart]);
 
   return (
     <Container>
@@ -214,7 +240,6 @@ const Cart = () => {
                     </ProductName>
                     <ProductId>
                       <b>Product ID:</b> {product._id}
-                      {console.log(product.filters)}
                     </ProductId>
                     <ProductPriceOneUnit>
                       <b>Price :</b> {`$ ${product.price}`}
@@ -228,9 +253,9 @@ const Cart = () => {
                 </ProductDetail>
                 <PriceDetail>
                   <ProductAmountContainer>
-                    <Add style={{ fontSize: "10px" }} />
+                    <Add name="inc" style={{ fontSize: "10px" }} />
                     <ProductAmount>{product.quantity}</ProductAmount>
-                    <Remove style={{ fontSize: "10px" }} />
+                    <Remove name="dec" style={{ fontSize: "10px" }} />
                   </ProductAmountContainer>
                   <ProductPrice>
                     $ {product.quantity * product.price}
@@ -268,7 +293,18 @@ const Cart = () => {
           <FooterText>Shopping Bag(2)</FooterText>
           <FooterText>Your Wishlist (0)</FooterText>
         </FooterTexts>
-        <FooterButton type="filled">CHECKOUT NOW</FooterButton>
+        <StripeCheckout
+          name="My-Shop"
+          image="https://image1.jdomni.in/storeLogo/02122020/E2/D3/AD/80828A41663079A080691C50EE_1606915864349.png?output-format=webp"
+          billingAddress
+          shippingAddress
+          description={`your total is $${cart.total}`}
+          amount={cart.total * 100}
+          token={onToken}
+          stripeKey={KEY}
+        >
+          <FooterButton type="filled">CHECKOUT NOW</FooterButton>
+        </StripeCheckout>
       </Footer>
     </Container>
   );
