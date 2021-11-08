@@ -46,6 +46,14 @@ const Title = styled.p`
   width: 150px;
 `;
 
+const ClearFilter = styled.button`
+  padding: 5px;
+  border: none;
+  color: #5c0000;
+  margin-left: 10px;
+  cursor: pointer;
+`;
+
 const ProductList = () => {
   const location = useLocation();
   const cat = location.pathname.split("/")[2];
@@ -74,12 +82,16 @@ const ProductList = () => {
           </Select>
           <Select name="promotion" onChange={handleFilter}>
             <Option disabled>promotion</Option>
-            <Option>free shipment</Option>
+            <Option>ร้านค้าแนะนำ</Option>
             <Option>exclusive price</Option>
             <Option>only9.9$</Option>
             <Option>10%cashback</Option>
             <Option>9.9$free shipping</Option>
           </Select>
+          {filters !== {} && (
+            <ClearFilter onClick={() => setFilters({})}>Clear</ClearFilter>
+          )}
+          {console.log(filters)}
         </Filter>
         <Filter>
           <FilterText>Sort Products</FilterText>

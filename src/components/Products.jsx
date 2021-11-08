@@ -48,11 +48,11 @@ const Products = ({ cat, filters, sort }) => {
       );
     } else if (sort === "lowToHigh") {
       setFilteredProducts((prev) =>
-        [...prev].sort((a, b) => a.price - b.price)
+        [...prev].sort((a, b) => a.floorPrice - b.floorPrice)
       );
     } else if (sort === "highToLow") {
       setFilteredProducts((prev) =>
-        [...prev].sort((a, b) => b.price - a.price)
+        [...prev].sort((a, b) => b.floorPrice - a.floorPrice)
       );
     } else if (sort === "highestLikes") {
       setFilteredProducts((prev) =>

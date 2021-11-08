@@ -91,8 +91,8 @@ const Register = () => {
           <Input placeholder="password" />
           <Input placeholder="confirm password" />
           <Input placeholder="your-email" />
-          <Input placeholder="first name" />
-          <Input placeholder="last name" />
+          <Input placeholder="firstname" />
+          <Input placeholder="lastname" />
 
           <AgreementContainer>
             <CheckAgreement type="checkbox" />

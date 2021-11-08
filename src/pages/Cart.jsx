@@ -229,7 +229,6 @@ const Cart = () => {
         <Title>YOUR BAG</Title>
         <Bottom>
           <Info>
-            {console.log(cart)}
             {cart.products?.map((product) => (
               <Product>
                 <ProductDetail>

@@ -23,7 +23,6 @@ const Wrapper = styled.div`
   padding: 50px;
   display: flex;
   ${mobile({ flexDirection: "column", padding: "10px" })}
-
   box-shadow: 0px 0px 7px 1px rgba(54, 54, 54, 0.31);
   -webkit-box-shadow: 0px 0px 7px 1px rgba(54, 54, 54, 0.31);
   -moz-box-shadow: 0px 0px 7px 1px rgba(54, 54, 54, 0.31);
@@ -123,6 +122,11 @@ const StyledButton = styled.button`
   }
 `;
 
+const Condition = styled.p`
+  font-size: 0.64rem;
+  font-weight: 300;
+`;
+
 const Amount = styled.input`
   width: 30px;
   height: 30px;
@@ -160,14 +164,28 @@ const Product = () => {
     const getProduct = async () => {
       try {
         const res = await publicRequest.get(`/product/find/${_id}`);
-        setProduct(res.data);
-        const { filters } = res.data;
+        await setProduct(res.data);
         const data = [];
-        filters.forEach((e) => {
-          data.push([e.filterTitle, e.filterProducts[0]]);
-        });
+        if (res.data.filterTitleTwo) {
+          data.push(
+            [res.data.filterTitleOne, res.data.product[0].filterProductsOne],
+            [res.data.filterTitleTwo, res.data.product[0].filterProductsTwo]
+          );
+        } else {
+          data.push([
+            res.data.filterTitleOne,
+            res.data.product[0].filterProductsOne,
+          ]);
+        }
         const obj = Object.fromEntries(data);
         setFilters(obj);
+        // const { filters } = res.data;
+        // const data = [];
+        // filters.forEach((e) => {
+        //   data.push([e.filterTitle, e.filterProducts[0]]);
+        // });
+        // const obj = Object.fromEntries(data);
+        // setFilters(obj);
       } catch (err) {
         console.log(err);
       }
@@ -204,7 +222,7 @@ const Product = () => {
       })
     );
   };
-
+  // console.log(product);
   return (
     <Container>
       <Announcement />
@@ -217,32 +235,34 @@ const Product = () => {
           <Title>{product.title}</Title>
           <Brand>{product.brand}</Brand>
           <Price>
-            <Underline>$ {product.priceBeforeDiscount}</Underline>
-            <Br />${product.price} ({" "}
-            {(
-              ((product.priceBeforeDiscount - product.price) /
-                product.priceBeforeDiscount) *
-              100
-            ).toFixed(0)}
-            % off)
+            {
+              // ...product.product.filter((item) => item.priceBeforeDiscount) && <del>{}</del>
+            }
           </Price>
           <Desc>{product.desc}</Desc>
+          {product.condition === "used" && <Condition>สินค้ามือสอง</Condition>}
           <FilterContainer>
             <Filter>
-              {product.filters?.map((e, id) => (
-                <>
-                  <FilterTitle value={e?.filterTitle} key={id}>
-                    {e?.filterTitle}
-                  </FilterTitle>
-                  <FilterSize onChange={handleFilter} name={e?.filterTitle}>
-                    {e?.filterProducts?.map((item, itemId) => (
-                      <FilterSizeOption value={item} key={itemId}>
-                        {item}
-                      </FilterSizeOption>
-                    ))}
-                  </FilterSize>
-                </>
-              ))}
+              <FilterTitle>{product.filterTitleOne}</FilterTitle>
+              <FilterSize onChange={handleFilter} name={product.filterTitleOne}>
+                {product.product
+                  ?.map((item) => item.filterProductsOne)
+                  .filter((v, i, a) => a.indexOf(v) === i)
+                  .map((item) => (
+                    <FilterSizeOption>{item}</FilterSizeOption>
+                  ))}
+              </FilterSize>
+            </Filter>
+            <Filter>
+              <FilterTitle>{product.filterTitleTwo}</FilterTitle>
+              <FilterSize onChange={handleFilter} name={product.filterTitleTwo}>
+                {product.product
+                  ?.map((item) => item.filterProductsTwo)
+                  .filter((v, i, a) => a.indexOf(v) === i)
+                  .map((item) => (
+                    <FilterSizeOption>{item}</FilterSizeOption>
+                  ))}
+              </FilterSize>
             </Filter>
           </FilterContainer>
           <AddContainer>

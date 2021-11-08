@@ -100,12 +100,11 @@ const Product = ({ item }) => {
     <Container>
       <Image src={item.img} />
       <TextTitle>{item.title}</TextTitle>
-      {item.priceBeforeDiscount && (
-        <Text>
-          Price : <del>{item.priceBeforeDiscount}</del> {` ${item.price}`} $
-          <br />
-        </Text>
-      )}
+      <Text>
+        Price : {`${item.floorPrice} - ${item.ceilPrice} ฿`}
+        <br />
+      </Text>
+
       <Text>Total Sold : {item.sold}</Text>
       <Text>
         <Likes>
