@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import { mobile, tablet, notebook } from "../responsive";
 import { userRequest } from "../requestMethods";
 import { useHistory } from "react-router";
+import { Link } from "react-router-dom";
 
 const KEY = process.env.REACT_APP_STRIPE;
 
@@ -232,7 +233,9 @@ const Cart = () => {
             {cart.products?.map((product) => (
               <Product>
                 <ProductDetail>
+                <Link to={`/product/${product._id}`}>
                   <Image src={product.img} />
+                  </Link>
                   <Details>
                     <ProductName>
                       <b>Product:</b> {product.title}
@@ -242,18 +245,7 @@ const Cart = () => {
                     </ProductId>
                     <ProductPriceOneUnit>
                       <b>Price :</b> 
-                {console.log(product.product.filter((item)=> 
-                !item.hasOwnProperty("filterProductsTwo") ?
-                Object.values(product.filters).includes(Object.values(item.filterProductsOne)[0])
-                  : 
-                  Object.values(product.filters).includes(Object.values(item.filterProductsOne)[0]) && Object.values(product.filters).includes(Object.values(item.filterProductsOne)[0])
-                )[0])}
-                {/* {console.log(product.product.filter((item) => 
-                item.hasOwnProperty("filterProductsTwo") &&
-                Object.values(item.filterProductsTwo)
-                ))} */}
-
-                {/* {console.log(product.product)} */}
+                      {/* {product.item[0].price} */}
                     </ProductPriceOneUnit>
                     {Object.entries(product.filters).map(([key, value]) => (
                       <ProductSize>
