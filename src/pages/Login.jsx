@@ -98,7 +98,7 @@ const Login = () => {
     <Container>
       <Wrapper>
         <Logo>My-Shop</Logo>
-        <Title>Sign in</Title>
+        <Title>Login</Title>
         <Form>
           <Input
             placeholder="username"

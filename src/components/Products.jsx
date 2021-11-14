@@ -25,7 +25,7 @@ const Products = ({ cat, filters, sort }) => {
             : "http://localhost:8080/product"
         );
         setProducts(res.data);
-      } catch (err) {}
+      } catch (err) {console.error(err)}
     };
     getProducts();
   }, [cat]);
@@ -40,6 +40,7 @@ const Products = ({ cat, filters, sort }) => {
         )
       );
   }, [products, cat, filters]);
+
 
   useEffect(() => {
     if (sort === "newest") {
@@ -68,7 +69,7 @@ const Products = ({ cat, filters, sort }) => {
       {cat
         ? filteredProducts.map((item) => <Product item={item} key={item._id} />)
         : products
-            .slice(0, 8)
+            .slice(0, 16)
             .map((item) => <Product item={item} key={item._id} />)}
     </Container>
   );

@@ -241,7 +241,19 @@ const Cart = () => {
                       <b>Product ID:</b> {product._id}
                     </ProductId>
                     <ProductPriceOneUnit>
-                      <b>Price :</b> {`$ ${product.price}`}
+                      <b>Price :</b> 
+                {console.log(product.product.filter((item)=> 
+                !item.hasOwnProperty("filterProductsTwo") ?
+                Object.values(product.filters).includes(Object.values(item.filterProductsOne)[0])
+                  : 
+                  Object.values(product.filters).includes(Object.values(item.filterProductsOne)[0]) && Object.values(product.filters).includes(Object.values(item.filterProductsOne)[0])
+                )[0])}
+                {/* {console.log(product.product.filter((item) => 
+                item.hasOwnProperty("filterProductsTwo") &&
+                Object.values(item.filterProductsTwo)
+                ))} */}
+
+                {/* {console.log(product.product)} */}
                     </ProductPriceOneUnit>
                     {Object.entries(product.filters).map(([key, value]) => (
                       <ProductSize>

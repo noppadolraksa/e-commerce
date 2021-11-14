@@ -136,11 +136,6 @@ const Amount = styled.input`
   text-align: center;
 `;
 
-const Br = styled.br``;
-
-const Underline = styled.span`
-  text-decoration: line-through;
-`;
 
 const Product = () => {
   const location = useLocation();
@@ -151,6 +146,7 @@ const Product = () => {
   //to let react know where is acion(wrap action)
   const dispatch = useDispatch();
   const [filters, setFilters] = useState({});
+  const [item, setItem] = useState([]);
 
   const handleFilter = (e) => {
     const value = e.target.value;
@@ -192,6 +188,18 @@ const Product = () => {
     };
     getProduct();
   }, [_id]);
+ 
+ useEffect(()=> {
+  const res = product.product?.filter((item) =>
+  !product.hasOwnProperty("filterTitleTwo") ?
+  Object.values(filters).includes(item.filterProductsOne) 
+  :  Object.values(filters).includes(item.filterProductsOne) &&
+  Object.values(filters).includes(item.filterProductsTwo)
+)
+setItem(res)
+ },[filters, _id])
+ console.log(item)
+    
 
   const handleClick = (e) => {
     if (e === "increment") {
@@ -219,6 +227,7 @@ const Product = () => {
         ...product,
         quantity: amount,
         filters,
+        item
       })
     );
   };
@@ -235,8 +244,8 @@ const Product = () => {
           <Title>{product.title}</Title>
           <Brand>{product.brand}</Brand>
           <Price>
-            {
-              // ...product.product.filter((item) => item.priceBeforeDiscount) && <del>{}</del>
+            $ {
+          item?.[0]?.price
             }
           </Price>
           <Desc>{product.desc}</Desc>
@@ -253,6 +262,7 @@ const Product = () => {
                   ))}
               </FilterSize>
             </Filter>
+            {product.filterTitleTwo &&
             <Filter>
               <FilterTitle>{product.filterTitleTwo}</FilterTitle>
               <FilterSize onChange={handleFilter} name={product.filterTitleTwo}>
@@ -262,8 +272,9 @@ const Product = () => {
                   .map((item) => (
                     <FilterSizeOption>{item}</FilterSizeOption>
                   ))}
+                  
               </FilterSize>
-            </Filter>
+            </Filter>}
           </FilterContainer>
           <AddContainer>
             <AmountContainer>

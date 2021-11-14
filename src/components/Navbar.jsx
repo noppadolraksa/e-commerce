@@ -112,8 +112,8 @@ const Navbar = () => {
           </SearchContainer>
         </Center>
         <Right>
-          <MenuItems>Signin</MenuItems>
-          <MenuItems>Register</MenuItems>
+          <MenuItems><a href="/login">Login</a></MenuItems>
+          <MenuItems><a href="/login">Register</a></MenuItems>
           <MenuItems>
             <Link to="/cart">
               <Badge badgeContent={quantity} color="primary">

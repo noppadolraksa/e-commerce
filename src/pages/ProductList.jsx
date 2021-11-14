@@ -91,7 +91,7 @@ const ProductList = () => {
           {filters !== {} && (
             <ClearFilter onClick={() => setFilters({})}>Clear</ClearFilter>
           )}
-          {console.log(filters)}
+        
         </Filter>
         <Filter>
           <FilterText>Sort Products</FilterText>
