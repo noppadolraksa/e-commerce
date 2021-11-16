@@ -21,7 +21,7 @@ const Filter = styled.div`
   ${mobile({ width: "0px 20px", display: "flex", flexDirection: "column" })}
 `;
 
-const FilterText = styled.div`
+const FilterText = styled.p`
   font-size: 1.25em;
   font-weight: 600;
   margin-right: 20px;
@@ -91,7 +91,6 @@ const ProductList = () => {
           {filters !== {} && (
             <ClearFilter onClick={() => setFilters({})}>Clear</ClearFilter>
           )}
-        
         </Filter>
         <Filter>
           <FilterText>Sort Products</FilterText>

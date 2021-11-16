@@ -11,41 +11,32 @@ const cartSlice = createSlice({
   reducers: {
     // when you click in "add to cart"=>
     addProduct: (state, action) => {
-      const findProduct = state.products.findIndex(
+      const findProduct = state.products.find(
+        (item) => item.item[0]._id === action.payload.item[0]._id
+      );
+      const findIndexProduct = state.products.findIndex(
         (item) => item.item[0]._id === action.payload.item[0]._id
       );
 
       if (!findProduct) {
         state.quantity += 1;
         state.products.push(action.payload);
-        //3# total price = [...total] + price
+
         state.total += action.payload.item[0].price * action.payload.quantity;
       } else {
-        state.products[findProduct].quantity += action.payload.quantity;
+        state.products[findIndexProduct].quantity += action.payload.quantity;
       }
-      // const findProduct = state.products.filter((item) =>
-      //   item._id === action.payload._id &&
-      //   action.payload.item.hasOwnProperty("filterTitleTwo")
-      //     ? Object.values(item.filters).includes(
-      //         action.payload.item.filterProductsOne
-      //       ) &&
-      //       Object.values(item.filters).includes(
-      //         action.payload.item.filterProductsTwo
-      //       )
-      //     : Object.values(item.filters).includes(
-      //         action.payload.item.filterProductsOne
-      //       )
-      // );
-
-      // if (findProduct) {
-      //   findProduct.quantity += action.payload.quantity;
-      //   state.products.push(action.payload);
-      //   //3# total price = [...total] + price
-      //   state.total += action.payload.item[0].price * action.payload.quantity;
-      // }
     },
-    incQuantity: (state, action) => {
-      console.log(action.payload);
+    changeQuantity: (state, action) => {
+      const findProduct = state.products.find(
+        (item) => item.item[0]._id === action.payload.item.item[0]._id
+      );
+      if (action.payload === "inc") {
+        findProduct.quantity += 1;
+        state.total -= action.payload.item.item[0].price;
+      }
+      if (action.payload === "dec") {
+      }
     },
     deleteProduct: (state, action) => {
       state.quantity -= 1;
@@ -54,5 +45,5 @@ const cartSlice = createSlice({
   },
 });
 
-export const { addProduct, incQuantity, deleteProduct } = cartSlice.actions;
+export const { addProduct, changeQuantity, deleteProduct } = cartSlice.actions;
 export default cartSlice.reducer;

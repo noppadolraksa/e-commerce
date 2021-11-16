@@ -1,4 +1,4 @@
-import { Add, Remove } from "@mui/icons-material";
+import { Add, DeleteOutline, Remove } from "@mui/icons-material";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Announcement from "../components/Announcement";
@@ -10,11 +10,13 @@ import { userRequest } from "../requestMethods";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { incQuantity } from "../redux/cartRedux";
+import { changeQuantity } from "../redux/cartRedux";
 
 const KEY = process.env.REACT_APP_STRIPE;
 
-const Container = styled.div``;
+const Container = styled.div`
+  margin-bottom: 100px;
+`;
 
 const Wrapper = styled.div`
   padding: 20px; // got a ขอบกระดาษ
@@ -25,11 +27,20 @@ const Title = styled.h1`
   text-align: center;
 `;
 
-const Footer = styled.div`
+const FooterWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 20px;
+`;
+
+const Footer = styled.div`
+  position: fixed;
+  bottom: 0;
+  background-color: white;
+  height: 110px;
+  width: 100%;
+  border-top: 1px solid gray;
 `;
 
 const FooterButton = styled.button`
@@ -39,6 +50,7 @@ const FooterButton = styled.button`
   border: none;
   background-color: black;
   color: white;
+  margin-right: 20px;
 `;
 
 const FooterTexts = styled.div`
@@ -228,10 +240,28 @@ const Cart = () => {
 
   const handleClick = (e) => {
     if (e.target.name === "inc") {
-      dispatch(incQuantity("Hello"));
+      console.log(e.target.item);
+      dispatch(
+        changeQuantity({
+          name: "inc",
+          item: e.target.item,
+        })
+      );
     }
     if (e.target.name === "dec") {
+      if (!e.target.item.quantity === 0) {
+        dispatch(
+          changeQuantity({
+            name: "dec",
+            item: e.target.item,
+          })
+        );
+      }
     }
+  };
+
+  const handleDelete = (e) => {
+    e.preventDefault();
   };
 
   return (
@@ -242,8 +272,8 @@ const Cart = () => {
         <Title>YOUR BAG</Title>
         <Bottom>
           <Info>
-            {cart.products?.map((product, index) => (
-              <Product>
+            {cart.products?.map((product) => (
+              <Product key={product.item._id}>
                 <ProductDetail>
                   <Link to={`/product/${product._id}`}>
                     <Image src={product.img} />
@@ -253,26 +283,45 @@ const Cart = () => {
                       <b>Product:</b> {product.title}
                     </ProductName>
                     <ProductId>
-                      <b>Product ID:</b> {product._id}
+                      <b>ID :</b> {product.item[0]._id}
                     </ProductId>
                     <ProductPriceOneUnit>
-                      <b>Price :</b>
+                      <b>Price : </b>$ {product.item[0].price}
                       {/* {product.item[0].price} */}
                     </ProductPriceOneUnit>
-                    {Object.entries(product.filters).map(([key, value]) => (
-                      <ProductSize>
-                        <b>{`${key} :`}</b> {`${value}`}
-                      </ProductSize>
-                    ))}
+                    {Object.entries(product.filters).map(
+                      ([key, value], index) => (
+                        <ProductSize key={index}>
+                          <b>{`${key} :`}</b> {`${value}`}
+                        </ProductSize>
+                      )
+                    )}
                   </Details>
                 </ProductDetail>
                 <PriceDetail>
-                  <ProductAmountContainer key={index}>
-                    <Add onClick={handleClick} />
+                  <ProductAmountContainer>
+                    <Add
+                      onClick={handleClick}
+                      name="inc"
+                      item={product}
+                      style={{ cursor: "pointer" }}
+                    />
                     <ProductAmount value={cart.quantity}>
                       {product.quantity}
                     </ProductAmount>
-                    <Remove onClick={handleClick} />
+                    <Remove
+                      onClick={handleClick}
+                      name="dec"
+                      item={product}
+                      style={{ cursor: "pointer" }}
+                    />
+
+                    {product.quantity === 0 && (
+                      <DeleteOutline
+                        style={{ color: "red", cursor: "pointer" }}
+                        onClick={handleDelete}
+                      />
+                    )}
                   </ProductAmountContainer>
                   <ProductPrice>
                     $ {product.quantity * product.price}
@@ -305,24 +354,31 @@ const Cart = () => {
           </Summary> */}
         </Bottom>
       </Wrapper>
+
       <Footer>
-        <FooterTexts>
-          <a href="#top">
-            <FooterText>Shopping Bag({cart.quantity})</FooterText>
-          </a>
-        </FooterTexts>
-        <StripeCheckout
-          name="My-Shop"
-          image="https://image1.jdomni.in/storeLogo/02122020/E2/D3/AD/80828A41663079A080691C50EE_1606915864349.png?output-format=webp"
-          billingAddress
-          shippingAddress
-          description={`your total is $${cart.total}`}
-          amount={cart.total * 100}
-          token={onToken}
-          stripeKey={KEY}
-        >
-          <FooterButton type="filled">CHECKOUT NOW</FooterButton>
-        </StripeCheckout>
+        <FooterWrapper>
+          <FooterTexts>
+            <a href="#top">
+              <FooterText>Shopping Bag({cart.quantity})</FooterText>
+            </a>
+          </FooterTexts>
+          <SummaryItem>
+            <SummaryItemText>Subtotal</SummaryItemText>
+            <SummaryItemPrice>$ {cart.total}</SummaryItemPrice>
+          </SummaryItem>
+          <StripeCheckout
+            name="My-Shop"
+            image="https://image1.jdomni.in/storeLogo/02122020/E2/D3/AD/80828A41663079A080691C50EE_1606915864349.png?output-format=webp"
+            billingAddress
+            shippingAddress
+            description={`your total is $${cart.total}`}
+            amount={cart.total * 100}
+            token={onToken}
+            stripeKey={KEY}
+          >
+            <FooterButton type="filled">CHECKOUT NOW</FooterButton>
+          </StripeCheckout>
+        </FooterWrapper>
       </Footer>
     </Container>
   );

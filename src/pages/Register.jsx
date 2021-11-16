@@ -44,7 +44,7 @@ const Title = styled.h1`
   margin: 0.6em 0.6em 0.6em;
 `;
 
-const Form = styled.div`
+const Form = styled.form`
   display: flex;
   flex-wrap: wrap;
 `;

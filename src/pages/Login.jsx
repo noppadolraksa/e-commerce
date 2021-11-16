@@ -46,7 +46,7 @@ const Title = styled.h1`
   margin: 30px 10px 10px 10px;
 `;
 
-const Form = styled.div`
+const Form = styled.form`
   height: 100%;
   display: flex;
   flex-direction: column;

@@ -4,14 +4,16 @@ import Announcement from "../components/Announcement";
 import Newsletter from "../components/Newsletter";
 import Footer from "../components/Footer";
 import { Add, Remove } from "@mui/icons-material";
-import React, { Fragment, useState } from "react";
+import React, { useState } from "react";
 import { mobile, notebook, tablet } from "../responsive";
-
-import { useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Link, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { publicRequest } from "../requestMethods";
 import { addProduct } from "../redux/cartRedux";
 import { useDispatch } from "react-redux";
+import { Modal, Typography } from "@mui/material";
+import { Box } from "@mui/system";
 
 const Container = styled.div`
   ${mobile({ maxWidth: "350px" })}
@@ -104,6 +106,19 @@ const AddContainer = styled.div`
   ${mobile({ width: "97%" })}
 `;
 
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "#f2f2f2",
+  opacity: "0.95",
+  border: "1px solid #808080",
+  boxShadow: 24,
+  p: 4,
+};
+
 const AmountContainer = styled.div`
   display: flex;
   align-items: center;
@@ -146,6 +161,12 @@ const Product = () => {
   const dispatch = useDispatch();
   const [filters, setFilters] = useState({});
   const [item, setItem] = useState([]);
+  const [open, setOpen] = React.useState(false);
+  const user = useSelector((state) => state.user.currentUser);
+
+  const handleOpen = () => setOpen(true);
+
+  const handleClose = () => setOpen(false);
 
   const handleFilter = (e) => {
     const value = e.target.value;
@@ -219,14 +240,16 @@ const Product = () => {
 
   //update cart
   const handleCart = (e) => {
-    dispatch(
-      addProduct({
-        ...product,
-        quantity: amount,
-        filters,
-        item,
-      })
-    );
+    user
+      ? dispatch(
+          addProduct({
+            ...product,
+            quantity: amount,
+            filters,
+            item,
+          })
+        )
+      : handleOpen();
   };
   // console.log(product);
   return (
@@ -250,8 +273,8 @@ const Product = () => {
                 {product.product
                   ?.map((item) => item.filterProductsOne)
                   .filter((v, i, a) => a.indexOf(v) === i)
-                  .map((item) => (
-                    <FilterSizeOption>{item}</FilterSizeOption>
+                  .map((item, index) => (
+                    <FilterSizeOption key={index}>{item}</FilterSizeOption>
                   ))}
               </FilterSize>
             </Filter>
@@ -265,8 +288,8 @@ const Product = () => {
                   {product.product
                     ?.map((item) => item.filterProductsTwo)
                     .filter((v, i, a) => a.indexOf(v) === i)
-                    .map((item) => (
-                      <FilterSizeOption>{item}</FilterSizeOption>
+                    .map((item, index) => (
+                      <FilterSizeOption key={index}>{item}</FilterSizeOption>
                     ))}
                 </FilterSize>
               </Filter>
@@ -290,6 +313,25 @@ const Product = () => {
       </Wrapper>
       <Newsletter />
       <Footer />
+      <div>
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <Typography id="modal-modal-title" variant="h6" component="h2">
+              Oops! You are not able to update cart!
+            </Typography>
+            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+              please <Link to="/login">login</Link> first or{" "}
+              <Link to="/register">create an account</Link> to continue
+              shopping..
+            </Typography>
+          </Box>
+        </Modal>
+      </div>
     </Container>
   );
 };

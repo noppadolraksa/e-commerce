@@ -108,7 +108,7 @@ const Product = ({ item }) => {
       <Text>Total Sold : {item.sold}</Text>
       <Text>
         <Likes>
-          {item.likes}
+          {+item.likes}
           <Favorite style={{ color: "#e44d4dcc", height: "17px" }} />
         </Likes>
       </Text>
