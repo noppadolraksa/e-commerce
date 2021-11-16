@@ -9,6 +9,8 @@ import { mobile, tablet, notebook } from "../responsive";
 import { userRequest } from "../requestMethods";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { incQuantity } from "../redux/cartRedux";
 
 const KEY = process.env.REACT_APP_STRIPE;
 
@@ -200,7 +202,9 @@ const Hr = styled.hr`
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
   const [stripeToken, setStripeToken] = useState(null);
+
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const onToken = (token) => {
     setStripeToken(token);
@@ -222,6 +226,14 @@ const Cart = () => {
     stripeToken && makeRequest();
   }, [stripeToken, history, cart]);
 
+  const handleClick = (e) => {
+    if (e.target.name === "inc") {
+      dispatch(incQuantity("Hello"));
+    }
+    if (e.target.name === "dec") {
+    }
+  };
+
   return (
     <Container>
       <Announcement />
@@ -230,11 +242,11 @@ const Cart = () => {
         <Title>YOUR BAG</Title>
         <Bottom>
           <Info>
-            {cart.products?.map((product) => (
+            {cart.products?.map((product, index) => (
               <Product>
                 <ProductDetail>
-                <Link to={`/product/${product._id}`}>
-                  <Image src={product.img} />
+                  <Link to={`/product/${product._id}`}>
+                    <Image src={product.img} />
                   </Link>
                   <Details>
                     <ProductName>
@@ -244,7 +256,7 @@ const Cart = () => {
                       <b>Product ID:</b> {product._id}
                     </ProductId>
                     <ProductPriceOneUnit>
-                      <b>Price :</b> 
+                      <b>Price :</b>
                       {/* {product.item[0].price} */}
                     </ProductPriceOneUnit>
                     {Object.entries(product.filters).map(([key, value]) => (
@@ -255,10 +267,12 @@ const Cart = () => {
                   </Details>
                 </ProductDetail>
                 <PriceDetail>
-                  <ProductAmountContainer>
-                    <Add name="inc" style={{ fontSize: "10px" }} />
-                    <ProductAmount>{product.quantity}</ProductAmount>
-                    <Remove name="dec" style={{ fontSize: "10px" }} />
+                  <ProductAmountContainer key={index}>
+                    <Add onClick={handleClick} />
+                    <ProductAmount value={cart.quantity}>
+                      {product.quantity}
+                    </ProductAmount>
+                    <Remove onClick={handleClick} />
                   </ProductAmountContainer>
                   <ProductPrice>
                     $ {product.quantity * product.price}
@@ -293,8 +307,9 @@ const Cart = () => {
       </Wrapper>
       <Footer>
         <FooterTexts>
-          <FooterText>Shopping Bag(2)</FooterText>
-          <FooterText>Your Wishlist (0)</FooterText>
+          <a href="#top">
+            <FooterText>Shopping Bag({cart.quantity})</FooterText>
+          </a>
         </FooterTexts>
         <StripeCheckout
           name="My-Shop"

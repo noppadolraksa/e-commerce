@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { mobile } from "../responsive";
+import { mobile, tablet } from "../responsive";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../redux/apiCalls";
 
 const Container = styled.div`
+  margin: 0px;
   height: 100vh;
   width: 100vw;
   display: flex;
@@ -21,7 +22,7 @@ const Container = styled.div`
 
 const Wrapper = styled.div`
   width: 30%;
-  height: 305px;
+  height: 320px;
   padding: 20px;
   background-color: white;
   background: #fdfdfd;
@@ -29,7 +30,8 @@ const Wrapper = styled.div`
   -webkit-box-shadow: 0px 0px 7px 1px rgba(54, 54, 54, 0.31);
   -moz-box-shadow: 0px 0px 7px 1px rgba(54, 54, 54, 0.31);
   position: retative;
-  ${mobile({ width: "75%" })}
+  ${mobile({ width: "95%" })}
+  ${tablet({ width: "55%" })}
 `;
 
 const Logo = styled.h1`
@@ -60,22 +62,27 @@ const SubText = styled.p`
   font-size: 1em;
   font-weight: 300;
   margin-bottom: 0px;
+  ${tablet({ fontSize: "14px" })}
 `;
 
 const Button = styled.button`
   border: 1px solid gray;
   border-radius: 3px;
-  padding: 10px 15px;
+  padding: 5px 15px;
   background-color: #318383;
   color: white;
   cursor: pointer;
-  width: 20%;
+  width: 70px;
   display: flex;
+  align-items: center;
+  justify-content: center;
   align-self: flex-end;
-  ${mobile({ padding: "10px", fontSize: "0.7em" })}
+  margin-right: 10px;
+  margin-top: 10px;
+
   &::disabled {
     color: green;
-    cursor: not-not-allowed;
+    cursor: not-allowed;
   }
 `;
 

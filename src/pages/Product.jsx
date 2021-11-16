@@ -136,7 +136,6 @@ const Amount = styled.input`
   text-align: center;
 `;
 
-
 const Product = () => {
   const location = useLocation();
   const _id = location.pathname.split("/")[2];
@@ -160,7 +159,7 @@ const Product = () => {
     const getProduct = async () => {
       try {
         const res = await publicRequest.get(`/product/find/${_id}`);
-        await setProduct(res.data);
+        setProduct(res.data);
         const data = [];
         if (res.data.filterTitleTwo) {
           data.push(
@@ -188,18 +187,16 @@ const Product = () => {
     };
     getProduct();
   }, [_id]);
- 
- useEffect(()=> {
-  const res = product.product?.filter((item) =>
-  !product.hasOwnProperty("filterTitleTwo") ?
-  Object.values(filters).includes(item.filterProductsOne) 
-  :  Object.values(filters).includes(item.filterProductsOne) &&
-  Object.values(filters).includes(item.filterProductsTwo)
-)
-setItem(res)
- },[filters, _id])
- console.log(item)
-    
+
+  useEffect(() => {
+    const res = product.product?.filter((item) =>
+      !product.hasOwnProperty("filterTitleTwo")
+        ? Object.values(filters).includes(item.filterProductsOne)
+        : Object.values(filters).includes(item.filterProductsOne) &&
+          Object.values(filters).includes(item.filterProductsTwo)
+    );
+    setItem(res);
+  }, [filters, _id, product]);
 
   const handleClick = (e) => {
     if (e === "increment") {
@@ -227,7 +224,7 @@ setItem(res)
         ...product,
         quantity: amount,
         filters,
-        item
+        item,
       })
     );
   };
@@ -243,11 +240,7 @@ setItem(res)
         <InfoContainer>
           <Title>{product.title}</Title>
           <Brand>{product.brand}</Brand>
-          <Price>
-            $ {
-          item?.[0]?.price
-            }
-          </Price>
+          <Price>$ {item?.[0]?.price}</Price>
           <Desc>{product.desc}</Desc>
           {product.condition === "used" && <Condition>สินค้ามือสอง</Condition>}
           <FilterContainer>
@@ -262,19 +255,22 @@ setItem(res)
                   ))}
               </FilterSize>
             </Filter>
-            {product.filterTitleTwo &&
-            <Filter>
-              <FilterTitle>{product.filterTitleTwo}</FilterTitle>
-              <FilterSize onChange={handleFilter} name={product.filterTitleTwo}>
-                {product.product
-                  ?.map((item) => item.filterProductsTwo)
-                  .filter((v, i, a) => a.indexOf(v) === i)
-                  .map((item) => (
-                    <FilterSizeOption>{item}</FilterSizeOption>
-                  ))}
-                  
-              </FilterSize>
-            </Filter>}
+            {product.filterTitleTwo && (
+              <Filter>
+                <FilterTitle>{product.filterTitleTwo}</FilterTitle>
+                <FilterSize
+                  onChange={handleFilter}
+                  name={product.filterTitleTwo}
+                >
+                  {product.product
+                    ?.map((item) => item.filterProductsTwo)
+                    .filter((v, i, a) => a.indexOf(v) === i)
+                    .map((item) => (
+                      <FilterSizeOption>{item}</FilterSizeOption>
+                    ))}
+                </FilterSize>
+              </Filter>
+            )}
           </FilterContainer>
           <AddContainer>
             <AmountContainer>

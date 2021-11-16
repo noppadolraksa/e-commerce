@@ -1,7 +1,9 @@
 import styled from "styled-components";
-import { mobile } from "../responsive";
+import { mobile, tablet } from "../responsive";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
+  margin: 0px;
   height: 100vh;
   width: 100wh;
   background: rgb(242, 255, 216);
@@ -19,14 +21,15 @@ const Container = styled.div`
 
 const Wrapper = styled.div`
   width: 40%;
-  height: 380px;
-  padding: 2em;
+  height: 500px;
+  padding: 30px;
   background-color: white;
   background: #fdfdfd;
   box-shadow: 0px 0px 7px 1px rgba(54, 54, 54, 0.31);
   -webkit-box-shadow: 0px 0px 7px 1px rgba(54, 54, 54, 0.31);
   -moz-box-shadow: 0px 0px 7px 1px rgba(54, 54, 54, 0.31);
   ${mobile({ width: "75%", marginTop: "3em" })}
+  ${tablet({ width: "55%" })}
 `;
 
 const Logo = styled.h1`
@@ -48,21 +51,21 @@ const Form = styled.div`
 
 const AgreementContainer = styled.div`
   display: flex;
-  margin: 0.5em 0px 0.2em 0.125em;
+  margin: 0em 0em 0.5em 0.125em;
+  align-items: center;
 `;
 
 const Agreement = styled.div`
-  font-size: 0.9em;
+  font-size: 12px;
   font-weight: 200;
-  margin: 0em 0em 0em 0em;
-  ${mobile({ fontSize: "0.4em" })}
+  margin: 0px 5px 5px 5px;
+  min-width: 90%;
+  ${tablet({ fontSize: "10px" })}
 `;
 
 const CheckAgreement = styled.input`
   margin-right: 0.3em;
 `;
-
-const TermsOfService = styled.a``;
 
 const Button = styled.button`
   border: 1px solid gray;
@@ -75,9 +78,9 @@ const Button = styled.button`
 
 const Input = styled.input`
   flex: 1;
-  min-width: 90%;
-  margin: 0.5em 0.65em 0px 0px;
-  padding: 0.45em 0.35em;
+  min-width: 80%;
+  margin: 10px 5px;
+  padding: 10px 10px;
 `;
 
 const Register = () => {
@@ -98,9 +101,7 @@ const Register = () => {
             <CheckAgreement type="checkbox" />
             <Agreement>
               I agree with the Terms and Conditions of{" "}
-              <TermsOfService href="./Agreement">
-                Terms Of Services
-              </TermsOfService>{" "}
+              <Link to="/agreement">Terms Of Services </Link>
               Agreement.
             </Agreement>
           </AgreementContainer>

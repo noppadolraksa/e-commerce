@@ -16,6 +16,7 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
+import RegisterSuccess from "./pages/RegisterSuccess";
 
 const App = () => {
   const user = useSelector((state) => state.user.currentUser);
@@ -37,6 +38,9 @@ const App = () => {
         </Route>
         <Route path="/agreement">
           <Agreement />
+        </Route>
+        <Route path="/test">
+          <RegisterSuccess />
         </Route>
         <Route path="/success">
           <Success />

@@ -17,7 +17,7 @@ const FixNavBar = styled.div`
 
 const Homepage = (cat, filters, sort) => {
   return (
-    <div style={{ marginTop: 100 }}>
+    <div style={{ marginTop: 70 }}>
       <FixNavBar>
         <Announcement />
         <Navbar />
