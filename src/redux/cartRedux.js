@@ -25,22 +25,28 @@ const cartSlice = createSlice({
         state.total += action.payload.item[0].price * action.payload.quantity;
       } else {
         state.products[findIndexProduct].quantity += action.payload.quantity;
+        state.total += action.payload.item[0].price * action.payload.quantity;
       }
     },
     changeQuantity: (state, action) => {
       const findProduct = state.products.find(
-        (item) => item.item[0]._id === action.payload.item.item[0]._id
+        (item) => item.item[0]._id === action.payload.value._id
       );
-      if (action.payload === "inc") {
+      if (action.payload.name === "inc") {
         findProduct.quantity += 1;
-        state.total -= action.payload.item.item[0].price;
-      }
-      if (action.payload === "dec") {
+
+        state.total += action.payload.value.price;
+      } else {
+        findProduct.quantity -= 1;
+        state.total -= action.payload.value.price;
       }
     },
     deleteProduct: (state, action) => {
+      const findIndexProduct = state.products.findIndex(
+        (item) => item.item[0]._id === action.payload.value._id
+      );
       state.quantity -= 1;
-      state.products.splice(state.products.indexOf());
+      state.products.splice(findIndexProduct, 1);
     },
   },
 });

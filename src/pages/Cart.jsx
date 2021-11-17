@@ -10,7 +10,7 @@ import { userRequest } from "../requestMethods";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { changeQuantity } from "../redux/cartRedux";
+import { changeQuantity, deleteProduct } from "../redux/cartRedux";
 
 const KEY = process.env.REACT_APP_STRIPE;
 
@@ -165,6 +165,9 @@ const ProductAmountContainer = styled.div`
 const ProductPrice = styled.div`
   font-size: 1em;
   font-weight: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   ${mobile({ fontSize: "12px" })}
 `;
 
@@ -239,29 +242,17 @@ const Cart = () => {
   }, [stripeToken, history, cart]);
 
   const handleClick = (e) => {
-    if (e.target.name === "inc") {
-      console.log(e.target.item);
-      dispatch(
-        changeQuantity({
-          name: "inc",
-          item: e.target.item,
-        })
-      );
-    }
-    if (e.target.name === "dec") {
-      if (!e.target.item.quantity === 0) {
-        dispatch(
-          changeQuantity({
-            name: "dec",
-            item: e.target.item,
-          })
-        );
+    if (e.name === "inc") {
+      dispatch(changeQuantity({ ...e }));
+    } else {
+      if (e.quantity !== 0) {
+        dispatch(changeQuantity({ ...e }));
       }
     }
   };
 
   const handleDelete = (e) => {
-    e.preventDefault();
+    dispatch(deleteProduct({ ...e }));
   };
 
   return (
@@ -287,7 +278,6 @@ const Cart = () => {
                     </ProductId>
                     <ProductPriceOneUnit>
                       <b>Price : </b>$ {product.item[0].price}
-                      {/* {product.item[0].price} */}
                     </ProductPriceOneUnit>
                     {Object.entries(product.filters).map(
                       ([key, value], index) => (
@@ -300,31 +290,41 @@ const Cart = () => {
                 </ProductDetail>
                 <PriceDetail>
                   <ProductAmountContainer>
-                    <Add
-                      onClick={handleClick}
-                      name="inc"
-                      item={product}
-                      style={{ cursor: "pointer" }}
-                    />
-                    <ProductAmount value={cart.quantity}>
-                      {product.quantity}
-                    </ProductAmount>
                     <Remove
-                      onClick={handleClick}
-                      name="dec"
-                      item={product}
+                      onClick={() =>
+                        handleClick({
+                          name: "dec",
+                          value: product.item[0],
+                          quantity: product.quantity,
+                        })
+                      }
                       style={{ cursor: "pointer" }}
                     />
+                    <ProductAmount>{product.quantity}</ProductAmount>
+                    <Add
+                      onClick={() =>
+                        handleClick({
+                          name: "inc",
+                          value: product.item[0],
+                          quantity: product.quantity,
+                        })
+                      }
+                      style={{ cursor: "pointer" }}
+                    />
+                  </ProductAmountContainer>
 
+                  <ProductPrice>
+                    $ {product.quantity * product.item[0].price}
                     {product.quantity === 0 && (
                       <DeleteOutline
                         style={{ color: "red", cursor: "pointer" }}
-                        onClick={handleDelete}
+                        onClick={() =>
+                          handleDelete({
+                            value: product.item[0],
+                          })
+                        }
                       />
                     )}
-                  </ProductAmountContainer>
-                  <ProductPrice>
-                    $ {product.quantity * product.price}
                   </ProductPrice>
                 </PriceDetail>
               </Product>
