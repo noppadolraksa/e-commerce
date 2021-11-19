@@ -1,12 +1,13 @@
 export const sliderItems = [
   {
     id: 1,
-    img: "https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1620339026-best-amazon-dresses-for-women-floral-maxi-1620338999.png?crop=0.803xw:1.00xh;0.0848xw,0&resize=768:*",
-    title: "SUMMER SALE",
-    desc: "Some online reviewers mentioned using this dress for more formal events, including weddings. It features a button up detail and a split, flowy skirt. Note that it’s cold wash only and will shrink a bit when you first wash it.",
-    bg: "f5fafd",
+    img: "https://i.ibb.co/cXFnLLV/3.png",
+    title: "LOUNGEWEAR LOVE",
+    desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
+    bg: "fbf0f4",
     brand: "MANILA",
     price: { rawPrice: 45.99, discountPercentPrice: 15, discountPrice: 38.99 },
+    catagories: "shirt",
   },
   {
     id: 2,
@@ -16,15 +17,17 @@ export const sliderItems = [
     bg: "fcf1ed",
     brand: "MANILA",
     price: { rawPrice: 45.99, discountPercentPrice: 15, discountPrice: 38.99 },
+    catagories: "shirt",
   },
   {
     id: 3,
-    img: "https://i.ibb.co/cXFnLLV/3.png",
-    title: "LOUNGEWEAR LOVE",
-    desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
-    bg: "fbf0f4",
+    img: "https://o.remove.bg/downloads/6f5de078-7043-4b49-8a1e-8c2607414c88/1620339026-best-amazon-dresses-for-women-floral-maxi-1620338999-removebg-preview.png",
+    title: "SUMMER SALE",
+    desc: "Some online reviewers mentioned using this dress for more formal events, including weddings. It features a button up detail and a split, flowy skirt. Note that it’s cold wash only and will shrink a bit when you first wash it.",
+    bg: "f5fafd",
     brand: "MANILA",
     price: { rawPrice: 45.99, discountPercentPrice: 15, discountPrice: 38.99 },
+    catagories: "shirt",
   },
 ];
 

@@ -20,12 +20,14 @@ const Products = ({ cat, filters, sort }) => {
     const getProducts = async () => {
       try {
         const res = await axios.get(
-          cat
+          !cat === {}
             ? `http://localhost:8080/product?category=${cat}`
             : "http://localhost:8080/product"
         );
         setProducts(res.data);
-      } catch (err) {console.error(err)}
+      } catch (err) {
+        console.error(err);
+      }
     };
     getProducts();
   }, [cat]);
@@ -40,7 +42,6 @@ const Products = ({ cat, filters, sort }) => {
         )
       );
   }, [products, cat, filters]);
-
 
   useEffect(() => {
     if (sort === "newest") {
@@ -57,7 +58,7 @@ const Products = ({ cat, filters, sort }) => {
       );
     } else if (sort === "highestLikes") {
       setFilteredProducts((prev) =>
-        [...prev].sort((a, b) => b.likes - a.likes)
+        [...prev].sort((a, b) => b.userLikes.length - a.userLikes.length)
       );
     } else {
       setFilteredProducts((prev) => [...prev].sort((a, b) => b.sold - a.sold));

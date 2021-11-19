@@ -1,13 +1,18 @@
-import React from "react";
 import {
   Favorite,
   FavoriteBorderOutlined,
+  FavoriteRounded,
   SearchOutlined,
   ShoppingCartOutlined,
 } from "@mui/icons-material";
 import styled from "styled-components";
 import { mobile } from "../responsive";
 import { Link } from "react-router-dom";
+
+import { useSelector } from "react-redux";
+
+import { userRequest } from "../requestMethods";
+import { useEffect, useState } from "react";
 
 const Info = styled.div`
   width: 100%;
@@ -27,12 +32,18 @@ const Info = styled.div`
 const Container = styled.div`
   margin: 5px;
   width: 220px;
-  height: 300px;
+  height: 320px;
   display: flex;
+  justify-content: center;
   flex-direction: column;
   background-color: white;
   position: relative;
-  ${mobile({ width: "42vw", height: "55vh" })}
+  ${mobile({
+    width: "297px",
+    height: "318px",
+    margin: "auto",
+    marginBottom: "5px",
+  })}
   box-shadow: 0px 0px 7px 1px rgba(54, 54, 54, 0.31);
   -webkit-box-shadow: 0px 0px 7px 1px rgba(54, 54, 54, 0.31);
   -moz-box-shadow: 0px 0px 7px 1px rgba(54, 54, 54, 0.31);
@@ -63,15 +74,22 @@ const Likes = styled.div`
 
 const Image = styled.img`
   z-index: 2;
-  width: 80%;
-  height: 60%;
+  width: 180px;
+  height: 200px;
   margin: 20px 20px 10px 20px;
   border: 1px solid #ddd;
+  ${mobile({
+    width: "210px",
+    height: "225px",
+    margin: "auto",
+    marginBottom: "5px",
+  })}
 `;
 
-const Icon = styled.div`
+const Icon = styled.button`
   width: 40px;
   height: 40px;
+  border: none;
   border-radius: 50%;
   margin: 10px;
   display: flex;
@@ -95,7 +113,34 @@ const Icon = styled.div`
   }
 `;
 
+const likeStyle = { color: "#e44d4dcc", height: "17px" };
+
 const Product = ({ item }) => {
+  const user = useSelector((state) => state.user.currentUser);
+  const [like, setLike] = useState(
+    item.userLikes.find((id) => id === user?._id) === user?._id
+  );
+
+  const handleClick = async (e) => {
+    try {
+      if (user) {
+        await userRequest.post(
+          like
+            ? "http://localhost:8080/product/unlikeproduct"
+            : "http://localhost:8080/product/likeproduct",
+          { _id: e._id, user_id: user._id }
+        );
+        await setLike(!like);
+      } else {
+        window.location.replace("http://localhost:3000/login");
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  useEffect(() => {}, [like, item]);
+
   return (
     <Container>
       <Image src={item.img} />
@@ -108,21 +153,28 @@ const Product = ({ item }) => {
       <Text>Total Sold : {item.sold}</Text>
       <Text>
         <Likes>
-          {+item.likes}
-          <Favorite style={{ color: "#e44d4dcc", height: "17px" }} />
+          {item.userLikes.length}
+          <Favorite style={likeStyle} />
         </Likes>
       </Text>
       <Info>
         <Icon>
-          <ShoppingCartOutlined />
+          <Link to={`/product/${item._id}`}>
+            <ShoppingCartOutlined />
+          </Link>
         </Icon>
         <Icon>
           <Link to={`/product/${item._id}`}>
             <SearchOutlined style={{ color: "none", textDecoration: "none" }} />
           </Link>
         </Icon>
-        <Icon>
-          <FavoriteBorderOutlined />
+
+        <Icon onClick={() => handleClick({ _id: item._id })}>
+          {like && user ? (
+            <FavoriteRounded style={{ color: "red" }} />
+          ) : (
+            <FavoriteBorderOutlined />
+          )}
         </Icon>
       </Info>
     </Container>

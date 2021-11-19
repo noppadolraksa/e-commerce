@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useCallback } from "react";
 import styled from "styled-components";
-import { mobile, tablet } from "../responsive";
-import { Link } from "react-router-dom";
+import { mobile } from "../responsive";
+import { useHistory } from "react-router-dom";
 
 const Container = styled.div`
   flex: 1;
@@ -38,20 +38,28 @@ const Button = styled.button`
   border: none;
   padding: 10px;
   background-color: white;
-  color: gray;
+
   cursor: pointer;
+  a {
+    color: gray;
+    text-decoration: none;
+  }
 `;
 
 const CategoryItem = ({ item }) => {
+  const history = useHistory();
+  const handleClick = useCallback(
+    (e) => history.push(`/products/${e}`),
+    [history]
+  );
+
   return (
     <Container>
-      <Link to={`/products/${item.categories}`}>
-        <Image src={item.img} />
-        <Info>
-          <Title>{item.title}</Title>
-          <Button>Shop Now</Button>
-        </Info>
-      </Link>
+      <Image src={item.img} />
+      <Info>
+        <Title>{item.title}</Title>
+        <Button onClick={() => handleClick(item.categories)}>Shop Now</Button>
+      </Info>
     </Container>
   );
 };

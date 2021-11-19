@@ -51,7 +51,7 @@ const RegisterSuccess = () => {
       <Wrapper>
         <Title>Register Successfully!</Title>
         <Text>
-          please login <Link to="login">here</Link>{" "}
+          please login <Link to="/login">here</Link>{" "}
         </Text>
         <SubText>
           <Link to="/">go back</Link>

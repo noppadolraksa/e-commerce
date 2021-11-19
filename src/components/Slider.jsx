@@ -1,6 +1,7 @@
 // @ts-nocheck
 import { ArrowLeftOutlined, ArrowRightOutlined } from "@mui/icons-material";
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { sliderItems } from "../data";
 import { mobile } from "../responsive";
@@ -79,6 +80,10 @@ const Button = styled.button`
   font-size: 1.25em;
   background-color: transparent;
   cursor: pointer;
+  a {
+    text-decoration: none;
+    color: teal;
+  }
 `;
 
 const Brand = styled.p`
@@ -134,7 +139,11 @@ const Slider = () => {
                 {item.price.discountPercentPrice}% off)
               </Price>
               <Desc>{item.desc}</Desc>
-              <Button>SHOP NOW</Button>
+
+              <Button>
+                {" "}
+                <Link to={`/products/${item.categories}`}>SHOP NOW</Link>
+              </Button>
             </InfoContainer>
           </Slide>
         ))}

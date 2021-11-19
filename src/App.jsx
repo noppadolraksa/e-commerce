@@ -39,7 +39,7 @@ const App = () => {
         <Route path="/agreement">
           <Agreement />
         </Route>
-        <Route path="/test">
+        <Route path="/register/success">
           <RegisterSuccess />
         </Route>
         <Route path="/success">

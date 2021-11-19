@@ -11,7 +11,7 @@ const Container = styled.div`
   justify-content: center;
   font-size: 0.8em;
   font-weight: 500;
-  ${mobile({ width: "100vw" })}
+  width: 100vw;
 `;
 
 const Announcement = () => {

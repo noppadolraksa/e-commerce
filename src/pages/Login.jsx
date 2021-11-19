@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { mobile, tablet } from "../responsive";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../redux/apiCalls";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   margin: 0px;
@@ -22,7 +23,7 @@ const Container = styled.div`
 
 const Wrapper = styled.div`
   width: 30%;
-  height: 320px;
+  flex-wrap: wrap;
   padding: 20px;
   background-color: white;
   background: #fdfdfd;
@@ -30,14 +31,17 @@ const Wrapper = styled.div`
   -webkit-box-shadow: 0px 0px 7px 1px rgba(54, 54, 54, 0.31);
   -moz-box-shadow: 0px 0px 7px 1px rgba(54, 54, 54, 0.31);
   position: retative;
-  ${mobile({ width: "95%" })}
-  ${tablet({ width: "55%" })}
+  ${tablet({ width: "400px" })}
 `;
 
 const Logo = styled.h1`
   font-size: 1em;
   font-weight: 150;
   position: absolute;
+  a {
+    color: #005555;
+    text-decoration: none;
+  }
 `;
 
 const Title = styled.h1`
@@ -98,13 +102,17 @@ const Login = () => {
 
   const handleClick = (e) => {
     e.preventDefault();
-    login(dispatch, { username, password });
+    login(dispatch, { username, password }).then(() => {
+      window.location.reload(true);
+    });
   };
 
   return (
     <Container>
       <Wrapper>
-        <Logo>My-Shop</Logo>
+        <Logo>
+          <Link to="/">My-Shop</Link>
+        </Logo>
         <Title>Login</Title>
         <Form>
           <Input

@@ -2,7 +2,7 @@ import { Badge } from "@mui/material";
 import React from "react";
 import styled from "styled-components";
 import { Search, ShoppingCartOutlined } from "@mui/icons-material";
-import { mobile, notebook, tablet } from "../responsive";
+import { mobile, mobileMini, notebook, tablet } from "../responsive";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -10,8 +10,8 @@ const Container = styled.div`
   height: 70px;
   background-color: white;
   ${mobile({ height: "90px", maxWidth: "100vw" })}
-  ${tablet({ maxWidth: "780px" })}
-  ${notebook({ maxWidth: "960px" })}
+  ${tablet({ maxWidth: "100vw" })}
+  ${notebook({ maxWidth: "100vw" })}
  
 
 
@@ -43,7 +43,8 @@ const Right = styled.div`
   justify-content: flex-end;
   align-items: center;
 
-  ${mobile({ margin: "0px 20px 10px 0px" })}
+  ${mobile({ margin: "10px 20px 10px 0px" })}
+  ${mobileMini({ margin: "5px 20px 10px 0px" })}
   flex:1;
 `;
 
@@ -63,6 +64,10 @@ const Logo = styled.h1`
   border-bottom-style: none;
   ${mobile({ fontSize: "1.0em" })}
   ${tablet({ fontSize: "1.2em" })}
+  a {
+    color: #005555;
+    text-decoration: none;
+  }
 `;
 
 const SearchContainer = styled.div`
@@ -71,13 +76,13 @@ const SearchContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-content: center;
-  ${tablet({ width: "100%" })}
+  ${tablet({ width: "85%" })}
   ${mobile({ width: "92%" })}
 `;
 
 const SearchBackground = styled.div`
   padding: 10px;
-  background-color: #008080c7;
+  background-color: teal;
   z-index: 2;
   display: flex;
   align-items: center;
@@ -91,12 +96,19 @@ const MenuItems = styled.div`
   font-size: 0.85em;
   cursor: pointer;
   margin-left: 25px;
+  a {
+    color: #005555;
+    text-decoration: none;
+  }
 `;
 const MenuLogout = styled.div`
-  font-size: 0.85em;
+  font-size: 10px;
   cursor: pointer;
   margin-left: 25px;
   color: #ba0000;
+`;
+const TextHello = styled.p`
+  font-size: 12px;
 `;
 
 const Navbar = () => {
@@ -117,9 +129,9 @@ const Navbar = () => {
     <Container>
       <Wrapper>
         <Left>
-          <Link to={`/`}>
-            <Logo>My-Shop</Logo>
-          </Link>
+          <Logo>
+            <Link to={`/`}>My-Shop</Link>
+          </Logo>
         </Left>
 
         <Center>
@@ -138,7 +150,10 @@ const Navbar = () => {
         </Center>
         <Right>
           {currentUser ? (
-            <MenuLogout onClick={handleLogout}>Log out</MenuLogout>
+            <>
+              <TextHello>{`hello ${currentUser.firstname}`}</TextHello>
+              <MenuLogout onClick={handleLogout}>Log out</MenuLogout>
+            </>
           ) : (
             <>
               <MenuItems>

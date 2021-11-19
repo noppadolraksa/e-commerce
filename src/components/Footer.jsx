@@ -7,10 +7,11 @@ import {
   Twitter,
 } from "@mui/icons-material";
 import styled from "styled-components";
-import { mobile } from "../responsive";
+import { mobile, tablet } from "../responsive";
 
 const Container = styled.div`
   display: flex;
+  width: 100vw;
   ${mobile({ flexDirection: "column" })}
 `;
 
@@ -23,10 +24,12 @@ const Left = styled.div`
 
 const Logo = styled.h1`
   margin: 0px 0px;
+  ${tablet({ fontSize: "20px" })}
 `;
 
 const Desc = styled.p`
   margin: 0px, 0px;
+  ${tablet({ fontSize: "10px" })}
 `;
 
 const SocialContainer = styled.div`
@@ -45,15 +48,21 @@ const SocialIcon = styled.div`
   margin-right: 30px;
   cursor: pointer;
   ${mobile({ flexDirection: "column" })}
+  ${tablet({ width: "35px", height: "35px" })}
 `;
+
+const iconstyle = {
+  marginRight: "30px",
+};
 
 const Center = styled.div`
   flex: 1;
-  ${mobile({ display: "none" })}
+  ${tablet({ display: "none" })}
 `;
 
 const Title = styled.h3`
   margin-bottom: 30px;
+  ${tablet({ fontSize: "18px", marginBottom: "10px" })}
 `;
 
 const List = styled.ul`
@@ -79,6 +88,7 @@ const ContactItem = styled.div`
   display: flex;
   align-items: center;
   margin: 0px 20px 20px 0px;
+  ${tablet({ fontSize: "12px", margin: "0px 10px 10px 0px" })}
 `;
 
 const Payment = styled.img`
@@ -128,16 +138,15 @@ const Footer = () => {
       <Right>
         <Title>Contact</Title>
         <ContactItem>
-          <Room style={{ marginRight: "10px" }} />
+          <Room style={iconstyle} />
           My-Shop building 188/1 sukhumvit rd. 11220
         </ContactItem>
         <ContactItem>
-          <Phone style={{ marginRight: "10px" }} />
+          <Phone style={iconstyle} />
           +6687-560-6096
         </ContactItem>
         <ContactItem>
-          <MailOutline style={{ marginRight: "10px" }} />{" "}
-          Noppadol.raksa@gmail.com
+          <MailOutline style={iconstyle} /> Noppadol.raksa@gmail.com
         </ContactItem>
         <Payment src="http://cdn30.us1.fansshare.com/image/mastercard/visa-mastercard-logo-transparent-logo-328509012.jpg" />
       </Right>
