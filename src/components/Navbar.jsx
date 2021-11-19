@@ -4,7 +4,8 @@ import styled from "styled-components";
 import { Search, ShoppingCartOutlined } from "@mui/icons-material";
 import { mobile, mobileMini, notebook, tablet } from "../responsive";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { logoutUser } from "../redux/userRedux";
 
 const Container = styled.div`
   height: 70px;
@@ -114,12 +115,13 @@ const TextHello = styled.p`
 const Navbar = () => {
   const quantity = useSelector((state) => state.cart.quantity);
   const { currentUser } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
   const handleLogout = async (e) => {
     try {
       e.preventDefault();
-      await localStorage.clear();
-      window.location.reload(true);
+      dispatch(logoutUser());
+      window.location = "/";
     } catch (err) {
       console.error(err);
     }

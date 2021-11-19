@@ -8,6 +8,7 @@ import {
 } from "@mui/icons-material";
 import styled from "styled-components";
 import { mobile, tablet } from "../responsive";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
@@ -76,6 +77,11 @@ const List = styled.ul`
 const ListItem = styled.li`
   width: 50%;
   margin-bottom: 10px;
+  cursor: pointer;
+  a {
+    text-decoration: none;
+    color: black;
+  }
 `;
 
 const Right = styled.div`
@@ -109,30 +115,56 @@ const Footer = () => {
           experience.
         </Desc>
         <SocialContainer>
-          <SocialIcon color="3B5999">
-            <Facebook />
-          </SocialIcon>
-          <SocialIcon color="E4405F">
-            <Instagram />
-          </SocialIcon>
-          <SocialIcon color="55ACEE">
-            <Twitter />
-          </SocialIcon>
+          <Link to={{ pathname: "https://www.facebook.com" }} target="_blank">
+            <SocialIcon color="3B5999">
+              <Facebook />
+            </SocialIcon>
+          </Link>
+          <Link to={{ pathname: "https://www.instagram.com" }} target="_blank">
+            <SocialIcon color="E4405F">
+              <Instagram />
+            </SocialIcon>
+          </Link>
+          <Link to={{ pathname: "https://www.twitter.com" }} target="_blank">
+            <SocialIcon color="55ACEE">
+              <Twitter />
+            </SocialIcon>
+          </Link>
         </SocialContainer>
       </Left>
       <Center>
         <Title>Useful Links</Title>
         <List>
-          <ListItem>Home</ListItem>
-          <ListItem>Cart</ListItem>
-          <ListItem>Man Fashion</ListItem>
-          <ListItem>Women Fashion</ListItem>
-          <ListItem>Shoes</ListItem>
-          <ListItem>Accessories</ListItem>
-          <ListItem>My Account</ListItem>
-          <ListItem>Order Tracking</ListItem>
-          <ListItem>Wishlist</ListItem>
-          <ListItem>Terms</ListItem>
+          <ListItem>
+            <Link to="/">Home</Link>
+          </ListItem>
+          <ListItem>
+            <Link to="/products/cart">Cart</Link>
+          </ListItem>
+          <ListItem>
+            <Link to="/products/men-fashion">Man Fashion</Link>
+          </ListItem>
+          <ListItem>
+            <Link to="/products/women-fashion">Women Fashion</Link>
+          </ListItem>
+          <ListItem>
+            <Link to="/products/shoes">Shoes</Link>
+          </ListItem>
+          <ListItem>
+            <Link to="/products/accessories">Accessories</Link>
+          </ListItem>
+          <ListItem>
+            <Link to="/maintenance">My Account</Link>
+          </ListItem>
+          <ListItem>
+            <Link to="/maintenance">Order Tracking</Link>
+          </ListItem>
+          <ListItem>
+            <Link to="/maintenance">Wishlist</Link>
+          </ListItem>
+          <ListItem>
+            <Link to="/agreement">Terms</Link>
+          </ListItem>
         </List>
       </Center>
       <Right>

@@ -17,6 +17,7 @@ import {
   Redirect,
 } from "react-router-dom";
 import RegisterSuccess from "./pages/RegisterSuccess";
+import Maintenance from "./pages/Maintenance";
 
 const App = () => {
   const user = useSelector((state) => state.user.currentUser);
@@ -44,6 +45,9 @@ const App = () => {
         </Route>
         <Route path="/success">
           <Success />
+        </Route>
+        <Route path="/maintenance">
+          <Maintenance />
         </Route>
         <Route path="/login">{user ? <Redirect to="/" /> : <Login />}</Route>
         <Route path="/register">
