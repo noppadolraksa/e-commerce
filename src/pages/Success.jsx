@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { useLocation } from "react-router";
+import { useCallback, useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useHistory, useLocation } from "react-router";
 import { userRequest } from "../requestMethods";
+import { deleteAllProduct } from "../redux/cartRedux";
 
 const Success = () => {
   const location = useLocation();
@@ -10,7 +11,10 @@ const Success = () => {
   const cart = location.state.cart;
   const currentUser = useSelector((state) => state.user.currentUser);
   const [orderId, setOrderId] = useState(null);
+  const history = useHistory();
 
+  const dispatch = useDispatch();
+  console.log(cart);
   useEffect(() => {
     const createOrder = async () => {
       try {
@@ -24,10 +28,15 @@ const Success = () => {
           address: data.billing_details.address,
         });
         setOrderId(res.data._id);
-      } catch {}
+        dispatch(deleteAllProduct());
+      } catch (err) {
+        console.error(err);
+      }
     };
     data && createOrder();
-  }, [cart, data, currentUser]);
+  }, [cart, data, currentUser, dispatch]);
+
+  const handleClick = useCallback((e) => history.push("/"), [history]);
 
   return (
     <div
@@ -42,7 +51,9 @@ const Success = () => {
       {orderId
         ? `Order has been created successfully. Your order number is ${orderId}`
         : `Successfull. Your order is being prepared...`}
-      <button style={{ padding: 10, marginTop: 20 }}>Go to Homepage</button>
+      <button style={{ padding: 10, marginTop: 20 }} onClick={handleClick}>
+        Go to Homepage
+      </button>
     </div>
   );
 };

@@ -128,20 +128,21 @@ const Register = () => {
 
   const onSubmit = async (data) => {
     try {
-      await axios
-        .post("http://localhost:8080/auth/register", {
-          username: data.username,
-          password: data.password,
-          email: data.email,
-          firstname: data.firstname,
-          lastname: data.lastname,
-        })
-        .then((res) => {
-          console.log(res.message);
-          window.location = "/register/success";
-        });
+      const res = await axios.post("http://localhost:8080/auth/register", {
+        username: data.username,
+        password: data.password,
+        email: data.email,
+        firstname: data.firstname,
+        lastname: data.lastname,
+      });
+      window.location = "/register/success";
     } catch (err) {
-      console.log(err);
+      if (err.response.status === 400) {
+        alert(err.response.data);
+      } else {
+        console.error(err);
+        alert("something went wrong..");
+      }
     }
   };
 

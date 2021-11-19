@@ -48,8 +48,12 @@ const cartSlice = createSlice({
       state.quantity -= 1;
       state.products.splice(findIndexProduct, 1);
     },
+    deleteAllProduct: (state, action) => {
+      Object.assign(state, action.payload);
+    },
   },
 });
 
-export const { addProduct, changeQuantity, deleteProduct } = cartSlice.actions;
+export const { addProduct, changeQuantity, deleteProduct, deleteAllProduct } =
+  cartSlice.actions;
 export default cartSlice.reducer;
