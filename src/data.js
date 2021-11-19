@@ -7,7 +7,7 @@ export const sliderItems = [
     bg: "fbf0f4",
     brand: "MANILA",
     price: { rawPrice: 45.99, discountPercentPrice: 15, discountPrice: 38.99 },
-    catagories: "shirt",
+    categories: "shirt",
   },
   {
     id: 2,
@@ -17,17 +17,17 @@ export const sliderItems = [
     bg: "fcf1ed",
     brand: "MANILA",
     price: { rawPrice: 45.99, discountPercentPrice: 15, discountPrice: 38.99 },
-    catagories: "shirt",
+    categories: "shirt",
   },
   {
     id: 3,
-    img: "https://o.remove.bg/downloads/6f5de078-7043-4b49-8a1e-8c2607414c88/1620339026-best-amazon-dresses-for-women-floral-maxi-1620338999-removebg-preview.png",
+    img: "https:/www.picz.in.th/image/6YA4Rk",
     title: "SUMMER SALE",
     desc: "Some online reviewers mentioned using this dress for more formal events, including weddings. It features a button up detail and a split, flowy skirt. Note that it’s cold wash only and will shrink a bit when you first wash it.",
     bg: "f5fafd",
     brand: "MANILA",
     price: { rawPrice: 45.99, discountPercentPrice: 15, discountPrice: 38.99 },
-    catagories: "shirt",
+    categories: "shirt",
   },
 ];
 

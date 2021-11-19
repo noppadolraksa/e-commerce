@@ -153,7 +153,7 @@ const Product = ({ item }) => {
       <Text>Total Sold : {item.sold}</Text>
       <Text>
         <Likes>
-          {item.userLikes.length}
+          {like ? item.userLikes.length + 1 : item.userLikes.length}
           <Favorite style={likeStyle} />
         </Likes>
       </Text>
