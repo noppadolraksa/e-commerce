@@ -366,19 +366,19 @@ const Cart = () => {
           </FooterTexts>
           <SummaryItem>
             <SummaryItemText>Subtotal</SummaryItemText>
-            <SummaryItemPrice>$ {cart.total}</SummaryItemPrice>
+            <SummaryItemPrice>{`$  ${cart.total}`}</SummaryItemPrice>
           </SummaryItem>
           <StripeCheckout
             name="My-Shop"
             image="https://image1.jdomni.in/storeLogo/02122020/E2/D3/AD/80828A41663079A080691C50EE_1606915864349.png?output-format=webp"
             billingAddress
             shippingAddress
-            description={`your total is $${cart.total}`}
+            description={`your total is $ ${cart.total}`}
             amount={cart.total * 100}
             token={onToken}
             stripeKey={KEY}
           >
-            <FooterButton type="filled">CHECKOUT NOW</FooterButton>
+            <FooterButton>CHECKOUT NOW</FooterButton>
           </StripeCheckout>
         </FooterWrapper>
       </Footer>

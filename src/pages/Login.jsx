@@ -102,9 +102,13 @@ const Login = () => {
 
   const handleClick = (e) => {
     e.preventDefault();
-    login(dispatch, { username, password }).then(() => {
-      window.location.reload(true);
-    });
+    try {
+      login(dispatch, { username, password }).then(() => {
+        window.location.reload(true);
+      });
+    } catch (err) {
+      alert(err.response.message);
+    }
   };
 
   return (

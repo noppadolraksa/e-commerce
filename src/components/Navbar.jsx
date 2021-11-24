@@ -3,9 +3,10 @@ import React from "react";
 import styled from "styled-components";
 import { Search, ShoppingCartOutlined } from "@mui/icons-material";
 import { mobile, mobileMini, notebook, tablet } from "../responsive";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../redux/userRedux";
+import { deleteAllProduct } from "../redux/cartRedux";
 
 const Container = styled.div`
   height: 70px;
@@ -116,12 +117,14 @@ const Navbar = () => {
   const quantity = useSelector((state) => state.cart.quantity);
   const { currentUser } = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const handleLogout = async (e) => {
     try {
       e.preventDefault();
-      dispatch(logoutUser());
-      window.location = "/";
+      await dispatch(logoutUser());
+      await dispatch(deleteAllProduct());
+      history.go(0);
     } catch (err) {
       console.error(err);
     }

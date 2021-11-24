@@ -167,8 +167,8 @@ const Register = () => {
                 message: "username has 20 characters limit",
               },
               pattern: {
-                value: /[A-Za-z0-9]+/i,
-                message: "username only contain letters and numbers",
+                value: /^[A-Za-z0-9_]+$/,
+                message: "username only contain letters numbers and underscore",
               },
             })}
             placeholder="username"
