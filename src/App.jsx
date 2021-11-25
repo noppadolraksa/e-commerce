@@ -20,7 +20,7 @@ import RegisterSuccess from "./pages/RegisterSuccess";
 import Maintenance from "./pages/Maintenance";
 
 const App = () => {
-  const user = useSelector((state) => state.user.currentUser);
+  const user = useSelector((state) => state.user?.currentUser);
 
   return (
     <Router>

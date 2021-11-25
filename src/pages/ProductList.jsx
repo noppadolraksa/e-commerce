@@ -8,7 +8,9 @@ import Newsletter from "../components/Newsletter";
 import Products from "../components/Products";
 import { mobile } from "../responsive";
 
-const Container = styled.div``;
+const Container = styled.div`
+  height: 100vh;
+`;
 
 const FilterContainer = styled.div`
   display: flex;

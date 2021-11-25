@@ -132,7 +132,7 @@ const Product = ({ item }) => {
         );
         await setLike(!like);
       } else {
-        window.location.replace("http://localhost:3000/login");
+        window.location.replace("https://my-shop-e-commerce.netlify.app/login");
       }
     } catch (err) {
       console.error(err);

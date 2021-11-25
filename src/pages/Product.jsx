@@ -16,6 +16,7 @@ import { Modal, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 
 const Container = styled.div`
+  height: 100vh;
   ${mobile({ maxWidth: "350px" })}
   ${tablet({ maxWidth: "780px" })}
   ${notebook({ maxWidth: "960px" })}
