@@ -11,6 +11,21 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { userRequest } from "../requestMethods";
 import { useEffect, useState } from "react";
+import { Box } from "@mui/system";
+import { Modal, Typography } from "@mui/material";
+
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "#f2f2f2",
+  opacity: "0.95",
+  border: "1px solid #808080",
+  boxShadow: 24,
+  p: 4,
+};
 
 const Info = styled.div`
   width: 100%;
@@ -118,9 +133,13 @@ const Product = ({ item }) => {
   const [like, setLike] = useState(
     item.userLikes.find((id) => id === user?._id) === user?._id
   );
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => setOpen(true);
+
+  const handleClose = () => setOpen(false);
 
   const handleClick = async (e) => {
-    e.preventDefault();
     try {
       if (user) {
         await userRequest.post(
@@ -131,7 +150,7 @@ const Product = ({ item }) => {
         );
         await setLike(!like);
       } else {
-        window.location = "/login";
+        handleOpen();
       }
     } catch (err) {
       console.error(err);
@@ -176,6 +195,25 @@ const Product = ({ item }) => {
           )}
         </Icon>
       </Info>
+      <div>
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <Typography id="modal-modal-title" variant="h6" component="h2">
+              Oops! You are not able to do that..
+            </Typography>
+            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+              please <Link to="/login">login</Link> first or{" "}
+              <Link to="/register">create an account</Link> to continue
+              shopping..
+            </Typography>
+          </Box>
+        </Modal>
+      </div>
     </Container>
   );
 };

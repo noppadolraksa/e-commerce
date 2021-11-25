@@ -162,7 +162,7 @@ const Product = () => {
   const dispatch = useDispatch();
   const [filters, setFilters] = useState({});
   const [item, setItem] = useState([]);
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const user = useSelector((state) => state.user.currentUser);
 
   const handleOpen = () => setOpen(true);
