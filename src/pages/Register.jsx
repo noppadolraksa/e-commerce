@@ -128,13 +128,16 @@ const Register = () => {
 
   const onSubmit = async (data) => {
     try {
-      const res = await axios.post("http://localhost:8080/auth/register", {
-        username: data.username,
-        password: data.password,
-        email: data.email,
-        firstname: data.firstname,
-        lastname: data.lastname,
-      });
+      const res = await axios.post(
+        "https://my-shop-e-commerce.herokuapp.com/auth/register",
+        {
+          username: data.username,
+          password: data.password,
+          email: data.email,
+          firstname: data.firstname,
+          lastname: data.lastname,
+        }
+      );
       window.location = "/register/success";
     } catch (err) {
       if (err.response.status === 400) {

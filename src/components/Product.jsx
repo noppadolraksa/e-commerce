@@ -126,8 +126,8 @@ const Product = ({ item }) => {
       if (user) {
         await userRequest.post(
           like
-            ? "http://localhost:8080/product/unlikeproduct"
-            : "http://localhost:8080/product/likeproduct",
+            ? "https://my-shop-e-commerce.herokuapp.com/product/unlikeproduct"
+            : "https://my-shop-e-commerce.herokuapp.com/product/likeproduct",
           { _id: e._id, user_id: user._id }
         );
         await setLike(!like);
