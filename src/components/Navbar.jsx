@@ -14,9 +14,6 @@ const Container = styled.div`
   ${mobile({ height: "90px", maxWidth: "100vw" })}
   ${tablet({ maxWidth: "100vw" })}
   ${notebook({ maxWidth: "100vw" })}
- 
-
-
   -webkit-box-shadow: 0 2px 2px -2px #000000;
   -moz-box-shadow: 0 2px 2px -2px #000000;
   box-shadow: 0 2px 2px -2px #000000;
@@ -44,7 +41,6 @@ const Right = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-
   ${mobile({ margin: "10px 20px 10px 0px" })}
   ${mobileMini({ margin: "5px 20px 10px 0px" })}
   flex:1;
@@ -90,7 +86,6 @@ const SearchBackground = styled.div`
   align-items: center;
   justify-content: center;
   cursor: pointer;
-
   ${tablet({ padding: "5px" })}
 `;
 
@@ -103,12 +98,14 @@ const MenuItems = styled.div`
     text-decoration: none;
   }
 `;
+
 const MenuLogout = styled.div`
   font-size: 10px;
   cursor: pointer;
   margin-left: 25px;
   color: #ba0000;
 `;
+
 const TextHello = styled.p`
   font-size: 12px;
 `;
@@ -138,7 +135,6 @@ const Navbar = () => {
             <Link to={`/`}>My-Shop</Link>
           </Logo>
         </Left>
-
         <Center>
           <SearchContainer>
             <Input placeholder="Search" />

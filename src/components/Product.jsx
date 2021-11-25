@@ -8,9 +8,7 @@ import {
 import styled from "styled-components";
 import { mobile } from "../responsive";
 import { Link } from "react-router-dom";
-
 import { useSelector } from "react-redux";
-
 import { userRequest } from "../requestMethods";
 import { useEffect, useState } from "react";
 
@@ -132,7 +130,7 @@ const Product = ({ item }) => {
         );
         await setLike(!like);
       } else {
-        window.location.replace("https://my-shop-e-commerce.netlify.app/login");
+        window.location.replace("/login");
       }
     } catch (err) {
       console.error(err);

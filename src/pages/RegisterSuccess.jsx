@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { mobile, tablet } from "../responsive";
+
 const Container = styled.div`
   height: 100vh;
   width: 100wh;
@@ -35,10 +36,13 @@ const Wrapper = styled.div`
   ${tablet({ width: "55%" })}
   position: relative;
 `;
+
 const Title = styled.h2``;
+
 const Text = styled.p`
   margin: auto;
 `;
+
 const SubText = styled.p`
   position: absolute;
   right: 50px;

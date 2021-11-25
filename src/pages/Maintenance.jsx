@@ -16,6 +16,7 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
 `;
+
 const Text = styled.h3`
   text-decoration: bold;
   font-size: 30px;

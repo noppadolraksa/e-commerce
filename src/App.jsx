@@ -18,6 +18,7 @@ import {
 } from "react-router-dom";
 import RegisterSuccess from "./pages/RegisterSuccess";
 import Maintenance from "./pages/Maintenance";
+import ToTop from "./components/ToTop";
 
 const App = () => {
   const user = useSelector((state) => state.user?.currentUser);
@@ -26,29 +27,42 @@ const App = () => {
     <Router>
       <Switch>
         <Route exact path="/">
+          <ToTop />
           <Homepage />
         </Route>
+
         <Route path="/products/:category">
+          <ToTop />
           <ProductList />
         </Route>
+
         <Route path="/product/:id">
+          <ToTop />
           <Product />
         </Route>
+
         <Route path="/cart">
+          <ToTop />
           <Cart />
         </Route>
+
         <Route path="/agreement">
+          <ToTop />
           <Agreement />
         </Route>
-        <Route path="/register/success">
+
+        <Route path="/registersuccess">
           <RegisterSuccess />
         </Route>
+
         <Route path="/success">
           <Success />
         </Route>
+
         <Route path="/maintenance">
           <Maintenance />
         </Route>
+
         <Route path="/login">{user ? <Redirect to="/" /> : <Login />}</Route>
         <Route path="/register">
           {user ? <Redirect to="/" /> : <Register />}

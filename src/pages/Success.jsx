@@ -12,7 +12,6 @@ const Success = () => {
   const currentUser = useSelector((state) => state.user.currentUser);
   const [orderId, setOrderId] = useState(null);
   const history = useHistory();
-
   const dispatch = useDispatch();
 
   useEffect(() => {

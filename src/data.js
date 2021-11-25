@@ -21,7 +21,7 @@ export const sliderItems = [
   },
   {
     id: 3,
-    img: "https:/www.picz.in.th/image/6YA4Rk",
+    img: "https://firebasestorage.googleapis.com/v0/b/myshop-e-commerce.appspot.com/o/image-removebg-preview.png?alt=media&token=a55ed446-76a2-44de-8480-0539b905b37e",
     title: "SUMMER SALE",
     desc: "Some online reviewers mentioned using this dress for more formal events, including weddings. It features a button up detail and a split, flowy skirt. Note that it’s cold wash only and will shrink a bit when you first wash it.",
     bg: "f5fafd",

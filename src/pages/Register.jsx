@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { mobile, tablet } from "../responsive";
 import { Link } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
+import { useHistory } from "react-router-dom";
 
 import React, { useRef } from "react";
 import axios from "axios";
@@ -124,6 +125,7 @@ const Register = () => {
 
   //to dispatch confirm password
   const password = useRef({});
+  const history = useHistory();
   password.current = watch("password", "");
 
   const onSubmit = async (data) => {
@@ -138,7 +140,7 @@ const Register = () => {
           lastname: data.lastname,
         }
       );
-      window.location = "/register/success";
+      history.push("/registersuccess");
     } catch (err) {
       if (err.response.status === 400) {
         alert(err.response.data);
@@ -183,7 +185,7 @@ const Register = () => {
               required: "you must specify a password",
               minLength: {
                 value: 10,
-                message: "password is too short",
+                message: "password must be more than 10 characters",
               },
               maxLength: {
                 value: 24,
@@ -266,7 +268,9 @@ const Register = () => {
             />
             <Agreement>
               I agree with the Terms and Conditions of{" "}
-              <Link to="/agreement">Terms Of Services </Link>
+              <Link to="/agreement" target="_blank">
+                Terms Of Services{" "}
+              </Link>
               Agreement.
               {errors.agreement && (
                 <ErrorText>{errors.agreement.message}</ErrorText>

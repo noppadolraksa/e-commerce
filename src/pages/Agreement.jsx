@@ -17,6 +17,7 @@ const Title = styled.h1`
   font-size: 2em;
   margin-bottom: 40px;
 `;
+
 const SubTitle = styled.h4`
   margin-bottom: 40px;
 `;

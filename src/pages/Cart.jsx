@@ -5,7 +5,7 @@ import Announcement from "../components/Announcement";
 import Navbar from "../components/Navbar";
 import StripeCheckout from "react-stripe-checkout";
 import { useSelector } from "react-redux";
-import { mobile, tablet, notebook } from "../responsive";
+import { mobile } from "../responsive";
 import { userRequest } from "../requestMethods";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
@@ -176,18 +176,6 @@ const ProductAmount = styled.div`
   margin: 5px;
 `;
 
-const Summary = styled.div`
-  flex: 1;
-  border: 0.5px solid lightgray;
-  border-radius: 10px;
-  padding: 20px;
-  height: 50vh;
-`;
-
-const SummaryTitle = styled.h1`
-  font-weight: 200;
-`;
-
 const SummaryItem = styled.div`
   margin: 30px 0px;
   display: flex;
@@ -199,14 +187,6 @@ const SummaryItem = styled.div`
 const SummaryItemText = styled.span``;
 
 const SummaryItemPrice = styled.span``;
-
-const Button = styled.button`
-  width: 100%;
-  padding: 10px;
-  background-color: black;
-  color: white;
-  font-weight: 600;
-`;
 
 const Hr = styled.hr`
   background-color: #eee;
@@ -333,30 +313,8 @@ const Cart = () => {
             ))}
             <Hr />
           </Info>
-
-          {/* <Summary>
-            <SummaryTitle>ORDER SUMMARY</SummaryTitle>
-            <SummaryItem>
-              <SummaryItemText>Subtotal</SummaryItemText>
-              <SummaryItemPrice>$ 80</SummaryItemPrice>
-            </SummaryItem>
-            <SummaryItem>
-              <SummaryItemText>Estimated Shipping</SummaryItemText>
-              <SummaryItemPrice>$ 5.90</SummaryItemPrice>
-            </SummaryItem>
-            <SummaryItem>
-              <SummaryItemText>Shipping Discount</SummaryItemText>
-              <SummaryItemPrice>$ -5.90</SummaryItemPrice>
-            </SummaryItem>
-            <SummaryItem type="total">
-              <SummaryItemText>Total</SummaryItemText>
-              <SummaryItemPrice>$ 80</SummaryItemPrice>
-            </SummaryItem>
-            <Button>CHECKOUT NOW</Button>
-          </Summary> */}
         </Bottom>
       </Wrapper>
-
       <Footer>
         <FooterWrapper>
           <FooterTexts>
