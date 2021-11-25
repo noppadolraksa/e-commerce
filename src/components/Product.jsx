@@ -120,6 +120,7 @@ const Product = ({ item }) => {
   );
 
   const handleClick = async (e) => {
+    e.preventDefault();
     try {
       if (user) {
         await userRequest.post(
@@ -130,7 +131,7 @@ const Product = ({ item }) => {
         );
         await setLike(!like);
       } else {
-        window.location.replace("/login");
+        window.location = "/login";
       }
     } catch (err) {
       console.error(err);
