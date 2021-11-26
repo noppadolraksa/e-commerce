@@ -1,7 +1,7 @@
 export const sliderItems = [
   {
     id: 1,
-    img: "https://i.ibb.co/cXFnLLV/3.png",
+    img: "https://firebasestorage.googleapis.com/v0/b/myshop-e-commerce.appspot.com/o/static%20file%2F3.png?alt=media&token=4ea034c3-bf16-4a9d-b0d1-0862b28641c7",
     title: "LOUNGEWEAR LOVE",
     desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
     bg: "fbf0f4",
@@ -11,7 +11,7 @@ export const sliderItems = [
   },
   {
     id: 2,
-    img: "https://i.ibb.co/DG69bQ4/2.png",
+    img: "https://firebasestorage.googleapis.com/v0/b/myshop-e-commerce.appspot.com/o/static%20file%2F2.png?alt=media&token=bfe4aedb-d352-4a98-8171-715193cb5327",
     title: "AUTUMN COLLECTION",
     desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
     bg: "fcf1ed",
@@ -34,19 +34,19 @@ export const sliderItems = [
 export const categories = [
   {
     id: 1,
-    img: "https://images.pexels.com/photos/5886041/pexels-photo-5886041.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+    img: "https://firebasestorage.googleapis.com/v0/b/myshop-e-commerce.appspot.com/o/static%20file%2Fpexels-photo-5886041.jpeg?alt=media&token=b176ac33-5f25-4eeb-a9fa-d79d1dda333b",
     title: "SHIRT STYLE!",
     categories: "shirt",
   },
   {
     id: 2,
-    img: "https://images.pexels.com/photos/2983464/pexels-photo-2983464.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+    img: "https://firebasestorage.googleapis.com/v0/b/myshop-e-commerce.appspot.com/o/static%20file%2Fpexels-photo-2983464.jpeg?alt=media&token=d737081c-da36-4086-acad-8086ec3c22f2",
     title: "LOUNGEWEAR LOVE",
     categories: "men",
   },
   {
     id: 3,
-    img: "https://images.pexels.com/photos/5480696/pexels-photo-5480696.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
+    img: "https://firebasestorage.googleapis.com/v0/b/myshop-e-commerce.appspot.com/o/static%20file%2Fpexels-photo-5480696.jpeg?alt=media&token=aa2476f4-a1eb-4123-a6c3-44a8784cc71c",
     title: "LIGHT JACKETS",
     categories: "plain",
   },

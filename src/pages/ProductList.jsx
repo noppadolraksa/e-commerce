@@ -87,11 +87,11 @@ const ProductList = () => {
             <Option disabled>promotion</Option>
             <Option>ร้านค้าแนะนำ</Option>
             <Option>exclusive price</Option>
-            <Option>only9.9$</Option>
+            <Option>only 99 baht</Option>
             <Option>10%cashback</Option>
-            <Option>9.9$free shipping</Option>
+            <Option>99 baht free shipping</Option>
           </Select>
-          {filters !== {} && (
+          {Object.keys(filters).length && (
             <ClearFilter onClick={() => setFilters({})}>Clear</ClearFilter>
           )}
         </Filter>

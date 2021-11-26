@@ -7,6 +7,7 @@ export const mobile = (props) => {
     }
   `;
 };
+
 export const mobileMini = (props) => {
   return css`
     @media only screen and (max-width: 380px) {
@@ -26,6 +27,14 @@ export const tablet = (props) => {
 export const notebook = (props) => {
   return css`
     @media only screen and (max-width: 960px) {
+      ${props}
+    }
+  `;
+};
+
+export const navbarFixed = (props) => {
+  return css`
+    @media only screen and (max-width: 630px) {
       ${props}
     }
   `;

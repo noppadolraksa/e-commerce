@@ -2,17 +2,25 @@ import { Badge } from "@mui/material";
 import React from "react";
 import styled from "styled-components";
 import { Search, ShoppingCartOutlined } from "@mui/icons-material";
-import { mobile, mobileMini, notebook, tablet } from "../responsive";
+import {
+  mobile,
+  mobileMini,
+  navbarFixed,
+  notebook,
+  tablet,
+} from "../responsive";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../redux/userRedux";
 import { deleteAllProduct } from "../redux/cartRedux";
 
 const Container = styled.div`
-  height: 70px;
+  height: 62px;
   background-color: white;
-  ${mobile({ height: "90px", maxWidth: "100vw" })}
-  ${tablet({ maxWidth: "100vw" })}
+  ${mobile({ paddingBottom: "10px" })}
+  ${mobileMini({ paddingBottom: "20px" })}
+  ${tablet({ maxWidth: "100vw", height: "55px" })}
+  ${navbarFixed({ height: "70px" })}
   ${notebook({ maxWidth: "100vw" })}
   -webkit-box-shadow: 0 2px 2px -2px #000000;
   -moz-box-shadow: 0 2px 2px -2px #000000;

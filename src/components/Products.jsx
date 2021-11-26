@@ -20,7 +20,7 @@ const Products = ({ cat, filters, sort }) => {
     const getProducts = async () => {
       try {
         const res = await axios.get(
-          !cat === {}
+          !Object.keys(cat).length
             ? `https://my-shop-e-commerce.herokuapp.com/product?category=${cat}`
             : "https://my-shop-e-commerce.herokuapp.com/product"
         );

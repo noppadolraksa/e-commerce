@@ -23,7 +23,6 @@ const Success = () => {
             productId: item._id,
             itemId: item.item[0]._id,
             quantity: item.quantity,
-            sku: item.item[0].sku,
             price: item.item[0].price,
           })),
           amount: cart.total,
