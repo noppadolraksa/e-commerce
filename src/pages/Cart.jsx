@@ -259,7 +259,7 @@ const Cart = () => {
                       <b>ID :</b> {product.item[0]._id}
                     </ProductId>
                     <ProductPriceOneUnit>
-                      <b>Price : </b>$ {product.item[0].price}
+                      <b>Price : </b>฿ {product.item[0].price}
                     </ProductPriceOneUnit>
                     {Object.entries(product.filters).map(
                       ([key, value], index) => (
@@ -296,7 +296,7 @@ const Cart = () => {
                   </ProductAmountContainer>
 
                   <ProductPrice>
-                    $ {product.quantity * product.item[0].price}
+                    ฿ {product.quantity * product.item[0].price}
                     {product.quantity === 0 && (
                       <DeleteOutline
                         style={{ color: "red", cursor: "pointer" }}
@@ -324,14 +324,14 @@ const Cart = () => {
           </FooterTexts>
           <SummaryItem>
             <SummaryItemText>Subtotal</SummaryItemText>
-            <SummaryItemPrice>{`$  ${cart.total}`}</SummaryItemPrice>
+            <SummaryItemPrice>{`฿  ${cart.total}`}</SummaryItemPrice>
           </SummaryItem>
           <StripeCheckout
             name="My-Shop"
             image="https://image1.jdomni.in/storeLogo/02122020/E2/D3/AD/80828A41663079A080691C50EE_1606915864349.png?output-format=webp"
             billingAddress
             shippingAddress
-            description={`your total is $ ${cart.total}`}
+            description={`your total is ฿ ${cart.total}`}
             amount={cart.total * 100}
             token={onToken}
             stripeKey={KEY}

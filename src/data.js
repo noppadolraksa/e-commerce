@@ -6,7 +6,11 @@ export const sliderItems = [
     desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
     bg: "fbf0f4",
     brand: "MANILA",
-    price: { rawPrice: 45.99, discountPercentPrice: 15, discountPrice: 38.99 },
+    price: {
+      rawPrice: 459.99,
+      discountPercentPrice: 30,
+      discountPrice: 329.99,
+    },
     categories: "shirt",
   },
   {
@@ -16,7 +20,11 @@ export const sliderItems = [
     desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
     bg: "fcf1ed",
     brand: "MANILA",
-    price: { rawPrice: 45.99, discountPercentPrice: 15, discountPrice: 38.99 },
+    price: {
+      rawPrice: 1320.99,
+      discountPercentPrice: 30,
+      discountPrice: 790.99,
+    },
     categories: "shirt",
   },
   {
@@ -26,7 +34,11 @@ export const sliderItems = [
     desc: "Some online reviewers mentioned using this dress for more formal events, including weddings. It features a button up detail and a split, flowy skirt. Note that it’s cold wash only and will shrink a bit when you first wash it.",
     bg: "f5fafd",
     brand: "MANILA",
-    price: { rawPrice: 45.99, discountPercentPrice: 15, discountPrice: 38.99 },
+    price: {
+      rawPrice: 750.99,
+      discountPercentPrice: 25,
+      discountPrice: 489.99,
+    },
     categories: "shirt",
   },
 ];

@@ -264,7 +264,7 @@ const Product = () => {
         <InfoContainer>
           <Title>{product.title}</Title>
           <Brand>{product.brand}</Brand>
-          <Price>$ {item?.[0]?.price}</Price>
+          <Price>{`฿ ${product.floorPrice} - ${product.ceilPrice}`}</Price>
           <Desc>{product.desc}</Desc>
           {product.condition === "used" && <Condition>สินค้ามือสอง</Condition>}
           <FilterContainer>

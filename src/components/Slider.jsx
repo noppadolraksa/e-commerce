@@ -134,8 +134,9 @@ const Slider = () => {
               <Title>{item.title}</Title>
               <Brand>{item.brand}</Brand>
               <Price>
-                <Underline>${item.price.rawPrice}</Underline>
-                <Br />${item.price.discountPrice} (
+                <Underline>{`฿ ${item.price.rawPrice}`}</Underline>
+                <Br />
+                {`฿ ${item.price.discountPrice}`} (
                 {item.price.discountPercentPrice}% off)
               </Price>
               <Desc>{item.desc}</Desc>
