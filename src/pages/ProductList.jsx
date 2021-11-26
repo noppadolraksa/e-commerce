@@ -34,7 +34,7 @@ const Select = styled.select`
   padding: 10px;
   margin-right: 20px;
   color: #616161;
-  ${mobile({ margin: "10px 0px 0px 0px" })}
+  ${mobile({ margin: "10px 0px 0px 0px", width: "80%" })}
 `;
 
 const Option = styled.option``;
@@ -91,8 +91,10 @@ const ProductList = () => {
             <Option>10%cashback</Option>
             <Option>99 baht free shipping</Option>
           </Select>
-          {Object.keys(filters).length && (
+          {Object.keys(filters).length ? (
             <ClearFilter onClick={() => setFilters({})}>Clear</ClearFilter>
+          ) : (
+            <span />
           )}
         </Filter>
         <Filter>

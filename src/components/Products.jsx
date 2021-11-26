@@ -31,7 +31,7 @@ const Products = ({ cat, filters, sort }) => {
     };
     getProducts();
   }, [cat]);
-
+  console.log(products);
   useEffect(() => {
     cat &&
       setFilteredProducts(
@@ -70,7 +70,7 @@ const Products = ({ cat, filters, sort }) => {
       {cat
         ? filteredProducts.map((item) => <Product item={item} key={item._id} />)
         : products
-            .slice(0, 16)
+            .slice(0, 8)
             .map((item) => <Product item={item} key={item._id} />)}
     </Container>
   );
