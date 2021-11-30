@@ -4,6 +4,7 @@ const initialState = {
   products: [],
   quantity: 0,
   total: 0,
+  wishlist: [],
 };
 
 const cartSlice = createSlice({
@@ -50,9 +51,28 @@ const cartSlice = createSlice({
       state.products.splice(findIndexProduct, 1);
     },
     deleteAllProduct: () => initialState,
+    addWishlist: (state, action) => {
+      const findWishlist = state.wishlist.find(
+        (item) => item._id === action.payload._id
+      );
+      if (findWishlist === undefined) {
+        state.wishlist.push(action.payload);
+      }
+    },
+    removeWishlist: (state, action) => {
+      state.wishlist = state.wishlist.filter(
+        (item) => item._id !== action.payload._id
+      );
+    },
   },
 });
 
-export const { addProduct, changeQuantity, deleteProduct, deleteAllProduct } =
-  cartSlice.actions;
+export const {
+  addProduct,
+  changeQuantity,
+  deleteProduct,
+  deleteAllProduct,
+  addWishlist,
+  removeWishlist,
+} = cartSlice.actions;
 export default cartSlice.reducer;

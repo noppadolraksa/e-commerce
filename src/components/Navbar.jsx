@@ -116,6 +116,8 @@ const MenuLogout = styled.div`
 
 const TextHello = styled.p`
   font-size: 12px;
+  font-weight: 300;
+  color: teal;
 `;
 
 const Navbar = () => {

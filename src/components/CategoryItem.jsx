@@ -55,7 +55,7 @@ const CategoryItem = ({ item }) => {
 
   return (
     <Container>
-      <Image src={item.img} />
+      <Image src={item.img} alt="categories" />
       <Info>
         <Title>{item.title}</Title>
         <Button onClick={() => handleClick(item.categories)}>Shop Now</Button>

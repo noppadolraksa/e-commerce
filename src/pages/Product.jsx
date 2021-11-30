@@ -162,7 +162,7 @@ const Product = () => {
   const dispatch = useDispatch();
   const [filters, setFilters] = useState({});
   const [item, setItem] = useState([]);
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = React.useState(false);
   const user = useSelector((state) => state.user.currentUser);
 
   const handleOpen = () => setOpen(true);
@@ -259,12 +259,12 @@ const Product = () => {
       <Navbar />
       <Wrapper>
         <ImageContainer>
-          <Image src={product.img} />
+          <Image src={product.img} alt="one product" />
         </ImageContainer>
         <InfoContainer>
           <Title>{product.title}</Title>
           <Brand>{product.brand}</Brand>
-          <Price>{`฿ ${product.floorPrice} - ${product.ceilPrice}`}</Price>
+          <Price>$ {item?.[0]?.price}</Price>
           <Desc>{product.desc}</Desc>
           {product.condition === "used" && <Condition>สินค้ามือสอง</Condition>}
           <FilterContainer>

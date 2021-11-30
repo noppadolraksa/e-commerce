@@ -10,9 +10,11 @@ import { mobile } from "../responsive";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { userRequest } from "../requestMethods";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Box } from "@mui/system";
 import { Modal, Typography } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { addWishlist, removeWishlist } from "../redux/cartRedux";
 
 const style = {
   position: "absolute",
@@ -130,6 +132,7 @@ const likeStyle = { color: "#e44d4dcc", height: "17px" };
 
 const Product = ({ item }) => {
   const user = useSelector((state) => state.user.currentUser);
+  const dispatch = useDispatch();
   const [like, setLike] = useState(
     item.userLikes.find((id) => id === user?._id) === user?._id
   );
@@ -142,12 +145,19 @@ const Product = ({ item }) => {
   const handleClick = async (e) => {
     try {
       if (user) {
-        await userRequest.post(
-          like
-            ? "https://my-shop-e-commerce.herokuapp.com/product/unlikeproduct"
-            : "https://my-shop-e-commerce.herokuapp.com/product/likeproduct",
-          { _id: e._id, user_id: user._id }
-        );
+        if (like) {
+          await userRequest.post(
+            "http://localhost:8080/product/unlikeproduct",
+            { _id: e.item._id, user_id: user._id }
+          );
+          dispatch(removeWishlist(e.item));
+        } else {
+          await userRequest.post("http://localhost:8080/product/likeproduct", {
+            _id: e.item._id,
+            user_id: user._id,
+          });
+          dispatch(addWishlist(e.item));
+        }
         await setLike(!like);
       } else {
         handleOpen();
@@ -157,11 +167,9 @@ const Product = ({ item }) => {
     }
   };
 
-  useEffect(() => {}, [like, item]);
-
   return (
     <Container>
-      <Image src={item.img} />
+      <Image src={item.img} alt="product item" />
       <TextTitle>{item.title}</TextTitle>
       <Text>
         Price : {`${item.floorPrice} - ${item.ceilPrice} ฿`}
@@ -187,7 +195,7 @@ const Product = ({ item }) => {
           </Link>
         </Icon>
 
-        <Icon onClick={() => handleClick({ _id: item._id })}>
+        <Icon onClick={() => handleClick({ item })}>
           {like && user ? (
             <FavoriteRounded style={{ color: "red" }} />
           ) : (

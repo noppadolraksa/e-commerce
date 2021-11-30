@@ -80,8 +80,8 @@ const ProductList = () => {
           <FilterText>Filter Products</FilterText>
           <Select name="condition" onChange={handleFilter}>
             <Option disabled>condition</Option>
-            <Option>new</Option>
-            <Option>used</Option>
+            <Option>New</Option>
+            <Option>Used</Option>
           </Select>
           <Select name="promotion" onChange={handleFilter}>
             <Option disabled>promotion</Option>

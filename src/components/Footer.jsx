@@ -180,7 +180,10 @@ const Footer = () => {
         <ContactItem>
           <MailOutline style={iconstyle} /> Noppadol.raksa@gmail.com
         </ContactItem>
-        <Payment src="https://firebasestorage.googleapis.com/v0/b/myshop-e-commerce.appspot.com/o/Credit-Card-Icons.jpeg?alt=media&token=4a1357f6-481a-4c57-bbec-e64b951e9f17" />
+        <Payment
+          alt="payment"
+          src="https://firebasestorage.googleapis.com/v0/b/myshop-e-commerce.appspot.com/o/Credit-Card-Icons.jpeg?alt=media&token=4a1357f6-481a-4c57-bbec-e64b951e9f17"
+        />
       </Right>
     </Container>
   );

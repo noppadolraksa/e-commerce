@@ -61,6 +61,10 @@ const FooterText = styled.span`
   text-decoration: underline;
   cursor: pointer;
   margin: 0px 10px;
+  a {
+    color: gray;
+    text-decoration: none;
+  }
 `;
 
 const Bottom = styled.div`
@@ -78,7 +82,6 @@ const Product = styled.div`
   display: flex;
   justify-content: space-between;
   border: 1px solid #ddd;
-  ${mobile({ flexDirection: "column" })}
 `;
 
 const ProductDetail = styled.div`
@@ -86,7 +89,7 @@ const ProductDetail = styled.div`
   align-items: center;
   margin: 10px;
   flex: 8;
-  ${mobile({ flex: "1" })}
+  ${mobile({ flex: "1", alignItems: "flex-start" })}
 `;
 
 const ProductName = styled.span`
@@ -96,12 +99,13 @@ const ProductName = styled.span`
   line-height: 16px;
   overflow: hidden;
   margin-right: 10px;
+
   padding: 5px;
   ${mobile({
     display: "inline-block",
     overflow: "hidden",
     whiteSpace: "nowrap",
-    width: "65vw",
+
     fontSize: "8px",
     padding: "0px",
   })}
@@ -110,24 +114,38 @@ const ProductName = styled.span`
 const ProductId = styled.span`
   flex: 1;
   font-size: 11px;
+  height: 45px;
+  line-height: 16px;
+  overflow: hidden;
   margin-right: 10px;
   padding: 5px;
-  ${mobile({ fontSize: "8px" })}
+  ${mobile({ fontSize: "8px", padding: 0 })}
 `;
 
 const ProductPriceOneUnit = styled.span`
   flex: 1;
   font-size: 11px;
+  height: 45px;
+  line-height: 16px;
+  overflow: hidden;
   margin-right: 10px;
   padding: 5px;
-  ${mobile({ fontSize: "8px" })}
+  ${mobile({ fontSize: "8px", padding: 0 })}
+`;
+
+const ProductFilter = styled.div`
+  display: flex;
+  flex-direction: column;
+  ${mobile({ flexDirection: "row" })}
 `;
 
 const ProductSize = styled.span`
-  flex: 0.5;
   font-size: 11px;
-  margin-right: 5px;
   padding: 2px;
+  display: flex;
+
+  height: 30px;
+  line-height: 16px;
   ${mobile({ fontSize: "8px" })}
 `;
 
@@ -139,7 +157,14 @@ const Details = styled.div`
   flex-direction: row;
   align-items: center;
   flex: 8;
-  ${mobile({ flexDirection: "column", padding: "0px" })}
+  ${mobile({
+    flexDirection: "column",
+    padding: "0px",
+    alignItems: "flex-start",
+    justifyContent: "flex-start",
+    marginLeft: "10px",
+    width: "140px",
+  })}
 `;
 
 const PriceDetail = styled.div`
@@ -180,6 +205,7 @@ const SummaryItem = styled.div`
   margin: 30px 0px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   font-weight: ${(props) => props.type === "total" && "500"};
   font-size: ${(props) => props.type === "total" && "1.5em"};
 `;
@@ -196,6 +222,7 @@ const Hr = styled.hr`
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
+  const wishlist = useSelector((state) => state.cart.wishlist);
   const [stripeToken, setStripeToken] = useState(null);
 
   const history = useHistory();
@@ -243,15 +270,16 @@ const Cart = () => {
       <Navbar />
       <Wrapper>
         <Title>YOUR BAG</Title>
+
         <Bottom>
           <Info>
             {cart.products?.map((product) => (
               <Product key={product.item._id}>
-                <ProductDetail>
+                <ProductDetail key={product.item._id}>
                   <Link to={`/product/${product._id}`}>
-                    <Image src={product.img} />
+                    <Image src={product.img} alt="cart" />
                   </Link>
-                  <Details>
+                  <Details key={product.item._id}>
                     <ProductName>
                       <b>Product:</b> {product.title}
                     </ProductName>
@@ -261,54 +289,56 @@ const Cart = () => {
                     <ProductPriceOneUnit>
                       <b>Price : </b>฿ {product.item[0].price}
                     </ProductPriceOneUnit>
-                    {Object.entries(product.filters).map(
-                      ([key, value], index) => (
-                        <ProductSize key={index}>
-                          <b>{`${key} :`}</b> {`${value}`}
-                        </ProductSize>
-                      )
-                    )}
+                    <ProductFilter>
+                      {Object.entries(product.filters).map(
+                        ([key, value], index) => (
+                          <ProductSize key={index}>
+                            <b>{`${key} :`}</b> {`${value}`}
+                          </ProductSize>
+                        )
+                      )}
+                    </ProductFilter>
                   </Details>
-                </ProductDetail>
-                <PriceDetail>
-                  <ProductAmountContainer>
-                    <Remove
-                      onClick={() =>
-                        handleClick({
-                          name: "dec",
-                          value: product.item[0],
-                          quantity: product.quantity,
-                        })
-                      }
-                      style={{ cursor: "pointer" }}
-                    />
-                    <ProductAmount>{product.quantity}</ProductAmount>
-                    <Add
-                      onClick={() =>
-                        handleClick({
-                          name: "inc",
-                          value: product.item[0],
-                          quantity: product.quantity,
-                        })
-                      }
-                      style={{ cursor: "pointer" }}
-                    />
-                  </ProductAmountContainer>
-
-                  <ProductPrice>
-                    ฿ {product.quantity * product.item[0].price}
-                    {product.quantity === 0 && (
-                      <DeleteOutline
-                        style={{ color: "red", cursor: "pointer" }}
+                  <PriceDetail key={product.item._id}>
+                    <ProductAmountContainer>
+                      <Remove
                         onClick={() =>
-                          handleDelete({
+                          handleClick({
+                            name: "dec",
                             value: product.item[0],
+                            quantity: product.quantity,
                           })
                         }
+                        style={{ cursor: "pointer" }}
                       />
-                    )}
-                  </ProductPrice>
-                </PriceDetail>
+                      <ProductAmount>{product.quantity}</ProductAmount>
+                      <Add
+                        onClick={() =>
+                          handleClick({
+                            name: "inc",
+                            value: product.item[0],
+                            quantity: product.quantity,
+                          })
+                        }
+                        style={{ cursor: "pointer" }}
+                      />
+                    </ProductAmountContainer>
+
+                    <ProductPrice>
+                      ฿ {product.quantity * product.item[0].price}
+                      {product.quantity === 0 && (
+                        <DeleteOutline
+                          style={{ color: "red", cursor: "pointer" }}
+                          onClick={() =>
+                            handleDelete({
+                              value: product.item[0],
+                            })
+                          }
+                        />
+                      )}
+                    </ProductPrice>
+                  </PriceDetail>
+                </ProductDetail>
               </Product>
             ))}
             <Hr />
@@ -318,9 +348,9 @@ const Cart = () => {
       <Footer>
         <FooterWrapper>
           <FooterTexts>
-            <a href="#top">
-              <FooterText>Shopping Bag({cart.quantity})</FooterText>
-            </a>
+            <FooterText>
+              <Link to="/wishlist">wishlist({wishlist.length}) </Link>
+            </FooterText>
           </FooterTexts>
           <SummaryItem>
             <SummaryItemText>Subtotal</SummaryItemText>

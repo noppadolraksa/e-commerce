@@ -20,9 +20,9 @@ const Products = ({ cat, filters, sort }) => {
     const getProducts = async () => {
       try {
         const res = await axios.get(
-          !Object.keys(cat).length
-            ? `https://my-shop-e-commerce.herokuapp.com/product?category=${cat}`
-            : "https://my-shop-e-commerce.herokuapp.com/product"
+          Object.keys(cat).length
+            ? `http://localhost:8080/product?category=${cat}`
+            : "http://localhost:8080/product"
         );
         setProducts(res.data);
       } catch (err) {
@@ -31,16 +31,25 @@ const Products = ({ cat, filters, sort }) => {
     };
     getProducts();
   }, [cat]);
-  console.log(products);
+
   useEffect(() => {
-    cat &&
-      setFilteredProducts(
-        products.filter((item) =>
-          Object.entries(filters).every(([key, value]) =>
-            item[key].includes(value)
+    Object.keys(cat).length
+      ? setFilteredProducts(
+          products.filter((item) =>
+            Object.entries(filters).every(([key, value]) =>
+              item[key].includes(value)
+            )
           )
         )
-      );
+      : setFilteredProducts(
+          products
+            .slice(0, 16)
+            .filter((item) =>
+              Object.entries(filters).every(([key, value]) =>
+                item[key].includes(value)
+              )
+            )
+        );
   }, [products, cat, filters]);
 
   useEffect(() => {
@@ -70,7 +79,7 @@ const Products = ({ cat, filters, sort }) => {
       {cat
         ? filteredProducts.map((item) => <Product item={item} key={item._id} />)
         : products
-            .slice(0, 8)
+            .slice(0, 16)
             .map((item) => <Product item={item} key={item._id} />)}
     </Container>
   );
