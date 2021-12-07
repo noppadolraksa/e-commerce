@@ -15,25 +15,19 @@ import { logoutUser } from "../redux/userRedux";
 import { deleteAllProduct } from "../redux/cartRedux";
 
 const Container = styled.div`
-  height: 62px;
   background-color: white;
-  ${mobile({ paddingBottom: "10px" })}
-  ${mobileMini({ paddingBottom: "20px" })}
-  ${tablet({ maxWidth: "100vw", height: "55px" })}
-  ${navbarFixed({ height: "70px" })}
+
+  ${tablet({ maxWidth: "100vw" })}
   ${notebook({ maxWidth: "100vw" })}
-  -webkit-box-shadow: 0 2px 2px -2px #000000;
-  -moz-box-shadow: 0 2px 2px -2px #000000;
-  box-shadow: 0 2px 2px -2px #000000;
 `;
 
 const Wrapper = styled.div`
-  padding: 12px 40px 20px 20px;
+  padding: 5px 40px 10px 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  ${mobile({ padding: "10px 0px", width: "100vw" })}
+  ${mobile({ padding: "3px 0px 0px 0px" })}
 `;
 
 const Left = styled.div`
@@ -49,8 +43,8 @@ const Right = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  ${mobile({ margin: "10px 20px 10px 0px" })}
-  ${mobileMini({ margin: "5px 20px 10px 0px" })}
+  ${mobile({ margin: "0px 20px 10px 0px" })}
+  ${mobileMini({ margin: "0px 20px 10px 0px" })}
   flex:1;
 `;
 
@@ -97,7 +91,7 @@ const SearchBackground = styled.div`
   ${tablet({ padding: "5px" })}
 `;
 
-const MenuItems = styled.div`
+const MenuItems = styled.p`
   font-size: 0.85em;
   cursor: pointer;
   margin-left: 25px;
@@ -107,7 +101,7 @@ const MenuItems = styled.div`
   }
 `;
 
-const MenuLogout = styled.div`
+const MenuLogout = styled.p`
   font-size: 10px;
   cursor: pointer;
   margin-left: 25px;
@@ -118,6 +112,10 @@ const TextHello = styled.p`
   font-size: 12px;
   font-weight: 300;
   color: teal;
+  a {
+    color: teal;
+    text-decoration: none;
+  }
 `;
 
 const Navbar = () => {
@@ -162,7 +160,9 @@ const Navbar = () => {
         <Right>
           {currentUser ? (
             <>
-              <TextHello>{`hello ${currentUser.firstname}`}</TextHello>
+              <TextHello>
+                <Link to="/profile/user/profile">{`hello ${currentUser.firstname}`}</Link>
+              </TextHello>
               <MenuLogout onClick={handleLogout}>Log out</MenuLogout>
             </>
           ) : (

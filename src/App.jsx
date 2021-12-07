@@ -20,6 +20,7 @@ import {
 import RegisterSuccess from "./pages/RegisterSuccess";
 import Maintenance from "./pages/Maintenance";
 import ToTop from "./components/ToTop";
+import Profile from "./pages/Profile";
 
 const App = () => {
   const user = useSelector((state) => state.user?.currentUser);
@@ -55,6 +56,10 @@ const App = () => {
         <Route path="/wishlist">
           <ToTop />
           <Wishlist />
+        </Route>
+
+        <Route path="/profile">
+          {user ? <Profile /> : <Redirect to="/" />}
         </Route>
 
         <Route path="/agreement">

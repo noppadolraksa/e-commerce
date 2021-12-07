@@ -14,7 +14,7 @@ import { useState } from "react";
 import { Box } from "@mui/system";
 import { Modal, Typography } from "@mui/material";
 import { useDispatch } from "react-redux";
-import { addWishlist, removeWishlist } from "../redux/cartRedux";
+import { addWishlist, removeWishlist } from "../redux/wishlistRedux";
 
 const style = {
   position: "absolute",

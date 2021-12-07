@@ -222,7 +222,7 @@ const Hr = styled.hr`
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
-  const wishlist = useSelector((state) => state.cart.wishlist);
+  const wishlist = useSelector((state) => state.wishlist.wishlist);
   const [stripeToken, setStripeToken] = useState(null);
 
   const history = useHistory();

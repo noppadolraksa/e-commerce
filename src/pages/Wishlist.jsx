@@ -28,7 +28,7 @@ const Wrapper = styled.div`
 
 const Info = styled.div`
   flex: 3;
-  min-height: 50vh;
+  min-height: 500px;
 `;
 
 const Product = styled.div`
@@ -117,15 +117,9 @@ const Image = styled.img`
   ${mobile({ width: "50px" })}
 `;
 
-const ProductAmountContainer = styled.div`
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-`;
-
 const WishList = () => {
-  const cart = useSelector((state) => state?.cart);
-  console.log(cart);
+  const wishlist = useSelector((state) => state?.wishlist);
+  console.log(wishlist);
   return (
     <Container>
       <Navbar />
@@ -135,7 +129,7 @@ const WishList = () => {
       </Header>
       <Wrapper>
         <Info>
-          {cart.wishlist?.map((product) => (
+          {wishlist.wishlist?.map((product) => (
             <Product key={product._id}>
               <ProductDetail>
                 <Link to={`/product/${product._id}`}>

@@ -3,17 +3,24 @@ import Navbar from "../components/Navbar";
 import Announcement from "../components/Announcement";
 import Newsletter from "../components/Newsletter";
 import Footer from "../components/Footer";
-import { Add, Remove } from "@mui/icons-material";
+import {
+  Add,
+  Favorite,
+  FavoriteBorderOutlined,
+  FavoriteRounded,
+  Remove,
+} from "@mui/icons-material";
 import React, { useState } from "react";
 import { mobile, notebook, tablet } from "../responsive";
 import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import { useEffect } from "react";
-import { publicRequest } from "../requestMethods";
+import { publicRequest, userRequest } from "../requestMethods";
 import { addProduct } from "../redux/cartRedux";
 import { useDispatch } from "react-redux";
 import { Modal, Typography } from "@mui/material";
 import { Box } from "@mui/system";
+import { addWishlist, removeWishlist } from "../redux/wishlistRedux";
 
 const Container = styled.div`
   height: 100vh;
@@ -53,12 +60,12 @@ const InfoContainer = styled.div`
 `;
 
 const Title = styled.h1`
-  font-weight: 250;
+  font-weight: 600;
   ${mobile({ fontSize: "1.25em" })}
   line-height: 1.5rem;
   height: 6rem;
   overflow: hidden;
-  font-size: 20px;
+  font-size: 50px;
 `;
 
 const Desc = styled.p`
@@ -152,6 +159,41 @@ const Amount = styled.input`
   text-align: center;
 `;
 
+const Likes = styled.div`
+  display: flex;
+  align-items: center;
+  color: gray;
+`;
+
+const likeStyle = { color: "#e44d4dcc", height: "17px" };
+
+const Icon = styled.button`
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  margin: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.5s ease; // all function keep 0.5sec
+  text-decoration: none;
+  &:focus,
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
+    text-decoration: none;
+  }
+
+  &:hover {
+    background-color: #e9f5f5;
+    transform: scale(1.1);
+  }
+`;
+
 const Product = () => {
   const location = useLocation();
   const _id = location.pathname.split("/")[2];
@@ -164,6 +206,7 @@ const Product = () => {
   const [item, setItem] = useState([]);
   const [open, setOpen] = React.useState(false);
   const user = useSelector((state) => state.user.currentUser);
+  const [like, setLike] = useState(false);
 
   const handleOpen = () => setOpen(true);
 
@@ -182,6 +225,9 @@ const Product = () => {
       try {
         const res = await publicRequest.get(`/product/find/${_id}`);
         setProduct(res.data);
+        setLike(
+          res.data.userLikes?.find((id) => id === user?._id) === user?._id
+        );
         const data = [];
         if (res.data.filterTitleTwo) {
           data.push(
@@ -196,6 +242,7 @@ const Product = () => {
         }
         const obj = Object.fromEntries(data);
         setFilters(obj);
+        // filter both
         // const { filters } = res.data;
         // const data = [];
         // filters.forEach((e) => {
@@ -208,7 +255,7 @@ const Product = () => {
       }
     };
     getProduct();
-  }, [_id]);
+  }, [_id, user?._id]);
 
   useEffect(() => {
     const res = product.product?.filter((item) =>
@@ -252,6 +299,32 @@ const Product = () => {
         )
       : handleOpen();
   };
+
+  const handleLike = async () => {
+    try {
+      if (user) {
+        if (like) {
+          await userRequest.post(
+            "http://localhost:8080/product/unlikeproduct",
+            { _id: product._id, user_id: user._id }
+          );
+          dispatch(removeWishlist(product));
+        } else {
+          await userRequest.post("http://localhost:8080/product/likeproduct", {
+            _id: product._id,
+            user_id: user._id,
+          });
+          dispatch(addWishlist(product));
+        }
+        await setLike(!like);
+      } else {
+        handleOpen();
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   // console.log(product);
   return (
     <Container>
@@ -266,6 +339,19 @@ const Product = () => {
           <Brand>{product.brand}</Brand>
           <Price>$ {item?.[0]?.price}</Price>
           <Desc>{product.desc}</Desc>
+          <Likes>
+            {"("}
+            {like ? product?.userLikes?.length + 1 : product?.userLikes?.length}
+            )
+            <Icon onClick={handleLike}>
+              {like && user ? (
+                <FavoriteRounded style={{ color: "red" }} />
+              ) : (
+                <FavoriteBorderOutlined />
+              )}
+            </Icon>
+            {`(${product.sold}) ขายแล้ว`}
+          </Likes>
           {product.condition === "used" && <Condition>สินค้ามือสอง</Condition>}
           <FilterContainer>
             <Filter>
@@ -323,7 +409,7 @@ const Product = () => {
         >
           <Box sx={style}>
             <Typography id="modal-modal-title" variant="h6" component="h2">
-              Oops! You are not able to update cart!
+              Oops! You are not able to do that!
             </Typography>
             <Typography id="modal-modal-description" sx={{ mt: 2 }}>
               please <Link to="/login">login</Link> first or{" "}

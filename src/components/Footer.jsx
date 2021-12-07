@@ -90,7 +90,7 @@ const Right = styled.div`
   ${mobile({ margin: "0px 20px" })}
 `;
 
-const ContactItem = styled.div`
+const ContactItem = styled.p`
   display: flex;
   align-items: center;
   margin: 0px 20px 20px 0px;
