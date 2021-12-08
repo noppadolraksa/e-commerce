@@ -52,7 +52,6 @@ const SidebarList = styled.p`
 const Sidebar = (props) => {
   const location = useLocation();
   const list = location.pathname.split("/")[3];
-  console.log(list);
 
   return (
     <Container>

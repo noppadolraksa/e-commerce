@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { tablet } from "../responsive";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../redux/apiCalls";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 const Container = styled.div`
   margin: 0px;
@@ -99,12 +99,13 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const { isFetching, error } = useSelector((state) => state.user);
+  const history = useHistory();
 
   const handleClick = (e) => {
     e.preventDefault();
     try {
       login(dispatch, { username, password }).then(() => {
-        window.location.reload(true);
+        history.goBack();
       });
     } catch (err) {
       alert(err.response.message);

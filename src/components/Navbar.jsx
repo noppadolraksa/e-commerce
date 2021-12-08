@@ -108,14 +108,27 @@ const MenuLogout = styled.p`
   color: #ba0000;
 `;
 
-const TextHello = styled.p`
-  font-size: 12px;
-  font-weight: 300;
-  color: teal;
+const TextHello = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: row;
   a {
     color: teal;
     text-decoration: none;
   }
+`;
+
+const TextFirstname = styled.p`
+  font-size: 12px;
+  font-weight: 300;
+  color: teal;
+`;
+
+const ProfileImg = styled.img`
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
 `;
 
 const Navbar = () => {
@@ -129,7 +142,7 @@ const Navbar = () => {
       e.preventDefault();
       await dispatch(logoutUser());
       await dispatch(deleteAllProduct());
-      history.go(0);
+      history.push("/");
     } catch (err) {
       console.error(err);
     }
@@ -160,9 +173,19 @@ const Navbar = () => {
         <Right>
           {currentUser ? (
             <>
-              <TextHello>
-                <Link to="/profile/user/profile">{`hello ${currentUser.firstname}`}</Link>
-              </TextHello>
+              <Link
+                to="/profile/user/profile"
+                style={{ textDecoration: "none" }}
+              >
+                <TextHello>
+                  <ProfileImg
+                    alt="profile img"
+                    src={currentUser.img || ""}
+                  ></ProfileImg>
+                  <TextFirstname>{currentUser.firstname}</TextFirstname>
+                </TextHello>
+              </Link>
+
               <MenuLogout onClick={handleLogout}>Log out</MenuLogout>
             </>
           ) : (

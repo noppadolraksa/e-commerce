@@ -65,12 +65,13 @@ const Title = styled.h1`
   line-height: 1.5rem;
   height: 6rem;
   overflow: hidden;
-  font-size: 50px;
+  font-size: 20px;
 `;
 
 const Desc = styled.p`
   margin: 20px 0px;
   font-weight: 250;
+  font-size: 12px;
 `;
 
 const Price = styled.p`

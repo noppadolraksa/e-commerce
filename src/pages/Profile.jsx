@@ -10,6 +10,7 @@ import { Redirect, Route } from "react-router";
 import UserSuccessOrder from "./profile/UserSuccessOrder";
 import UserPendingOrder from "./profile/UserPendingOrder";
 import UserAllOrder from "./profile/UserAllOrder";
+import Footer from "../components/Footer";
 
 const Container = styled.div`
   display: flex;
@@ -53,6 +54,7 @@ const Profile = () => {
           <Redirect to="/login" />
         )}
       </Section>
+      <Footer />
     </Container>
   );
 };

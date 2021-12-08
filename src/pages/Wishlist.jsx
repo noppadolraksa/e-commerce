@@ -119,7 +119,7 @@ const Image = styled.img`
 
 const WishList = () => {
   const wishlist = useSelector((state) => state?.wishlist);
-  console.log(wishlist);
+
   return (
     <Container>
       <Navbar />
