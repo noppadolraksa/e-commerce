@@ -19,6 +19,7 @@ const Success = () => {
       try {
         const res = await userRequest.post("/order", {
           user: currentUser,
+          userId: currentUser._id,
           products: cart.products.map((item) => ({
             product: item,
             item: item.item[0],

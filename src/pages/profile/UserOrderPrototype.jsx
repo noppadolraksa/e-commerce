@@ -118,6 +118,13 @@ const Img = styled.img`
   ${mobile({ height: 40, width: 40 })}
 `;
 
+const OrderAddressContainer = styled.div``;
+
+const OrderAddress = styled.p`
+  font-size: 12px;
+  margin: 5px;
+`;
+
 const OrderFooter = styled.div`
   display: flex;
   align-items: center;
@@ -215,6 +222,9 @@ const UserOrderPrototype = ({ status }) => {
               </OrderProductRight>
             </OrderProduct>
           ))}
+          <OrderAddressContainer>
+            <OrderAddress>{`ที่อยู่จัดส่ง: ${order.address.city}, ${order.address.line1}, ${order.address.line2}, ${order.address.postal_code}, ${order.address.country}`}</OrderAddress>
+          </OrderAddressContainer>
           <OrderFooter>
             <OrderTimestamp>{order.createdAt.substring(0, 19)}</OrderTimestamp>
             <TotalPrice>
