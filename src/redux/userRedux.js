@@ -41,6 +41,10 @@ const userSlice = createSlice({
     updateUserCancel: (state) => {
       state.isFetching = false;
     },
+    updateUserAddressSuccess: (state, action) => {
+      state.isFetching = false;
+      state.currentUser.address = action.payload.user.address;
+    },
   },
 });
 
@@ -53,5 +57,6 @@ export const {
   updateUserStart,
   updateUserSuccess,
   updateUserCancel,
+  updateUserAddressSuccess,
 } = userSlice.actions;
 export default userSlice.reducer;

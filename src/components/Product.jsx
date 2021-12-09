@@ -133,6 +133,7 @@ const likeStyle = { color: "#e44d4dcc", height: "17px" };
 const Product = ({ item }) => {
   const user = useSelector((state) => state.user.currentUser);
   const dispatch = useDispatch();
+
   const [like, setLike] = useState(
     item.userLikes.find((id) => id === user?._id) === user?._id
   );
@@ -146,11 +147,23 @@ const Product = ({ item }) => {
     try {
       if (user) {
         if (like) {
-          await userRequest.post(
-            "http://localhost:8080/product/unlikeproduct",
-            { _id: e.item._id, user_id: user._id }
-          );
-          dispatch(removeWishlist(e.item));
+          try {
+            await userRequest.post(
+              "http://localhost:8080/product/unlikeproduct",
+              { _id: e.item._id, user_id: user._id }
+            );
+            dispatch(removeWishlist(e.item));
+          } catch (err) {
+            if (err.response.data === "Token is not valid!") {
+              alert(
+                `Error status : ${err.response.status} ${err.response.data} Please sign in again..`
+              );
+            } else {
+              alert(
+                `Error status : ${err.response.status} ${err.response.data}`
+              );
+            }
+          }
         } else {
           await userRequest.post("http://localhost:8080/product/likeproduct", {
             _id: e.item._id,

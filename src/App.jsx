@@ -21,6 +21,7 @@ import RegisterSuccess from "./pages/RegisterSuccess";
 import Maintenance from "./pages/Maintenance";
 import ToTop from "./components/ToTop";
 import Profile from "./pages/Profile";
+import LoginSuccess from "./pages/LoginSuccess";
 
 const App = () => {
   const user = useSelector((state) => state.user?.currentUser);
@@ -77,6 +78,10 @@ const App = () => {
 
         <Route path="/maintenance">
           <Maintenance />
+        </Route>
+
+        <Route path="/loginsuccess">
+          <LoginSuccess />
         </Route>
 
         <Route path="/login">{user ? <Redirect to="/" /> : <Login />}</Route>

@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { Link, NavLink, useLocation } from "react-router-dom";
+import { mobile } from "../../responsive";
+import { useState } from "react";
 
 export const MyNavLink = styled(NavLink)`
   &.${(props) => props.activeClassName} {
@@ -10,12 +12,14 @@ export const MyNavLink = styled(NavLink)`
 `;
 
 const Container = styled.div`
-  flex: 1;
   height: calc(100vh - 50px);
   background-color: rgb(235, 250, 244);
   position: sticky;
   top: 50px;
   border-radius: 10px;
+  transition: all 0.5s ease;
+  width: ${(props) => props.open === false && "30px"};
+  flex: ${(props) => (props.open === false ? "none" : 1)};
 `;
 
 const Wrapper = styled.div`
@@ -25,11 +29,14 @@ const Wrapper = styled.div`
 
 const SidebarMenu = styled.div`
   margin-bottom: 10px;
+  transition: all 0.5s ease;
+  display: ${(props) => (props.open === false ? "none" : "in-line")};
 `;
 
 const SidebarTitle = styled.p`
   font-size: 13px;
   color: rgb(172, 172, 172);
+  ${mobile({ fontSize: "10px", marginBottom: "5px" })}
 `;
 
 const SidebarList = styled.p`
@@ -47,16 +54,22 @@ const SidebarList = styled.p`
     color: #e12424 !important;
     background-color: #e8e8e8;
   }
+  ${mobile({ fontSize: "10px", marginBottom: "5px" })}
 `;
 
 const Sidebar = (props) => {
+  const [sidebar, setSidebar] = useState(false);
   const location = useLocation();
   const list = location.pathname.split("/")[3];
 
   return (
-    <Container>
+    <Container
+      onMouseEnter={() => setSidebar(true)}
+      onMouseLeave={() => setSidebar(false)}
+      open={sidebar}
+    >
       <Wrapper>
-        <SidebarMenu>
+        <SidebarMenu open={sidebar}>
           <SidebarTitle>Edit Profile</SidebarTitle>
           <Link to="/profile/user/profile" style={{ textDecoration: "none" }}>
             <SidebarList select={list === "profile" ? true : false}>
@@ -77,7 +90,7 @@ const Sidebar = (props) => {
             </SidebarList>
           </Link>
         </SidebarMenu>
-        <SidebarMenu>
+        <SidebarMenu open={sidebar}>
           <SidebarTitle>My Order</SidebarTitle>
           <Link to="/profile/order/all" style={{ textDecoration: "none" }}>
             <SidebarList select={list === "all" ? true : false}>
@@ -92,6 +105,11 @@ const Sidebar = (props) => {
           <Link to="/profile/order/success" style={{ textDecoration: "none" }}>
             <SidebarList select={list === "success" ? true : false}>
               Success Order
+            </SidebarList>
+          </Link>
+          <Link to="/profile/order/cancel" style={{ textDecoration: "none" }}>
+            <SidebarList select={list === "cancel" ? true : false}>
+              Cancel Order
             </SidebarList>
           </Link>
         </SidebarMenu>

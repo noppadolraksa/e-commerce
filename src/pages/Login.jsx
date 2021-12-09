@@ -104,11 +104,9 @@ const Login = () => {
   const handleClick = (e) => {
     e.preventDefault();
     try {
-      login(dispatch, { username, password }).then(() => {
-        history.goBack();
-      });
+      login(dispatch, { username, password });
     } catch (err) {
-      alert(err.response.message);
+      alert(err.response.data);
     }
   };
 

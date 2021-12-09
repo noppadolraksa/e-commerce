@@ -90,8 +90,8 @@ const UserProfile = () => {
   });
 
   const onSubmit = async (data) => {
-    // await dispatch(updateUserStart());
     if (file?.name !== undefined && file?.name !== user.img) {
+      await dispatch(updateUserStart());
       const storage = getStorage(app);
       const fileName = new Date().getTime() + file?.name;
       const storageRef = ref(storage, fileName);
@@ -113,22 +113,35 @@ const UserProfile = () => {
           }
         },
         (error) => {
-          console.error("upload failure..");
+          console.error(error);
+          alert("upload failed!");
         },
         () => {
-          getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
-            const res = await updateUser(
-              user._id,
-              {
-                firstname: data.firstname,
-                lastname: data.lastname,
-                email: data.email,
-                phone: data.phone,
-                img: downloadURL,
-              },
-              dispatch
+          try {
+            getDownloadURL(uploadTask.snapshot.ref).then(
+              async (downloadURL) => {
+                const res = await updateUser(
+                  user._id,
+                  {
+                    firstname: data.firstname,
+                    lastname: data.lastname,
+                    email: data.email,
+                    phone: data.phone,
+                    img: downloadURL,
+                  },
+                  dispatch
+                );
+                alert("User has been updated successfully!");
+              }
             );
-          });
+          } catch (err) {
+            if (err.response.status === 403) {
+              alert(err.response.data);
+            } else {
+              console.error(err);
+              alert("something went wrong..");
+            }
+          }
         }
       );
     } else {
@@ -145,9 +158,9 @@ const UserProfile = () => {
           dispatch
         );
 
-        alert("Updated User!");
+        alert("Address Updated! ");
       } catch (err) {
-        if (err.response.status === 400) {
+        if (err.response.status === 403) {
           alert(err.response.data);
         } else {
           console.error(err);

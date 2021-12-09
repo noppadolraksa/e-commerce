@@ -8,6 +8,7 @@ import Navbar from "../components/Navbar";
 import { useSelector } from "react-redux";
 import { Redirect, Route } from "react-router";
 import UserSuccessOrder from "./profile/UserSuccessOrder";
+import UserCancelOrder from "./profile/UserCancelOrder";
 import UserPendingOrder from "./profile/UserPendingOrder";
 import UserAllOrder from "./profile/UserAllOrder";
 import Footer from "../components/Footer";
@@ -48,6 +49,9 @@ const Profile = () => {
             </Route>
             <Route path="/profile/order/success">
               <UserSuccessOrder />
+            </Route>
+            <Route path="/profile/order/cancel">
+              <UserCancelOrder />
             </Route>
           </>
         ) : (

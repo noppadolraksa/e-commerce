@@ -142,7 +142,6 @@ const Slider = () => {
               <Desc>{item.desc}</Desc>
 
               <Button>
-                {" "}
                 <Link to={`/products/${item.categories}`}>SHOP NOW</Link>
               </Button>
             </InfoContainer>

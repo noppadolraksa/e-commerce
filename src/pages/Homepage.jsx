@@ -7,6 +7,8 @@ import Products from "../components/Products";
 import Newsletter from "../components/Newsletter";
 import Footer from "../components/Footer";
 import { mobile } from "../responsive";
+import { useEffect, useReducer } from "react";
+import { useSelector } from "react-redux";
 
 const FixNavBar = styled.div`
   position: fixed;
@@ -21,6 +23,12 @@ const Container = styled.div`
 `;
 
 const Homepage = (cat, filters, sort) => {
+  const [ignored, forceUpdate] = useReducer((x) => x + 1, 0);
+  const user = useSelector((state) => state.user.currentUser);
+  useEffect(() => {
+    forceUpdate();
+  }, []);
+
   return (
     <Container>
       <FixNavBar>

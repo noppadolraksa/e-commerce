@@ -1,12 +1,8 @@
 import React from "react";
-import styled from "styled-components";
-
-const Container = styled.div`
-  flex: 4;
-`;
+import UserOrderPrototype from "./UserOrderPrototype";
 
 const UserAllOrder = () => {
-  return <Container>User All Order</Container>;
+  return <UserOrderPrototype status="all" />;
 };
 
 export default UserAllOrder;
