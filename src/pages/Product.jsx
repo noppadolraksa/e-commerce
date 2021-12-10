@@ -329,7 +329,6 @@ const Product = () => {
     }
   };
 
-  // console.log(product);
   return (
     <Container>
       <Announcement />

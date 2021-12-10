@@ -182,7 +182,7 @@ const UserOrderPrototype = ({ status }) => {
     };
     getOrders();
   }, [status, user._id]);
-  console.log(orders);
+
   return (
     <Container>
       <Title>{status[0].toUpperCase() + status.substring(1)} Order</Title>
