@@ -32,7 +32,7 @@
 //   useEffect(() => {
 //     const makeRequest = async () => {
 //       try {
-//         const res = await axios.post("http://localhost:8080/stripe/payment", {
+//         const res = await axios.post("https://my-shop-ecommerces.herokuapp.com/stripe/payment", {
 //           tokenId: stripeToken.id,
 //           amount: 1000,
 //         });

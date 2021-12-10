@@ -306,15 +306,18 @@ const Product = () => {
       if (user) {
         if (like) {
           await userRequest.post(
-            "http://localhost:8080/product/unlikeproduct",
+            "https://my-shop-ecommerces.herokuapp.com/product/unlikeproduct",
             { _id: product._id, user_id: user._id }
           );
           dispatch(removeWishlist(product));
         } else {
-          await userRequest.post("http://localhost:8080/product/likeproduct", {
-            _id: product._id,
-            user_id: user._id,
-          });
+          await userRequest.post(
+            "https://my-shop-ecommerces.herokuapp.com/product/likeproduct",
+            {
+              _id: product._id,
+              user_id: user._id,
+            }
+          );
           dispatch(addWishlist(product));
         }
         await setLike(!like);

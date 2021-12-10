@@ -149,7 +149,7 @@ const Product = ({ item }) => {
         if (like) {
           try {
             await userRequest.post(
-              "http://localhost:8080/product/unlikeproduct",
+              "https://my-shop-ecommerces.herokuapp.com/product/unlikeproduct",
               { _id: e.item._id, user_id: user._id }
             );
             dispatch(removeWishlist(e.item));
@@ -165,10 +165,13 @@ const Product = ({ item }) => {
             }
           }
         } else {
-          await userRequest.post("http://localhost:8080/product/likeproduct", {
-            _id: e.item._id,
-            user_id: user._id,
-          });
+          await userRequest.post(
+            "https://my-shop-ecommerces.herokuapp.com/product/likeproduct",
+            {
+              _id: e.item._id,
+              user_id: user._id,
+            }
+          );
           dispatch(addWishlist(e.item));
         }
         await setLike(!like);
