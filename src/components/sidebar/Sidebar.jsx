@@ -25,6 +25,17 @@ const Container = styled.div`
 const Wrapper = styled.div`
   padding: 20px;
   color: #555;
+  position: relative;
+`;
+const BarSlide = styled.div`
+  position: absolute;
+  width: 10px;
+  height: 100px;
+  background-color: #55555575;
+  top: 35vh;
+  border-radius: 5px;
+  right: 10px;
+  /* transform: translate(-50%, -50%); */
 `;
 
 const SidebarMenu = styled.div`
@@ -69,6 +80,7 @@ const Sidebar = (props) => {
       open={sidebar}
     >
       <Wrapper>
+        <BarSlide></BarSlide>
         <SidebarMenu open={sidebar}>
           <SidebarTitle>Edit Profile</SidebarTitle>
           <Link to="/profile/user/profile" style={{ textDecoration: "none" }}>

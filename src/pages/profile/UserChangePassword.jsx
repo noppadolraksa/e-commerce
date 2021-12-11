@@ -145,8 +145,12 @@ const UserChangePassword = () => {
         {errors.confirmPassword && (
           <ErrorText>{errors.confirmPassword.message}</ErrorText>
         )}
-
-        <ButtonResult isFetching={isFetching} />
+        <Section>
+          <Topic>
+            <ButtonResult isFetching={isFetching} />
+          </Topic>
+          <SpanInput></SpanInput>
+        </Section>
       </form>
     </Container>
   );

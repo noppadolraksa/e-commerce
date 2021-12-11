@@ -255,7 +255,12 @@ const UserProfile = () => {
             />
           </SpanInput>
         </Section>
-        <ButtonResult isFetching={isFetching} />
+        <Section>
+          <Topic>
+            <ButtonResult isFetching={isFetching} />
+          </Topic>
+          <SpanInput></SpanInput>
+        </Section>
       </form>
     </Container>
   );
