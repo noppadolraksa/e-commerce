@@ -153,7 +153,12 @@ const Navbar = () => {
       <Wrapper>
         <Left>
           <Logo>
-            <Link to={`/`}>My-Shop</Link>
+            <Link
+              style={{ textDecoration: "inherit", color: "inherit" }}
+              to={`/`}
+            >
+              My-Shop
+            </Link>
           </Logo>
         </Left>
         <Center>
@@ -174,8 +179,8 @@ const Navbar = () => {
           {currentUser ? (
             <>
               <Link
-                to="/profile/user/profile"
                 style={{ textDecoration: "none" }}
+                to="/profile/user/profile"
               >
                 <TextHello>
                   <ProfileImg
@@ -191,15 +196,28 @@ const Navbar = () => {
           ) : (
             <>
               <MenuItems>
-                <Link to="/login">Login</Link>
+                <Link
+                  style={{ textDecoration: "inherit", color: "inherit" }}
+                  to="/login"
+                >
+                  Login
+                </Link>
               </MenuItems>
               <MenuItems>
-                <Link to="/register">Register</Link>
+                <Link
+                  style={{ textDecoration: "inherit", color: "inherit" }}
+                  to="/register"
+                >
+                  Register
+                </Link>
               </MenuItems>
             </>
           )}
           <MenuItems>
-            <Link to="/cart">
+            <Link
+              style={{ textDecoration: "inherit", color: "inherit" }}
+              to="/cart"
+            >
               <Badge badgeContent={quantity} color="primary">
                 <ShoppingCartOutlined />
               </Badge>

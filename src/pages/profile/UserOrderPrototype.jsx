@@ -200,7 +200,10 @@ const UserOrderPrototype = ({ status }) => {
             <OrderProduct key={product._id}>
               <OrderProductLeft>
                 <ImgContainer>
-                  <Link to={`/product/${product._id}`}>
+                  <Link
+                    style={{ textDecoration: "none" }}
+                    to={`/product/${product._id}`}
+                  >
                     <Img alt="product" src={product.product[0].img} />
                   </Link>
                 </ImgContainer>
@@ -223,7 +226,11 @@ const UserOrderPrototype = ({ status }) => {
             </OrderProduct>
           ))}
           <OrderAddressContainer>
-            <OrderAddress>{`ที่อยู่จัดส่ง: ${order.address.city}, ${order.address.line1}, ${order.address.line2}, ${order.address.postal_code}, ${order.address.country}`}</OrderAddress>
+            <OrderAddress>{`ที่อยู่จัดส่ง: ${order.address.city}, ${
+              order.address.line1
+            }, ${order.address.line2 !== null && order.address.line2}, ${
+              order.address.postal_code
+            }, ${order.address.country}`}</OrderAddress>
           </OrderAddressContainer>
           <OrderFooter>
             <OrderTimestamp>{order.createdAt.substring(0, 19)}</OrderTimestamp>

@@ -115,17 +115,29 @@ const Footer = () => {
           experience.
         </Desc>
         <SocialContainer>
-          <Link to={{ pathname: "https://www.facebook.com" }} target="_blank">
+          <Link
+            style={{ textDecoration: "none" }}
+            to={{ pathname: "https://www.facebook.com" }}
+            target="_blank"
+          >
             <SocialIcon color="3B5999">
               <Facebook />
             </SocialIcon>
           </Link>
-          <Link to={{ pathname: "https://www.instagram.com" }} target="_blank">
+          <Link
+            style={{ textDecoration: "none" }}
+            to={{ pathname: "https://www.instagram.com" }}
+            target="_blank"
+          >
             <SocialIcon color="E4405F">
               <Instagram />
             </SocialIcon>
           </Link>
-          <Link to={{ pathname: "https://www.twitter.com" }} target="_blank">
+          <Link
+            style={{ textDecoration: "none" }}
+            to={{ pathname: "https://www.twitter.com" }}
+            target="_blank"
+          >
             <SocialIcon color="55ACEE">
               <Twitter />
             </SocialIcon>
@@ -136,34 +148,84 @@ const Footer = () => {
         <Title>Useful Links</Title>
         <List>
           <ListItem>
-            <Link to="/">Home</Link>
+            <Link
+              style={{ textDecoration: "inherit", color: "inherit" }}
+              to="/"
+            >
+              Home
+            </Link>
           </ListItem>
           <ListItem>
-            <Link to="/products/cart">Cart</Link>
+            <Link
+              style={{ textDecoration: "inherit", color: "inherit" }}
+              to="/products/cart"
+            >
+              Cart
+            </Link>
           </ListItem>
           <ListItem>
-            <Link to="/products/men-fashion">Man Fashion</Link>
+            <Link
+              style={{ textDecoration: "inherit", color: "inherit" }}
+              to="/products/men-fashion"
+            >
+              Man Fashion
+            </Link>
           </ListItem>
           <ListItem>
-            <Link to="/products/women-fashion">Women Fashion</Link>
+            <Link
+              style={{ textDecoration: "none" }}
+              to="/products/women-fashion"
+            >
+              Women Fashion
+            </Link>
           </ListItem>
           <ListItem>
-            <Link to="/products/shoes">Shoes</Link>
+            <Link
+              style={{ textDecoration: "inherit", color: "inherit" }}
+              to="/products/shoes"
+            >
+              Shoes
+            </Link>
           </ListItem>
           <ListItem>
-            <Link to="/products/accessories">Accessories</Link>
+            <Link
+              style={{ textDecoration: "inherit", color: "inherit" }}
+              to="/products/accessories"
+            >
+              Accessories
+            </Link>
           </ListItem>
           <ListItem>
-            <Link to="/maintenance">My Account</Link>
+            <Link
+              style={{ textDecoration: "inherit", color: "inherit" }}
+              to="/maintenance"
+            >
+              My Account
+            </Link>
           </ListItem>
           <ListItem>
-            <Link to="/maintenance">Order Tracking</Link>
+            <Link
+              style={{ textDecoration: "inherit", color: "inherit" }}
+              to="/maintenance"
+            >
+              Order Tracking
+            </Link>
           </ListItem>
           <ListItem>
-            <Link to="/maintenance">Wishlist</Link>
+            <Link
+              style={{ textDecoration: "inherit", color: "inherit" }}
+              to="/maintenance"
+            >
+              Wishlist
+            </Link>
           </ListItem>
           <ListItem>
-            <Link to="/agreement">Terms</Link>
+            <Link
+              style={{ textDecoration: "inherit", color: "inherit" }}
+              to="/agreement"
+            >
+              Terms
+            </Link>
           </ListItem>
         </List>
       </Center>

@@ -5,6 +5,12 @@ import { Controller } from "react-hook-form";
 const ImagePreview = styled.img`
   width: 50px;
   height: 50px;
+  margin-left: 0;
+`;
+
+const Section = styled.section`
+  display: flex;
+  align-items: center;
 `;
 
 const InputImage = ({ control, file, setFile, img }) => {
@@ -21,7 +27,7 @@ const InputImage = ({ control, file, setFile, img }) => {
   };
 
   return (
-    <section>
+    <Section>
       <Controller
         render={({ field }) => (
           <input
@@ -40,7 +46,7 @@ const InputImage = ({ control, file, setFile, img }) => {
       ) : (
         <ImagePreview alt="image preview" src={img} />
       )}
-    </section>
+    </Section>
   );
 };
 

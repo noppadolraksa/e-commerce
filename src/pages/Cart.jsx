@@ -276,7 +276,10 @@ const Cart = () => {
             {cart.products?.map((product) => (
               <Product key={product.item._id}>
                 <ProductDetail key={product.item._id}>
-                  <Link to={`/product/${product._id}`}>
+                  <Link
+                    style={{ textDecoration: "none" }}
+                    to={`/product/${product._id}`}
+                  >
                     <Image src={product.img} alt="cart" />
                   </Link>
                   <Details key={product.item._id}>
@@ -349,7 +352,12 @@ const Cart = () => {
         <FooterWrapper>
           <FooterTexts>
             <FooterText>
-              <Link to="/wishlist">wishlist({wishlist.length}) </Link>
+              <Link
+                style={{ textDecoration: "inherit", color: "inherit" }}
+                to="/wishlist"
+              >
+                wishlist({wishlist.length}){" "}
+              </Link>
             </FooterText>
           </FooterTexts>
           <SummaryItem>

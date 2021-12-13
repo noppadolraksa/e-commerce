@@ -52,7 +52,9 @@ const LoginSuccess = () => {
         <Title>Login Successfully!</Title>
 
         <SubText>
-          <Link to="/">go to homepage</Link>
+          <Link style={{ textDecoration: "inherit", color: "inherit" }} to="/">
+            go to homepage
+          </Link>
         </SubText>
       </Wrapper>
     </Container>

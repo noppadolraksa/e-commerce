@@ -55,10 +55,18 @@ const RegisterSuccess = () => {
       <Wrapper>
         <Title>Register Successfully!</Title>
         <Text>
-          please login <Link to="/login">here</Link>{" "}
+          please login{" "}
+          <Link
+            style={{ textDecoration: "inherit", color: "inherit" }}
+            to="/login"
+          >
+            here
+          </Link>{" "}
         </Text>
         <SubText>
-          <Link to="/">go back</Link>
+          <Link style={{ textDecoration: "inherit", color: "inherit" }} to="/">
+            go back
+          </Link>
         </SubText>
       </Wrapper>
     </Container>

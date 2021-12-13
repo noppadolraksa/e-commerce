@@ -155,7 +155,9 @@ const Register = () => {
     <Container>
       <Wrapper>
         <Logo>
-          <Link to="/">My-Shop </Link>
+          <Link style={{ textDecoration: "inherit", color: "inherit" }} to="/">
+            My-Shop{" "}
+          </Link>
         </Logo>
 
         <Title>Create an Account</Title>
@@ -268,7 +270,11 @@ const Register = () => {
             />
             <Agreement>
               I agree with the Terms and Conditions of{" "}
-              <Link to="/agreement" target="_blank">
+              <Link
+                style={{ textDecoration: "none" }}
+                to="/agreement"
+                target="_blank"
+              >
                 Terms Of Services{" "}
               </Link>
               Agreement.
@@ -281,7 +287,12 @@ const Register = () => {
         </Form>
         <LoginText>
           already have an account?{`  `}
-          <Link to="/login">Login..</Link>
+          <Link
+            style={{ textDecoration: "inherit", color: "inherit" }}
+            to="/login"
+          >
+            Login..
+          </Link>
         </LoginText>
       </Wrapper>
     </Container>

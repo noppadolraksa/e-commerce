@@ -83,19 +83,25 @@ const Sidebar = (props) => {
         <BarSlide></BarSlide>
         <SidebarMenu open={sidebar}>
           <SidebarTitle>Edit Profile</SidebarTitle>
-          <Link to="/profile/user/profile" style={{ textDecoration: "none" }}>
+          <Link
+            style={{ textDecoration: "inherit", color: "inherit" }}
+            to="/profile/user/profile"
+          >
             <SidebarList select={list === "profile" ? true : false}>
               Profile
             </SidebarList>
           </Link>
-          <Link to="/profile/user/address" style={{ textDecoration: "none" }}>
+          <Link
+            style={{ textDecoration: "inherit", color: "inherit" }}
+            to="/profile/user/address"
+          >
             <SidebarList select={list === "address" ? true : false}>
               Address
             </SidebarList>
           </Link>
           <Link
-            to="/profile/user/changepassword"
             style={{ textDecoration: "none" }}
+            to="/profile/user/changepassword"
           >
             <SidebarList select={list === "changepassword" ? true : false}>
               Change Password
@@ -104,22 +110,34 @@ const Sidebar = (props) => {
         </SidebarMenu>
         <SidebarMenu open={sidebar}>
           <SidebarTitle>My Order</SidebarTitle>
-          <Link to="/profile/order/all" style={{ textDecoration: "none" }}>
+          <Link
+            style={{ textDecoration: "inherit", color: "inherit" }}
+            to="/profile/order/all"
+          >
             <SidebarList select={list === "all" ? true : false}>
               All Order
             </SidebarList>
           </Link>
-          <Link to="/profile/order/pending" style={{ textDecoration: "none" }}>
+          <Link
+            style={{ textDecoration: "inherit", color: "inherit" }}
+            to="/profile/order/pending"
+          >
             <SidebarList select={list === "pending" ? true : false}>
               Pending Order
             </SidebarList>
           </Link>
-          <Link to="/profile/order/success" style={{ textDecoration: "none" }}>
+          <Link
+            style={{ textDecoration: "inherit", color: "inherit" }}
+            to="/profile/order/success"
+          >
             <SidebarList select={list === "success" ? true : false}>
               Success Order
             </SidebarList>
           </Link>
-          <Link to="/profile/order/cancel" style={{ textDecoration: "none" }}>
+          <Link
+            style={{ textDecoration: "inherit", color: "inherit" }}
+            to="/profile/order/cancel"
+          >
             <SidebarList select={list === "cancel" ? true : false}>
               Cancel Order
             </SidebarList>

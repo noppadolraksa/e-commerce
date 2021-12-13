@@ -201,12 +201,18 @@ const Product = ({ item }) => {
       </Text>
       <Info>
         <Icon>
-          <Link to={`/product/${item._id}`}>
+          <Link
+            style={{ textDecoration: "inherit", color: "inherit" }}
+            to={`/product/${item._id}`}
+          >
             <ShoppingCartOutlined />
           </Link>
         </Icon>
         <Icon>
-          <Link to={`/product/${item._id}`}>
+          <Link
+            style={{ textDecoration: "inherit", color: "inherit" }}
+            to={`/product/${item._id}`}
+          >
             <SearchOutlined style={{ color: "none", textDecoration: "none" }} />
           </Link>
         </Icon>
@@ -231,9 +237,21 @@ const Product = ({ item }) => {
               Oops! You are not able to do that..
             </Typography>
             <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-              please <Link to="/login">login</Link> first or{" "}
-              <Link to="/register">create an account</Link> to continue
-              shopping..
+              please{" "}
+              <Link
+                style={{ textDecoration: "inherit", color: "inherit" }}
+                to="/login"
+              >
+                login
+              </Link>{" "}
+              first or{" "}
+              <Link
+                style={{ textDecoration: "inherit", color: "inherit" }}
+                to="/register"
+              >
+                create an account
+              </Link>{" "}
+              to continue shopping..
             </Typography>
           </Box>
         </Modal>

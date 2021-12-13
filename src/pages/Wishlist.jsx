@@ -132,7 +132,10 @@ const WishList = () => {
           {wishlist.wishlist?.map((product) => (
             <Product key={product._id}>
               <ProductDetail>
-                <Link to={`/product/${product._id}`}>
+                <Link
+                  style={{ textDecoration: "none" }}
+                  to={`/product/${product._id}`}
+                >
                   <Image src={product.img} alt="cart" />
                 </Link>
                 <Details>

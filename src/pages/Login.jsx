@@ -114,7 +114,9 @@ const Login = () => {
     <Container>
       <Wrapper>
         <Logo>
-          <Link to="/">My-Shop</Link>
+          <Link style={{ textDecoration: "inherit", color: "inherit" }} to="/">
+            My-Shop
+          </Link>
         </Logo>
         <Title>Login</Title>
         <Form>

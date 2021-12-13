@@ -98,7 +98,7 @@ const UserAddress = () => {
               control={control}
               defaultValue={defaultValue.address}
               errors={errors}
-              inputName="Address"
+              inputName={null}
               name="address"
               floor="5"
               ceil="300"
