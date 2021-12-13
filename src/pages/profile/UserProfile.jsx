@@ -50,6 +50,7 @@ const Section = styled.section`
   display: flex;
   align-items: center;
   margin-top: 10px;
+  margin-bottom: 0;
 `;
 
 const Topic = styled.div`
@@ -65,6 +66,15 @@ const SpanInput = styled.span`
 
 const ErrorText = styled.p`
   color: red;
+  margin-left: 5px;
+  margin-top: 0;
+  margin-bottom: 0;
+`;
+
+const ErrorContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 0;
 `;
 
 const UserProfile = () => {
@@ -197,7 +207,14 @@ const UserProfile = () => {
             />
           </SpanInput>
         </Section>
-        {errors.firstname && <ErrorText>{errors.firstname.message}</ErrorText>}
+        <ErrorContainer>
+          <Topic />
+          <SpanInput>
+            {errors.firstname && (
+              <ErrorText>{errors.firstname.message}</ErrorText>
+            )}
+          </SpanInput>
+        </ErrorContainer>
         <Section>
           <Topic>Last Name :</Topic>
           <SpanInput>
@@ -213,7 +230,14 @@ const UserProfile = () => {
             />
           </SpanInput>
         </Section>
-        {errors.lastname && <ErrorText>{errors.lastname.message}</ErrorText>}
+        <ErrorContainer>
+          <Topic />
+          <SpanInput>
+            {errors.lastname && (
+              <ErrorText>{errors.lastname.message}</ErrorText>
+            )}
+          </SpanInput>
+        </ErrorContainer>
         <Section>
           <Topic>Email :</Topic>
           <SpanInput>
@@ -227,7 +251,13 @@ const UserProfile = () => {
             />
           </SpanInput>
         </Section>
-        {errors.email && <ErrorText>{errors.email.message}</ErrorText>}
+        <ErrorContainer>
+          <Topic />
+          <SpanInput>
+            {errors.email && <ErrorText>{errors.email.message}</ErrorText>}
+          </SpanInput>
+        </ErrorContainer>
+
         <Section>
           <Topic>Phone :</Topic>
           <SpanInput>
@@ -243,7 +273,13 @@ const UserProfile = () => {
             />
           </SpanInput>
         </Section>
-        {errors.phone && <ErrorText>{errors.phone.message}</ErrorText>}
+        <ErrorContainer>
+          <Topic />
+          <SpanInput>
+            {errors.phone && <ErrorText>{errors.phone.message}</ErrorText>}
+          </SpanInput>
+        </ErrorContainer>
+
         <Section>
           <Topic>Upload Image :</Topic>
           <SpanInput>

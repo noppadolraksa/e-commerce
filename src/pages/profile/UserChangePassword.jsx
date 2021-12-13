@@ -5,12 +5,10 @@ import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
 import ButtonResult from "../../components/sidebar/ButtonResult";
 
-import { changeUserPassword, updateUserAddress } from "../../redux/apiCalls";
+import { changeUserPassword } from "../../redux/apiCalls";
 import InputPassword from "../../components/sidebar/InputPassword";
 import InputRePassword from "../../components/sidebar/InputRePassword";
 import { useHistory } from "react-router-dom";
-import axios from "axios";
-import { userRequest } from "../../requestMethods";
 
 const Container = styled.div`
   flex: 4;
@@ -34,7 +32,8 @@ const Desc = styled.p`
 const Section = styled.section`
   display: flex;
   align-items: center;
-  margin: 10px;
+  margin-top: 10px;
+  margin-bottom: 0;
 `;
 
 const Topic = styled.div`
@@ -51,6 +50,15 @@ const SpanInput = styled.span`
 
 const ErrorText = styled.p`
   color: red;
+  margin-left: 5px;
+  margin-top: 0;
+  margin-bottom: 0;
+`;
+
+const ErrorContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 0;
 `;
 
 const UserChangePassword = () => {
@@ -75,7 +83,7 @@ const UserChangePassword = () => {
 
   //to dispatch confirm password
   const password = useRef({});
-  const history = useHistory();
+
   password.current = watch("newPassword", "");
 
   const onSubmit = async (data) => {
@@ -109,9 +117,15 @@ const UserChangePassword = () => {
             />
           </SpanInput>
         </Section>
-        {errors.oldPassword && (
-          <ErrorText>{errors.oldPassword.message}</ErrorText>
-        )}
+        <ErrorContainer>
+          <Topic />
+          <SpanInput>
+            {errors.oldPassword && (
+              <ErrorText>{errors.oldPassword.message}</ErrorText>
+            )}
+          </SpanInput>
+        </ErrorContainer>
+
         <Section>
           <Topic>New Password :</Topic>
           <SpanInput>
@@ -126,9 +140,14 @@ const UserChangePassword = () => {
             />
           </SpanInput>
         </Section>
-        {errors.newPassword && (
-          <ErrorText>{errors.newPassword.message}</ErrorText>
-        )}
+        <ErrorContainer>
+          <Topic />
+          <SpanInput>
+            {errors.newPassword && (
+              <ErrorText>{errors.newPassword.message}</ErrorText>
+            )}
+          </SpanInput>
+        </ErrorContainer>
         <Section>
           <Topic>Confirm Password :</Topic>
           <SpanInput>
@@ -142,9 +161,14 @@ const UserChangePassword = () => {
             />
           </SpanInput>
         </Section>
-        {errors.confirmPassword && (
-          <ErrorText>{errors.confirmPassword.message}</ErrorText>
-        )}
+        <ErrorContainer>
+          <Topic />
+          <SpanInput>
+            {errors.confirmPassword && (
+              <ErrorText>{errors.confirmPassword.message}</ErrorText>
+            )}
+          </SpanInput>
+        </ErrorContainer>
         <Section>
           <Topic>
             <ButtonResult isFetching={isFetching} />

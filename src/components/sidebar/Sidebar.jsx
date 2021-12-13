@@ -100,7 +100,7 @@ const Sidebar = (props) => {
             </SidebarList>
           </Link>
           <Link
-            style={{ textDecoration: "none" }}
+            style={{ textDecoration: "inherit", color: "inherit" }}
             to="/profile/user/changepassword"
           >
             <SidebarList select={list === "changepassword" ? true : false}>

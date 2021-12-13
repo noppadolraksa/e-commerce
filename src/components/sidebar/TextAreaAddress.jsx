@@ -13,11 +13,6 @@ const TextAreaAddress = ({
 }) => {
   return (
     <fieldset style={{ width: 200, color: "#555" }}>
-      {inputName !== null && (
-        <legend>
-          <p>{inputName}</p>
-        </legend>
-      )}
       <Controller
         render={({ field }) => (
           <textarea
