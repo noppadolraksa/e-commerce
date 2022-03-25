@@ -130,10 +130,22 @@ const Login = () => {
             type="password"
           />
           <SubText>
-            No account? <a href="./Register">Create one!</a>
+            No account?{" "}
+            <Link
+              style={{ textDecoration: "inherit", color: "inherit" }}
+              to="./Register"
+            >
+              Create one!
+            </Link>
           </SubText>
           <SubText>
-            Forgot password? <a href="./Register">Click here!</a>
+            Forgot password?{" "}
+            <Link
+              style={{ textDecoration: "inherit", color: "inherit" }}
+              to="./Register"
+            >
+              Click here!
+            </Link>
           </SubText>
           <Button onClick={handleClick} disabled={isFetching}>
             Submit

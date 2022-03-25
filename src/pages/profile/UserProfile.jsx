@@ -79,6 +79,7 @@ const ErrorContainer = styled.div`
 
 const UserProfile = () => {
   const [file, setFile] = useState({});
+  const [loading, setLoading] = useState(false);
   const user = useSelector((state) => state.user?.currentUser);
   const dispatch = useDispatch();
   const { isFetching } = useSelector((state) => state.user);
@@ -101,14 +102,15 @@ const UserProfile = () => {
 
   const onSubmit = async (data) => {
     if (file?.name !== undefined && file?.name !== user.img) {
-      await dispatch(updateUserStart());
       const storage = getStorage(app);
       const fileName = new Date().getTime() + file?.name;
       const storageRef = ref(storage, fileName);
       const uploadTask = uploadBytesResumable(storageRef, file);
+
       uploadTask.on(
         "state_changed",
         (snapshot) => {
+          setLoading(true);
           const progress =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
           console.log("Upload is " + progress + "% done");
@@ -168,7 +170,7 @@ const UserProfile = () => {
           dispatch
         );
 
-        alert("Address Updated! ");
+        alert("Profile Updated! ");
       } catch (err) {
         if (err.response.status === 403) {
           alert(err.response.data);
@@ -179,6 +181,7 @@ const UserProfile = () => {
       }
     }
     dispatch(updateUserCancel());
+    setLoading(false);
   };
 
   return (
@@ -293,7 +296,7 @@ const UserProfile = () => {
         </Section>
         <Section>
           <Topic>
-            <ButtonResult isFetching={isFetching} />
+            <ButtonResult isFetching={loading} />
           </Topic>
           <SpanInput></SpanInput>
         </Section>
