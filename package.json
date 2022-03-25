@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@cypress/code-coverage": "^3.9.12",
+    "@cypress/instrument-cra": "^1.4.0",
     "@emotion/react": "^11.6.0",
     "@emotion/styled": "^11.6.0",
     "@material-ui/core": "^4.12.3",
@@ -14,6 +16,7 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.24.0",
+    "cypress": "^9.1.1",
     "dotenv": "^10.0.0",
     "firebase": "^9.6.0",
     "react": "^17.0.2",
@@ -25,13 +28,17 @@
     "react-scripts": "^5.0.0",
     "react-stripe-checkout": "^2.6.3",
     "redux-persist": "^6.0.0",
+    "start-server-and-test": "^1.14.0",
     "styled-components": "^5.3.3",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "cypress:start:app": "BROWSER=none react-scripts -r @cypress/instrument-cra start",
+    "cypress:start:wait": "start-server-and-test cypress:start:app http://localhost:3000",
+    "cypress:open": "npm run cypress:start:wait -- \"cypress open\"",
+    "cypress:run": "npm run cypress:start:wait -- \"cypress run\"",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

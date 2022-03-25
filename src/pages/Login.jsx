@@ -133,7 +133,7 @@ const Login = () => {
             No account?{" "}
             <Link
               style={{ textDecoration: "inherit", color: "inherit" }}
-              href="./Register"
+              to="./Register"
             >
               Create one!
             </Link>
@@ -142,7 +142,7 @@ const Login = () => {
             Forgot password?{" "}
             <Link
               style={{ textDecoration: "inherit", color: "inherit" }}
-              href="./Register"
+              to="./Register"
             >
               Click here!
             </Link>
